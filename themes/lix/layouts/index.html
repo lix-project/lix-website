@@ -1,5 +1,5 @@
 {{ define "main" }}
   {{ with .Site.Data.home.hero }}{{ partial "sections/hero.html" . }}{{ end }}
   {{ with .Site.Data.home.ecosystem }}{{ partial "sections/ecosystem.html" . }}{{ end }}
-  {{ with .Site.Data.home.portfolio }}{{ partial "sections/portfolio.html" . }}{{ end }}
+  {{ with .Site.Data.home.points }}{{ partial "sections/points.html" . }}{{ end }}
 {{ end }}
