@@ -7,9 +7,9 @@ content:
 
   buttonPrimary:
     label: "Why Lix?"
-    url: "#"
+    url: "/about#why-lix"
 
   buttonSecondary:
     label: "Start using lix"
-    url: ""
+    url: "/install"
 

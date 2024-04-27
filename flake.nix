@@ -18,6 +18,13 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
+        # For local development...
         devShell = pkgs.mkShell { buildInputs = [ pkgs.hugo pkgs.sass ]; };
+
+        # ... and remote deployment.
+        packages = {
+          site-content = pkgs.callPackage ./nix/site-content.nix {};
+        };
+
     });
 }
