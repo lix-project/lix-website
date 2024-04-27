@@ -21,6 +21,7 @@ TODO List
 
 ## Graphics
 
+- Fix the fact that Hugo is sticking the wrong thing into the alt text.
 - Replace the primary "hero" graphic with a Lix one.
 - Replace the "lix-managed systems" graphic with an image of our logo on a screen.
 - Replace the placeholders for each of the three main page "why lix" points.
