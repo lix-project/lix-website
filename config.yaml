@@ -28,7 +28,7 @@ params:
     - "General Inquiries: info@lix.systems"
     - "Security Reports: security@lix.systems"
 
-  copyright: "Content licenced under CC-BY-SA-4.0 or LGPL-2.0-or-later."
+  copyright: "Content licensed under CC-BY-SA-4.0 or LGPL-2.0-or-later."
 
 menus:
   main:
