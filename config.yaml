@@ -69,13 +69,13 @@ menus:
       url: "/about"
       weight: 2
 
+    - name: "Source Repositories"
+      url: "https://git.lix.systems"
     - name: "The Lix Team"
       url: "/team"
       weight: 3
 
-    - name: "Source Repositories"
-      url: "https://git.lix.systems"
-      weight: 4
+      weight: 3
 
     - name: "Documentation"
       url: "/#"

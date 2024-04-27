@@ -2,38 +2,31 @@ enabled: true
 id: "portfolio"
 
 content:
-  - image: "images/portfolio-ecommerce.png"
-    pretitle: "Portfolio Service"
-    title: "We developed an eCommerce website"
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed euismod quis sit gravida pharetra sit. Cursus vel enim pretium vulputate semper sem elit magna neque. Aliquet adipisc."
+
+  - image: "images/services-web-development.png"
+    pretitle: "nix with a modern flavor"
+    title: "an ever-evolving lix codebase, for a language that can evolve"
+    text: "Lix is designed to grow and evolve — in a way that never breaks backwards compatibility. Lix intends to support language versioning features — so we can continuously improve the language without affecting existing configurations."
 
     buttons: 
-      - label: "See live"
-        url: "#"
+      - label: "see our roadmap"
+        url: "/roadmap"
 
-      - label: "Read more"
-        url: "#"
 
-  - image: "images/portfolio-ecommerce.png"
-    pretitle: "Portfolio Service"
-    title: "We developed an eCommerce website"
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed euismod quis sit gravida pharetra sit. Cursus vel enim pretium vulputate semper sem elit magna neque. Aliquet adipisc."
+  - image: "images/services-web-development.png"
+    pretitle: "an independent ecosystem"
+    title: "community-owned infrastructure"
+    text: "Lix is designed to avoid ecosystem lock-in: you can build and use Lix without any dependency on corporate-controlled infrastructure, like Microsoft's GitHub."
 
     buttons: 
-      - label: "See live"
+      - label: "read about our infrastructure"
         url: "#"
 
-      - label: "Read more"
-        url: "#"
-
-  - image: "images/portfolio-ecommerce.png"
-    pretitle: "Portfolio Service"
-    title: "We developed an eCommerce website"
-    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed euismod quis sit gravida pharetra sit. Cursus vel enim pretium vulputate semper sem elit magna neque. Aliquet adipisc."
+  - image: "images/services-web-development.png"
+    pretitle: "a human-friendly implementation"
+    title: "a configuration language for everyone — human or otherwise"
+    text: "Declarative configurations may run on machines — but their interface shouldn't be designed for them! The Lix team is constantly working on usability and ergonomics enhancements — including tools that let you better see and interact with your configuration."
 
     buttons: 
-      - label: "See live"
-        url: "#"
-
-      - label: "Read more"
-        url: "#"
+      - label: "see existing & proposed improvements"
+        url: "/roadmap"

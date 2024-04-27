@@ -1,0 +1,27 @@
+enabled: true
+id: "ecosystem"
+
+content:
+  title: "The Lix Ecosystem"
+  text: "Like other Nix ecosystems, Lix layers together multiple projects to create a full Lix stack — allowing you to forge your own systems on a base of community work."
+  cards:
+    - image: "images/ecosystem-lix.png"
+      title: "The Lix Package Manager"
+      text: "The ecosystem's core is the Lix package manager — a community variant of the Nix configuration language and package management system."
+      button:
+        label: "view the code"
+        url: "https://git.lix.systems/lix-project/lix"
+
+    - image: "images/ecosystem-nixpkgs.svg"
+      title: "Community Packages"
+      text: "Lix is fully compatible with existing Nix expressions — which means it benefits from the hundreds of thousands of existing community-maintained packages and configurations."
+      button:
+        label: "visit nixpkgs"
+        url: "https://github.com/nixos/nixpkgs"
+
+    - image: "images/ecosystem-nixpkgs.svg"
+      title: "Lix-Managed Systems"
+      text: "Lix can also be used as the core Nix implementation for Nix-based operating systems and system managers, including the full NixOS distribution, as well as system management software like Home Manager or nix-darwin."
+      button:
+        label: "use lix with NixOS"
+        url: "/install"
