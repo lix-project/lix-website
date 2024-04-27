@@ -1,0 +1,57 @@
+{
+  "name": "cspell-trie-lib",
+  "version": "5.21.2",
+  "description": "Trie Data Structure to support cspell.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/test/**",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "clean": "rimraf dist coverage .tsbuildinfo",
+    "build": "tsc -p .",
+    "build-dev": "tsc -p tsconfig.dev.json",
+    "clean-build": "npm run clean && npm run build",
+    "coverage": "jest --coverage",
+    "test-watch": "jest --watch",
+    "test": "jest",
+    "watch": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetsidesoftware/cspell.git"
+  },
+  "keywords": [
+    "trie",
+    "cspell"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-trie"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell#readme",
+  "dependencies": {
+    "@cspell/cspell-pipe": "^5.21.2",
+    "fs-extra": "^10.1.0",
+    "gensequence": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "devDependencies": {
+    "@cspell/cspell-types": "^5.21.2",
+    "@cspell/dict-en_us": "^2.2.5",
+    "@cspell/dict-es-es": "^2.2.0",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^17.0.35",
+    "jest": "^28.1.0",
+    "rimraf": "^3.0.2"
+  },
+  "gitHead": "ce422e9d62a5fbad056c4f82aafcbf98c6a86677"
+}

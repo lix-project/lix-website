@@ -1,0 +1,3 @@
+export declare type Entry = [string, string] | [string, string, string];
+export declare const codes: Entry[];
+//# sourceMappingURL=knownLocales.d.ts.map

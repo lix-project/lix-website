@@ -1,0 +1,91 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDictionary = exports.clearCachedFiles = exports.ExclusionHelper = exports.Link = exports.Text = exports.validateText = exports.IncludeExcludeFlag = exports.checkText = exports.resolveFile = exports.setLogger = exports.getLogger = exports.traceWordsAsync = exports.traceWords = exports.DocumentValidator = exports.suggestionsForWords = exports.suggestionsForWord = exports.SuggestionError = exports.SpellingDictionaryLoadError = exports.SpellingDictionaryCollection = exports.refreshDictionaryCache = exports.isSpellingDictionaryLoadError = exports.createSpellingDictionary = exports.CompoundWordsMethod = exports.spellCheckFile = exports.spellCheckDocument = exports.isBinaryFile = exports.fileToDocument = exports.determineFinalDocumentSettings = exports.constructSettingsForText = exports.combineTextAndLanguageSettings = exports.defaultSettingsFilename = exports.updateTextDocument = exports.createTextDocument = exports.getLanguagesForExt = void 0;
+const ExclusionHelper = __importStar(require("./exclusionHelper"));
+exports.ExclusionHelper = ExclusionHelper;
+const Settings_1 = require("./Settings");
+const CSpellSettingsServer_1 = require("./Settings/CSpellSettingsServer");
+const Link = __importStar(require("./Settings/index.link"));
+exports.Link = Link;
+const SpellingDictionary_1 = require("./SpellingDictionary");
+const Text = __importStar(require("./util/text"));
+exports.Text = Text;
+__exportStar(require("@cspell/cspell-types"), exports);
+__exportStar(require("cspell-io"), exports);
+var LanguageIds_1 = require("./LanguageIds");
+Object.defineProperty(exports, "getLanguagesForExt", { enumerable: true, get: function () { return LanguageIds_1.getLanguagesForExt; } });
+var TextDocument_1 = require("./Models/TextDocument");
+Object.defineProperty(exports, "createTextDocument", { enumerable: true, get: function () { return TextDocument_1.createTextDocument; } });
+Object.defineProperty(exports, "updateTextDocument", { enumerable: true, get: function () { return TextDocument_1.updateTextDocument; } });
+__exportStar(require("./Settings"), exports);
+var Settings_2 = require("./Settings");
+Object.defineProperty(exports, "defaultSettingsFilename", { enumerable: true, get: function () { return Settings_2.defaultFileName; } });
+var TextDocumentSettings_1 = require("./Settings/TextDocumentSettings");
+Object.defineProperty(exports, "combineTextAndLanguageSettings", { enumerable: true, get: function () { return TextDocumentSettings_1.combineTextAndLanguageSettings; } });
+Object.defineProperty(exports, "constructSettingsForText", { enumerable: true, get: function () { return TextDocumentSettings_1.combineTextAndLanguageSettings; } });
+var spellCheckFile_1 = require("./spellCheckFile");
+Object.defineProperty(exports, "determineFinalDocumentSettings", { enumerable: true, get: function () { return spellCheckFile_1.determineFinalDocumentSettings; } });
+Object.defineProperty(exports, "fileToDocument", { enumerable: true, get: function () { return spellCheckFile_1.fileToDocument; } });
+Object.defineProperty(exports, "isBinaryFile", { enumerable: true, get: function () { return spellCheckFile_1.isBinaryFile; } });
+Object.defineProperty(exports, "spellCheckDocument", { enumerable: true, get: function () { return spellCheckFile_1.spellCheckDocument; } });
+Object.defineProperty(exports, "spellCheckFile", { enumerable: true, get: function () { return spellCheckFile_1.spellCheckFile; } });
+var SpellingDictionary_2 = require("./SpellingDictionary");
+Object.defineProperty(exports, "CompoundWordsMethod", { enumerable: true, get: function () { return SpellingDictionary_2.CompoundWordsMethod; } });
+Object.defineProperty(exports, "createSpellingDictionary", { enumerable: true, get: function () { return SpellingDictionary_2.createSpellingDictionary; } });
+Object.defineProperty(exports, "isSpellingDictionaryLoadError", { enumerable: true, get: function () { return SpellingDictionary_2.isSpellingDictionaryLoadError; } });
+Object.defineProperty(exports, "refreshDictionaryCache", { enumerable: true, get: function () { return SpellingDictionary_2.refreshDictionaryCache; } });
+Object.defineProperty(exports, "SpellingDictionaryCollection", { enumerable: true, get: function () { return SpellingDictionary_2.SpellingDictionaryCollection; } });
+Object.defineProperty(exports, "SpellingDictionaryLoadError", { enumerable: true, get: function () { return SpellingDictionary_2.SpellingDictionaryLoadError; } });
+var suggestions_1 = require("./suggestions");
+Object.defineProperty(exports, "SuggestionError", { enumerable: true, get: function () { return suggestions_1.SuggestionError; } });
+Object.defineProperty(exports, "suggestionsForWord", { enumerable: true, get: function () { return suggestions_1.suggestionsForWord; } });
+Object.defineProperty(exports, "suggestionsForWords", { enumerable: true, get: function () { return suggestions_1.suggestionsForWords; } });
+var textValidation_1 = require("./textValidation");
+Object.defineProperty(exports, "DocumentValidator", { enumerable: true, get: function () { return textValidation_1.DocumentValidator; } });
+var trace_1 = require("./trace");
+Object.defineProperty(exports, "traceWords", { enumerable: true, get: function () { return trace_1.traceWords; } });
+Object.defineProperty(exports, "traceWordsAsync", { enumerable: true, get: function () { return trace_1.traceWordsAsync; } });
+var logger_1 = require("./util/logger");
+Object.defineProperty(exports, "getLogger", { enumerable: true, get: function () { return logger_1.getLogger; } });
+Object.defineProperty(exports, "setLogger", { enumerable: true, get: function () { return logger_1.setLogger; } });
+var resolveFile_1 = require("./util/resolveFile");
+Object.defineProperty(exports, "resolveFile", { enumerable: true, get: function () { return resolveFile_1.resolveFile; } });
+var validator_1 = require("./validator");
+Object.defineProperty(exports, "checkText", { enumerable: true, get: function () { return validator_1.checkText; } });
+Object.defineProperty(exports, "IncludeExcludeFlag", { enumerable: true, get: function () { return validator_1.IncludeExcludeFlag; } });
+Object.defineProperty(exports, "validateText", { enumerable: true, get: function () { return validator_1.validateText; } });
+async function clearCachedFiles() {
+    await Promise.all([(0, Settings_1.clearCachedSettingsFiles)(), (0, SpellingDictionary_1.refreshDictionaryCache)(0)]);
+}
+exports.clearCachedFiles = clearCachedFiles;
+function getDictionary(settings) {
+    return (0, SpellingDictionary_1.getDictionaryInternal)((0, CSpellSettingsServer_1.toInternalSettings)(settings));
+}
+exports.getDictionary = getDictionary;
+//# sourceMappingURL=index.js.map

@@ -1,0 +1,424 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.runLint = void 0;
+const cspell_pipe_1 = require("@cspell/cspell-pipe");
+const cspell_types_1 = require("@cspell/cspell-types");
+const cspell_gitignore_1 = require("cspell-gitignore");
+const cspell_glob_1 = require("cspell-glob");
+const cspell = __importStar(require("cspell-lib"));
+const path = __importStar(require("path"));
+const util_1 = require("util");
+const vscode_uri_1 = require("vscode-uri");
+const cache_1 = require("../util/cache");
+const errors_1 = require("../util/errors");
+const fileHelper_1 = require("../util/fileHelper");
+const glob_1 = require("../util/glob");
+const reporters_1 = require("../util/reporters");
+const timer_1 = require("../util/timer");
+const util = __importStar(require("../util/util"));
+const chalk = require("chalk");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const npmPackage = require('../../package.json');
+const version = npmPackage.version;
+const { opFilterAsync } = cspell_pipe_1.operators;
+async function runLint(cfg) {
+    let { reporter } = cfg;
+    cspell.setLogger(getLoggerFromReporter(reporter));
+    const configErrors = new Set();
+    const lintResult = await run();
+    await reporter.result(lintResult);
+    return lintResult;
+    async function processFile(filename, configInfo, cache) {
+        var _a, _b, _c, _d, _e;
+        const getElapsedTimeMs = (0, timer_1.getTimeMeasurer)();
+        const cachedResult = await cache.getCachedLintResults(filename);
+        if (cachedResult) {
+            reporter.debug(`Filename: ${filename}, using cache`);
+            return { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
+        }
+        const result = {
+            fileInfo: {
+                filename,
+            },
+            issues: [],
+            processed: false,
+            errors: 0,
+            configErrors: 0,
+            elapsedTimeMs: 0,
+        };
+        const fileInfo = await (0, fileHelper_1.readFileInfo)(filename, undefined, true);
+        if (fileInfo.errorCode) {
+            if (fileInfo.errorCode !== 'EISDIR' && cfg.options.mustFindFiles) {
+                const err = (0, errors_1.toError)(`File not found: "${filename}"`);
+                reporter.error('Linter:', err);
+                result.errors += 1;
+            }
+            return result;
+        }
+        const doc = (0, fileHelper_1.fileInfoToDocument)(fileInfo, cfg.options.languageId, cfg.locale);
+        const { text } = fileInfo;
+        result.fileInfo = fileInfo;
+        let spellResult = {};
+        reporter.info(`Checking: ${filename}, File type: ${(_a = doc.languageId) !== null && _a !== void 0 ? _a : 'auto'}, Language: ${(_b = doc.locale) !== null && _b !== void 0 ? _b : 'default'}`, cspell_types_1.MessageTypes.Info);
+        try {
+            const validateOptions = { generateSuggestions: cfg.options.showSuggestions, numSuggestions: 5 };
+            const r = await cspell.spellCheckDocument(doc, validateOptions, configInfo.config);
+            spellResult = r;
+            result.processed = r.checked;
+            result.issues = cspell.Text.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
+        }
+        catch (e) {
+            reporter.error(`Failed to process "${filename}"`, (0, errors_1.toError)(e));
+            result.errors += 1;
+        }
+        result.elapsedTimeMs = getElapsedTimeMs();
+        const config = (_c = spellResult.settingsUsed) !== null && _c !== void 0 ? _c : {};
+        result.configErrors += await reportConfigurationErrors(config);
+        const elapsed = result.elapsedTimeMs / 1000.0;
+        const dictionaries = config.dictionaries || [];
+        reporter.info(`Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${result.issues.length} ${elapsed}S`, cspell_types_1.MessageTypes.Info);
+        reporter.info(`Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`, cspell_types_1.MessageTypes.Info);
+        reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, cspell_types_1.MessageTypes.Info);
+        if (cfg.options.debug) {
+            const { id: _id, name: _name, __imports, __importRef, ...cfg } = config;
+            const debugCfg = {
+                filename,
+                languageId: (_e = (_d = doc.languageId) !== null && _d !== void 0 ? _d : cfg.languageId) !== null && _e !== void 0 ? _e : 'default',
+                config: { ...cfg, source: null },
+                source: spellResult.localConfigFilepath,
+            };
+            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
+        }
+        const dep = calcDependencies(config);
+        cache.setCachedLintResults(result, dep.files);
+        return result;
+    }
+    function mapIssue({ doc: _, ...tdo }) {
+        const context = cfg.showContext
+            ? extractContext(tdo, cfg.showContext)
+            : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
+        return { ...tdo, context };
+    }
+    async function processFiles(files, configInfo, cacheSettings) {
+        var _a, _b;
+        const fileCount = files instanceof Array ? files.length : undefined;
+        const status = runResult();
+        const cache = (0, cache_1.createCache)(cacheSettings);
+        if (cfg.options.cacheReset) {
+            cache.reset();
+        }
+        const failFast = (_b = (_a = cfg.options.failFast) !== null && _a !== void 0 ? _a : configInfo.config.failFast) !== null && _b !== void 0 ? _b : false;
+        const emitProgressBegin = (filename, fileNum, fileCount) => reporter.progress({
+            type: 'ProgressFileBegin',
+            fileNum,
+            fileCount,
+            filename,
+        });
+        const emitProgressComplete = (filename, fileNum, fileCount, result) => reporter.progress({
+            type: 'ProgressFileComplete',
+            fileNum,
+            fileCount,
+            filename,
+            elapsedTimeMs: result === null || result === void 0 ? void 0 : result.elapsedTimeMs,
+            processed: result === null || result === void 0 ? void 0 : result.processed,
+            numErrors: (result === null || result === void 0 ? void 0 : result.issues.length) || (result === null || result === void 0 ? void 0 : result.errors),
+            cached: result === null || result === void 0 ? void 0 : result.cached,
+        });
+        async function* loadAndProcessFiles() {
+            let i = 0;
+            for await (const filename of files) {
+                ++i;
+                emitProgressBegin(filename, i, fileCount !== null && fileCount !== void 0 ? fileCount : i);
+                const result = await processFile(filename, configInfo, cache);
+                yield { filename, fileNum: i, result };
+            }
+        }
+        for await (const fileP of loadAndProcessFiles()) {
+            const { filename, fileNum, result } = await fileP;
+            status.files += 1;
+            status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
+            emitProgressComplete(filename, fileNum, fileCount !== null && fileCount !== void 0 ? fileCount : fileNum, result);
+            // Show the spelling errors after emitting the progress.
+            result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
+            if (result.issues.length || result.errors) {
+                status.filesWithIssues.add(filename);
+                status.issues += result.issues.length;
+                status.errors += result.errors;
+                if (failFast) {
+                    return status;
+                }
+            }
+            status.errors += result.configErrors;
+        }
+        cache.reconcile();
+        return status;
+    }
+    function calcDependencies(config) {
+        const { configFiles, dictionaryFiles } = cspell.extractDependencies(config);
+        return { files: configFiles.concat(dictionaryFiles) };
+    }
+    async function reportConfigurationErrors(config) {
+        const errors = cspell.extractImportErrors(config);
+        let count = 0;
+        errors.forEach((ref) => {
+            const key = ref.error.toString();
+            if (configErrors.has(key))
+                return;
+            configErrors.add(key);
+            count += 1;
+            reporter.error('Configuration', ref.error);
+        });
+        const dictCollection = await cspell.getDictionary(config);
+        dictCollection.dictionaries.forEach((dict) => {
+            var _a;
+            const dictErrors = ((_a = dict.getErrors) === null || _a === void 0 ? void 0 : _a.call(dict)) || [];
+            const msg = `Dictionary Error with (${dict.name})`;
+            dictErrors.forEach((error) => {
+                const key = msg + error.toString();
+                if (configErrors.has(key))
+                    return;
+                configErrors.add(key);
+                count += 1;
+                reporter.error(msg, error);
+            });
+        });
+        return count;
+    }
+    function countConfigErrors(configInfo) {
+        return reportConfigurationErrors(configInfo.config);
+    }
+    async function run() {
+        if (cfg.options.root) {
+            process.env[cspell.ENV_CSPELL_GLOB_ROOT] = cfg.root;
+        }
+        const configInfo = await (0, fileHelper_1.readConfig)(cfg.configFile, cfg.root);
+        if (cfg.options.defaultConfiguration !== undefined) {
+            configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
+        }
+        reporter = (0, reporters_1.mergeReporters)(cfg.reporter, ...(0, reporters_1.loadReporters)(configInfo.config));
+        cspell.setLogger(getLoggerFromReporter(reporter));
+        const globInfo = await determineGlobs(configInfo, cfg);
+        const { fileGlobs, excludeGlobs } = globInfo;
+        const hasFileLists = !!cfg.fileLists.length;
+        if (!fileGlobs.length && !hasFileLists) {
+            // Nothing to do.
+            return runResult();
+        }
+        header(fileGlobs, excludeGlobs);
+        checkGlobs(cfg.fileGlobs, reporter);
+        reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, cspell_types_1.MessageTypes.Info);
+        const configErrors = await countConfigErrors(configInfo);
+        if (configErrors)
+            return runResult({ errors: configErrors });
+        // Get Exclusions from the config files.
+        const { root } = cfg;
+        try {
+            const cacheSettings = await (0, cache_1.calcCacheSettings)(configInfo.config, { ...cfg.options, version }, root);
+            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
+            return await processFiles(files, configInfo, cacheSettings);
+        }
+        catch (e) {
+            const err = (0, errors_1.toApplicationError)(e);
+            reporter.error('Linter', err);
+            return runResult({ errors: 1 });
+        }
+    }
+    function header(files, cliExcludes) {
+        const formattedFiles = files.length > 100 ? files.slice(0, 100).concat(['...']) : files;
+        reporter.info(`
+cspell;
+Date: ${new Date().toUTCString()}
+Options:
+    verbose:   ${yesNo(!!cfg.options.verbose)}
+    config:    ${cfg.configFile || 'default'}
+    exclude:   ${cliExcludes.join('\n               ')}
+    files:     ${formattedFiles}
+    wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
+    unique:    ${yesNo(!!cfg.options.unique)}
+`, cspell_types_1.MessageTypes.Info);
+    }
+}
+exports.runLint = runLint;
+function checkGlobs(globs, reporter) {
+    globs
+        .filter((g) => g.startsWith("'") || g.endsWith("'"))
+        .map((glob) => chalk.yellow(glob))
+        .forEach((glob) => reporter.error('Linter', new errors_1.CheckFailed(`Glob starting or ending with ' (single quote) is not likely to match any files: ${glob}.`)));
+}
+async function determineGlobs(configInfo, cfg) {
+    var _a, _b, _c;
+    const useGitignore = (_b = (_a = cfg.options.gitignore) !== null && _a !== void 0 ? _a : configInfo.config.useGitignore) !== null && _b !== void 0 ? _b : false;
+    const gitignoreRoots = (_c = cfg.options.gitignoreRoot) !== null && _c !== void 0 ? _c : configInfo.config.gitignoreRoot;
+    const gitIgnore = useGitignore ? await generateGitIgnore(gitignoreRoots) : undefined;
+    const cliGlobs = cfg.fileGlobs;
+    const allGlobs = cliGlobs.length ? cliGlobs : configInfo.config.files || [];
+    const combinedGlobs = (0, glob_1.normalizeGlobsToRoot)(allGlobs, cfg.root, false);
+    const cliExcludeGlobs = (0, glob_1.extractPatterns)(cfg.excludes).map((p) => p.glob);
+    const normalizedExcludes = (0, glob_1.normalizeGlobsToRoot)(cliExcludeGlobs, cfg.root, true);
+    const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
+    const excludeGlobs = combinedGlobs.filter((g) => g.startsWith('!')).concat(normalizedExcludes);
+    const fileGlobs = includeGlobs;
+    return { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
+}
+async function determineFilesToCheck(configInfo, cfg, reporter, globInfo) {
+    async function _determineFilesToCheck() {
+        var _a;
+        const { fileLists } = cfg;
+        const hasFileLists = !!fileLists.length;
+        const { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
+        // Get Exclusions from the config files.
+        const { root } = cfg;
+        const globsToExclude = (configInfo.config.ignorePaths || []).concat(excludeGlobs);
+        const globMatcher = (0, glob_1.buildGlobMatcher)(globsToExclude, root, true);
+        const ignoreGlobs = (0, glob_1.extractGlobsFromMatcher)(globMatcher);
+        // cspell:word nodir
+        const globOptions = {
+            root,
+            cwd: root,
+            ignore: ignoreGlobs.concat(normalizedExcludes),
+            nodir: true,
+        };
+        const enableGlobDot = (_a = cfg.enableGlobDot) !== null && _a !== void 0 ? _a : configInfo.config.enableGlobDot;
+        if (enableGlobDot !== undefined) {
+            globOptions.dot = enableGlobDot;
+        }
+        const filterFiles = (0, cspell_pipe_1.opFilter)(filterFilesFn(globMatcher));
+        const foundFiles = await (hasFileLists
+            ? useFileLists(fileLists, allGlobs, root, enableGlobDot)
+            : (0, fileHelper_1.findFiles)(fileGlobs, globOptions));
+        const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+        const files = (0, cspell_pipe_1.isAsyncIterable)(filtered)
+            ? (0, cspell_pipe_1.pipeAsync)(filtered, filterFiles)
+            : [...(0, cspell_pipe_1.pipeSync)(filtered, filterFiles)];
+        return files;
+    }
+    function isExcluded(filename, globMatcherExclude) {
+        if (cspell.isBinaryFile(vscode_uri_1.URI.file(filename))) {
+            return true;
+        }
+        const { root } = cfg;
+        const absFilename = path.resolve(root, filename);
+        const r = globMatcherExclude.matchEx(absFilename);
+        if (r.matched) {
+            const { glob, source } = extractGlobSource(r.pattern);
+            reporter.info(`Excluded File: ${path.relative(root, absFilename)}; Excluded by ${glob} from ${source}`, cspell_types_1.MessageTypes.Info);
+        }
+        return r.matched;
+    }
+    function filterFilesFn(globMatcherExclude) {
+        const patterns = globMatcherExclude.patterns;
+        const excludeInfo = patterns
+            .map(extractGlobSource)
+            .map(({ glob, source }) => `Glob: ${glob} from ${source}`)
+            .filter(util.uniqueFn());
+        reporter.info(`Exclusion Globs: \n    ${excludeInfo.join('\n    ')}\n`, cspell_types_1.MessageTypes.Info);
+        return (filename) => !isExcluded(filename, globMatcherExclude);
+    }
+    return _determineFilesToCheck();
+}
+function extractContext(tdo, contextRange) {
+    const { line, offset } = tdo;
+    const textOffsetInLine = offset - line.offset;
+    let left = Math.max(textOffsetInLine - contextRange, 0);
+    let right = Math.min(line.text.length, textOffsetInLine + contextRange + tdo.text.length);
+    const lineText = line.text;
+    const isLetter = /^[a-z]$/i;
+    const isSpace = /^\s$/;
+    for (let n = contextRange / 2; n > 0 && left > 0; n--, left--) {
+        if (!isLetter.test(lineText[left - 1])) {
+            break;
+        }
+    }
+    for (let n = contextRange / 2; n > 0 && right < lineText.length; n--, right++) {
+        if (!isLetter.test(lineText[right])) {
+            break;
+        }
+    }
+    // remove leading space
+    for (; left < textOffsetInLine && isSpace.test(lineText[left]); left++) {
+        /* do nothing */
+    }
+    const context = {
+        text: line.text.slice(left, right).trimEnd(),
+        offset: left + line.offset,
+    };
+    return context;
+}
+function extractGlobSource(g) {
+    const { glob, rawGlob, source } = g;
+    return {
+        glob: rawGlob || glob,
+        source,
+    };
+}
+function runResult(init = {}) {
+    const { files = 0, filesWithIssues = new Set(), issues = 0, errors = 0, cachedFiles = 0 } = init;
+    return { files, filesWithIssues, issues, errors, cachedFiles };
+}
+function yesNo(value) {
+    return value ? 'Yes' : 'No';
+}
+function getLoggerFromReporter(reporter) {
+    const log = (...params) => {
+        const msg = (0, util_1.format)(...params);
+        reporter.info(msg, 'Info');
+    };
+    const error = (...params) => {
+        const msg = (0, util_1.format)(...params);
+        const err = { message: '', name: 'error', toString: () => '' };
+        reporter.error(msg, err);
+    };
+    const warn = (...params) => {
+        const msg = (0, util_1.format)(...params);
+        reporter.info(msg, 'Warning');
+    };
+    return {
+        log,
+        warn,
+        error,
+    };
+}
+async function generateGitIgnore(roots) {
+    const root = (typeof roots === 'string' ? [roots].filter((r) => !!r) : roots) || [];
+    if (!(root === null || root === void 0 ? void 0 : root.length)) {
+        const cwd = process.cwd();
+        const repo = (await (0, cspell_gitignore_1.findRepoRoot)(cwd)) || cwd;
+        root.push(repo);
+    }
+    return new cspell_gitignore_1.GitIgnore(root === null || root === void 0 ? void 0 : root.map((p) => path.resolve(p)));
+}
+async function useFileLists(fileListFiles, includeGlobPatterns, root, dot) {
+    includeGlobPatterns = includeGlobPatterns.length ? includeGlobPatterns : ['**'];
+    const options = { root, mode: 'include' };
+    if (dot !== undefined) {
+        options.dot = dot;
+    }
+    const globMatcher = new cspell_glob_1.GlobMatcher(includeGlobPatterns, options);
+    const filterFiles = (file) => globMatcher.match(file);
+    const files = (0, fileHelper_1.readFileListFiles)(fileListFiles);
+    return (0, cspell_pipe_1.pipeAsync)(files, (0, cspell_pipe_1.opFilter)(filterFiles), opFilterAsync(fileHelper_1.isNotDir));
+}
+//# sourceMappingURL=lint.js.map

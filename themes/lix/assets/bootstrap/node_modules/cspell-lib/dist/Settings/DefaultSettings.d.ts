@@ -1,0 +1,6 @@
+import { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef';
+export declare const _defaultSettingsBasis: Readonly<CSpellSettingsInternal>;
+export declare const _defaultSettings: Readonly<CSpellSettingsInternal>;
+export declare function getDefaultSettings(useDefaultDictionaries?: boolean): CSpellSettingsInternal;
+export declare function getDefaultBundledSettings(): CSpellSettingsInternal;
+//# sourceMappingURL=DefaultSettings.d.ts.map

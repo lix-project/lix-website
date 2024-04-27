@@ -1,0 +1,112 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.emitTraceResults = void 0;
+const Path = __importStar(require("path"));
+const strip_ansi_1 = __importDefault(require("strip-ansi"));
+const util_1 = require("../util/util");
+const chalk = require("chalk");
+const colWidthDictionaryName = 20;
+function emitTraceResults(results, options) {
+    var _a;
+    const maxWordLength = results
+        .map((r) => r.foundWord || r.word)
+        .reduce((a, b) => Math.max(a, (0, util_1.width)(b)), 'Word'.length);
+    const cols = {
+        word: maxWordLength,
+        dictName: colWidthDictionaryName,
+        terminalWidth: (_a = options.lineWidth) !== null && _a !== void 0 ? _a : (process.stdout.columns || 120),
+    };
+    const col = new Intl.Collator();
+    results.sort((a, b) => col.compare(a.dictName, b.dictName));
+    emitHeader(cols);
+    results.forEach((r) => emitTraceResult(r, cols, options));
+}
+exports.emitTraceResults = emitTraceResults;
+function emitHeader(colWidths) {
+    const line = [
+        (0, util_1.pad)('Word', colWidths.word),
+        'F',
+        (0, util_1.pad)('Dictionary', colWidths.dictName),
+        (0, util_1.pad)('Dictionary Location', 30),
+    ];
+    console.log(chalk.underline(line.join(' ').slice(0, colWidths.terminalWidth)));
+}
+function emitTraceResult(r, colWidths, options) {
+    var _a, _b;
+    const { word: wordColWidth, terminalWidth, dictName: widthName } = colWidths;
+    const errors = ((_b = (_a = r.errors) === null || _a === void 0 ? void 0 : _a.map((e) => e.message)) === null || _b === void 0 ? void 0 : _b.join('\n\t')) || '';
+    const word = (0, util_1.pad)(r.foundWord || r.word, wordColWidth);
+    const cWord = word.replace(/[+]/g, chalk.yellow('+'));
+    const w = r.forbidden ? chalk.red(cWord) : chalk.green(cWord);
+    const f = calcFoundChar(r);
+    const a = r.dictActive ? '*' : ' ';
+    const dictName = (0, util_1.pad)(r.dictName.slice(0, widthName - 1) + a, widthName);
+    const dictColor = r.dictActive ? chalk.yellowBright : chalk.rgb(200, 128, 50);
+    const n = dictColor(dictName);
+    const info = [w, f, n].join(' ') + ' ';
+    const used = (0, util_1.width)((0, strip_ansi_1.default)(info));
+    const widthSrc = terminalWidth - used;
+    const c = errors ? chalk.red : chalk.white;
+    const s = c(formatDictionaryLocation(r.dictSource, widthSrc, options.cwd));
+    const line = info + s;
+    console.log(line);
+    if (errors) {
+        console.error('\t' + chalk.red(errors));
+    }
+}
+function trimMid(s, w) {
+    s = s.trim();
+    if (s.length <= w) {
+        return s;
+    }
+    const l = Math.floor((w - 3) / 2);
+    const r = Math.ceil((w - 3) / 2);
+    return s.slice(0, l) + '...' + s.slice(-r);
+}
+function calcFoundChar(r) {
+    var _a, _b;
+    const errors = ((_b = (_a = r.errors) === null || _a === void 0 ? void 0 : _a.map((e) => e.message)) === null || _b === void 0 ? void 0 : _b.join('\n\t')) || '';
+    let color = chalk.dim;
+    color = r.found ? chalk.whiteBright : color;
+    color = r.forbidden ? chalk.red : color;
+    color = r.noSuggest ? chalk.yellowBright : color;
+    color = errors ? chalk.red : color;
+    let char = '-';
+    char = r.found ? '*' : char;
+    char = r.forbidden ? '!' : char;
+    char = r.noSuggest ? 'I' : char;
+    char = errors ? 'X' : char;
+    return color(char);
+}
+function formatDictionaryLocation(dictSource, maxWidth, cwd) {
+    const relPath = cwd ? Path.relative(cwd, dictSource) : dictSource;
+    const usePath = relPath.length < dictSource.length ? relPath : dictSource;
+    return trimMid(usePath, maxWidth);
+}
+//# sourceMappingURL=traceEmitter.js.map

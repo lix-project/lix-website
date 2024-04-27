@@ -1,0 +1,95 @@
+baseURL: "https://lix.systems/"
+theme: "lix"
+languageCode: "en-us"
+
+title: "Lix"
+
+# googleAnalytics: ""
+
+summaryLength: 20
+
+params:
+  title: "Lix"
+  description: "Lix is an independent varaint of the Nix package manager, developed by a team of open-source volunteers, and maintained by and for a passionate community of users."
+  images: 
+    - "images/hero-image.png"
+
+  logo: "lix_logo.png"
+
+  favicons:
+    themeColor: "#FFFFFF"
+    backgroundColor: "#FFFFFF"
+    faviconColor: "#000000"
+
+  social:
+    twitter: "https://twitter.com/LixProject"
+
+  location:
+    - ""
+
+  contact:
+    - "info@lix.systems"
+
+  copyright: "Content licenced under CC-BY-SA-4.0 or LGPL-2.0-or-later."
+
+menus:
+  main:
+    - name: "Home"
+      url: "/#hero"
+      weight: 1
+
+    - name: "About Lix"
+      url: "/about"
+      weight: 2
+
+    - name: "Code"
+      url: "https://git.lix.systems/lix-project/lix"
+      weight: 3
+
+    - name: "Docs"
+      url: "/#"
+      weight: 4
+
+    - name: "Community"
+      url: "/community"
+      weight: 5
+
+    - name: "Wiki"
+      url: "https://wiki.lix.systems"
+      weight: 6
+
+  buttons:
+    - name: "Install Lix"
+      url: "/#"
+      weight: 5
+      pre: "btn btn-primary text-light"
+
+  footer:
+    - name: "About Lix"
+      url: "/about"
+      weight: 2
+
+    - name: "The Lix Team"
+      url: "/team"
+      weight: 3
+
+    - name: "Source Repositories"
+      url: "https://git.lix.systems"
+      weight: 4
+
+    - name: "Documentation"
+      url: "/#"
+      weight: 4
+
+    - name: "Community"
+      url: "/community"
+      weight: 5
+
+    - name: "Wiki"
+      url: "https://wiki.lix.systems"
+      weight: 6
+
+
+taxonomies:
+  series: "series"
+  tags: "tags"

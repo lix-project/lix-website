@@ -1,0 +1,32 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.resolvePatterns = void 0;
+const text_1 = require("../util/text");
+const util_1 = require("../util/util");
+function resolvePatterns(regExpList = [], patternDefinitions = []) {
+    const patternMap = new Map(patternDefinitions.map((def) => [def.name.toLowerCase(), def.pattern]));
+    const resolved = new Set();
+    function resolvePattern(p) {
+        if (resolved.has(p))
+            return undefined;
+        resolved.add(p);
+        return patternMap.get(p.toString().toLowerCase()) || p;
+    }
+    function* flatten(patterns) {
+        for (const pattern of patterns) {
+            if (Array.isArray(pattern)) {
+                yield* flatten(pattern.map(resolvePattern).filter(util_1.isDefined));
+            }
+            else {
+                yield pattern;
+            }
+        }
+    }
+    const patternList = regExpList.map(resolvePattern).filter(util_1.isDefined);
+    return [...flatten(patternList)].map(toRegExp).filter(util_1.isDefined);
+}
+exports.resolvePatterns = resolvePatterns;
+function toRegExp(pattern) {
+    return pattern instanceof RegExp ? new RegExp(pattern) : (0, text_1.stringToRegExp)(pattern, 'gim', 'g');
+}
+//# sourceMappingURL=patterns.js.map

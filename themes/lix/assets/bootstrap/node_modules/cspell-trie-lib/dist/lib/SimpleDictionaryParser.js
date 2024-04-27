@@ -1,0 +1,115 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.parseDictionary = exports.parseLinesToDictionary = exports.parseDictionaryLines = exports.defaultParseDictionaryOptions = void 0;
+const gensequence_1 = require("gensequence");
+const trie_util_1 = require("./trie-util");
+const constants_1 = require("./constants");
+const TrieBuilder_1 = require("./TrieBuilder");
+const _defaultOptions = {
+    commentCharacter: constants_1.LINE_COMMENT,
+    optionalCompoundCharacter: constants_1.OPTIONAL_COMPOUND_FIX,
+    compoundCharacter: constants_1.COMPOUND_FIX,
+    forbiddenPrefix: constants_1.FORBID_PREFIX,
+    caseInsensitivePrefix: constants_1.CASE_INSENSITIVE_PREFIX,
+    keepExactPrefix: constants_1.IDENTITY_PREFIX,
+    stripCaseAndAccents: true,
+};
+exports.defaultParseDictionaryOptions = Object.freeze(_defaultOptions);
+/**
+ * Normalizes a dictionary words based upon prefix / suffixes.
+ * Case insensitive versions are also generated.
+ * @param lines - one word per line
+ * @param _options - defines prefixes used when parsing lines.
+ * @returns words that have been normalized.
+ */
+function parseDictionaryLines(lines, options) {
+    const _options = mergeOptions(_defaultOptions, options);
+    const { commentCharacter, optionalCompoundCharacter: optionalCompound, compoundCharacter: compound, caseInsensitivePrefix: ignoreCase, forbiddenPrefix: forbidden, keepExactPrefix: keepCase, stripCaseAndAccents, } = _options;
+    const regexComment = new RegExp(escapeRegEx(commentCharacter) + '.*', 'g');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function isString(line) {
+        return typeof line === 'string';
+    }
+    function trim(line) {
+        return line.trim();
+    }
+    function removeComments(line) {
+        return line.replace(regexComment, '').trim();
+    }
+    function filterEmptyLines(line) {
+        return !!line;
+    }
+    function* mapOptionalPrefix(line) {
+        if (line[0] === optionalCompound) {
+            const t = line.slice(1);
+            yield t;
+            yield compound + t;
+        }
+        else {
+            yield line;
+        }
+    }
+    function* mapOptionalSuffix(line) {
+        if (line.slice(-1) === optionalCompound) {
+            const t = line.slice(0, -1);
+            yield t;
+            yield t + compound;
+        }
+        else {
+            yield line;
+        }
+    }
+    const doNotNormalizePrefix = new Set([forbidden, ignoreCase, keepCase, '"']);
+    function removeDoublePrefix(w) {
+        return w.startsWith(ignoreCase + ignoreCase) ? w.slice(1) : w;
+    }
+    function stripKeepCasePrefixAndQuotes(word) {
+        word = word.replace(/"(.*)"/, '$1');
+        return word[0] === keepCase ? word.slice(1) : word;
+    }
+    function _normalize(word) {
+        return (0, trie_util_1.normalizeWord)(stripKeepCasePrefixAndQuotes(word));
+    }
+    function* mapNormalize(word) {
+        const nWord = _normalize(word);
+        const forms = new Set();
+        forms.add(nWord);
+        if (stripCaseAndAccents && !doNotNormalizePrefix.has(word[0])) {
+            for (const n of (0, trie_util_1.normalizeWordForCaseInsensitive)(nWord)) {
+                if (n !== nWord)
+                    forms.add(ignoreCase + n);
+            }
+        }
+        yield* forms;
+    }
+    const processLines = gensequence_1.operators.pipe(gensequence_1.operators.filter(isString), gensequence_1.operators.map(removeComments), gensequence_1.operators.map(trim), gensequence_1.operators.filter(filterEmptyLines), gensequence_1.operators.concatMap(mapOptionalPrefix), gensequence_1.operators.concatMap(mapOptionalSuffix), gensequence_1.operators.concatMap(mapNormalize), gensequence_1.operators.map(removeDoublePrefix));
+    return processLines(lines);
+}
+exports.parseDictionaryLines = parseDictionaryLines;
+function parseLinesToDictionary(lines, options) {
+    const _options = mergeOptions(_defaultOptions, options);
+    const dictLines = parseDictionaryLines(lines, _options);
+    return (0, TrieBuilder_1.buildTrieFast)([...new Set(dictLines)].sort(), {
+        compoundCharacter: _options.compoundCharacter,
+        forbiddenWordPrefix: _options.forbiddenPrefix,
+        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
+    });
+}
+exports.parseLinesToDictionary = parseLinesToDictionary;
+function parseDictionary(text, options) {
+    return parseLinesToDictionary(text.split('\n'), options);
+}
+exports.parseDictionary = parseDictionary;
+function escapeRegEx(s) {
+    return s.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
+}
+function mergeOptions(base, ...partials) {
+    const opt = { ...base };
+    for (const p of partials) {
+        if (!p)
+            continue;
+        Object.assign(opt, p);
+    }
+    return opt;
+}
+//# sourceMappingURL=SimpleDictionaryParser.js.map

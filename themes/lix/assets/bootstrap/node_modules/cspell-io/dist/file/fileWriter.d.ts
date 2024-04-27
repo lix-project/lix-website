@@ -1,0 +1,5 @@
+/// <reference types="node" />
+export declare function writeToFile(filename: string, data: string): NodeJS.WritableStream;
+export declare function writeToFileIterable(filename: string, data: Iterable<string>): NodeJS.WritableStream;
+export declare function writeToFileIterableP(filename: string, data: Iterable<string>): Promise<void>;
+//# sourceMappingURL=fileWriter.d.ts.map

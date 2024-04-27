@@ -1,0 +1,9 @@
+import { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef';
+import { SpellingDictionary } from './SpellingDictionary';
+import { SpellingDictionaryCollection } from './SpellingDictionaryCollection';
+export declare function loadDictionaryDefs(defsToLoad: DictionaryDefinitionInternal[]): Promise<SpellingDictionary>[];
+export declare function loadDictionaryDefsSync(defsToLoad: DictionaryDefinitionInternal[]): SpellingDictionary[];
+export declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
+export declare function getDictionaryInternal(settings: CSpellSettingsInternal): Promise<SpellingDictionaryCollection>;
+export declare function getDictionaryInternalSync(settings: CSpellSettingsInternal): SpellingDictionaryCollection;
+//# sourceMappingURL=Dictionaries.d.ts.map

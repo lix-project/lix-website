@@ -1,0 +1,137 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.internal = exports.getIgnoreRegExpFromDocument = exports.getIgnoreWordsFromDocument = exports.getInDocumentSettings = void 0;
+const gensequence_1 = require("gensequence");
+const Text = __importStar(require("../util/text"));
+const util_1 = require("../util/util");
+const CSpellSettingsServer_1 = require("./CSpellSettingsServer");
+// cspell:ignore gimuy
+const regExMatchRegEx = /\/.*\/[gimuy]*/;
+const regExInFileSettings = [/(?:spell-?checker|c?spell)::?(.*)/gi, /(LocalWords:?.*)/g];
+const EmptyWords = [];
+Object.freeze(EmptyWords);
+function getInDocumentSettings(text) {
+    const settings = getPossibleInDocSettings(text)
+        .concatMap((a) => parseSettingMatch(a))
+        .reduce((s, setting) => {
+        return (0, CSpellSettingsServer_1.mergeInDocSettings)(s, setting);
+    }, { id: 'in-doc-settings' });
+    // console.log('InDocSettings: %o', settings);
+    return settings;
+}
+exports.getInDocumentSettings = getInDocumentSettings;
+function parseSettingMatch(matchArray) {
+    const [, match = ''] = matchArray;
+    const possibleSetting = match.trim();
+    const settingParsers = [
+        [/^(?:enable|disable)(?:allow)?CompoundWords/i, parseCompoundWords],
+        [/^(?:enable|disable)CaseSensitive/i, parseCaseSensitive],
+        [/^words?\s/i, parseWords],
+        [/^ignore(?:words?)?\s/i, parseIgnoreWords],
+        [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
+        [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
+        [/^locale?\s/i, parseLocale],
+        [/^language\s/i, parseLocale],
+        [/^dictionaries\s/i, parseDictionaries],
+        [/^LocalWords:/, (w) => parseWords(w.replace(/LocalWords:?/gi, ' '))],
+    ];
+    return settingParsers
+        .filter(([regex]) => regex.test(possibleSetting))
+        .map(([, fn]) => fn)
+        .map((fn) => fn(possibleSetting));
+}
+function parseCompoundWords(match) {
+    const allowCompoundWords = /enable/i.test(match);
+    return { id: 'in-doc-allowCompoundWords', allowCompoundWords };
+}
+function parseCaseSensitive(match) {
+    const caseSensitive = /enable/i.test(match);
+    return { id: 'in-doc-caseSensitive', caseSensitive };
+}
+function parseWords(match) {
+    const words = match.split(/[,\s]+/g).slice(1);
+    return { id: 'in-doc-words', words };
+}
+function parseLocale(match) {
+    const parts = match.trim().split(/[\s,]+/);
+    const language = parts.slice(1).join(',');
+    return language ? { id: 'in-doc-local', language } : {};
+}
+function parseIgnoreWords(match) {
+    const wordsSetting = parseWords(match);
+    return (0, util_1.clean)({ id: 'in-doc-ignore', ignoreWords: wordsSetting.words });
+}
+function parseRegEx(match) {
+    const patterns = [match.replace(/^[^\s]+\s+/, '')].map((a) => {
+        const m = a.match(regExMatchRegEx);
+        if (m && m[0]) {
+            return m[0];
+        }
+        return a.replace(/((?:[^\s]|\\ )+).*/, '$1');
+    });
+    return patterns;
+}
+function parseIgnoreRegExp(match) {
+    const ignoreRegExpList = parseRegEx(match);
+    return { id: 'in-doc-ignoreRegExp', ignoreRegExpList };
+}
+function parseIncludeRegExp(match) {
+    const includeRegExpList = parseRegEx(match);
+    return { id: 'in-doc-includeRegExp', includeRegExpList };
+}
+function parseDictionaries(match) {
+    const dictionaries = match.split(/[,\s]+/g).slice(1);
+    return { id: 'in-doc-dictionaries', dictionaries };
+}
+function getPossibleInDocSettings(text) {
+    return (0, gensequence_1.genSequence)(regExInFileSettings).concatMap((regexp) => Text.match(regexp, text));
+}
+function getWordsFromDocument(text) {
+    const { words = EmptyWords } = getInDocumentSettings(text);
+    return words;
+}
+function getIgnoreWordsFromDocument(text) {
+    const { ignoreWords = EmptyWords } = getInDocumentSettings(text);
+    return ignoreWords;
+}
+exports.getIgnoreWordsFromDocument = getIgnoreWordsFromDocument;
+function getIgnoreRegExpFromDocument(text) {
+    const { ignoreRegExpList = [] } = getInDocumentSettings(text);
+    return ignoreRegExpList;
+}
+exports.getIgnoreRegExpFromDocument = getIgnoreRegExpFromDocument;
+/**
+ * These internal functions are used exposed for unit testing.
+ */
+exports.internal = {
+    getPossibleInDocSettings,
+    getWordsFromDocument,
+    parseWords,
+    parseCompoundWords,
+    parseIgnoreRegExp,
+    parseIgnoreWords,
+};
+//# sourceMappingURL=InDocSettings.js.map

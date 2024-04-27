@@ -1,0 +1,217 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__testing__ = exports.getReporter = void 0;
+const chalk = require("chalk");
+const cspell_lib_1 = require("cspell-lib");
+const path = __importStar(require("path"));
+const vscode_uri_1 = require("vscode-uri");
+const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text})`;
+const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
+const templateIssueWithContext = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
+const templateIssueWithContextWithSuggestions = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
+const templateIssueLegacy = `${chalk.green('$filename')}[$row, $col]: $message: ${chalk.red('$text')}`;
+const templateIssueWordsOnly = '$text';
+function genIssueEmitter(template) {
+    const defaultWidth = 10;
+    let maxWidth = defaultWidth;
+    let uri;
+    return function issueEmitter(issue) {
+        if (uri !== issue.uri) {
+            maxWidth = defaultWidth;
+            uri = issue.uri;
+        }
+        maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
+        console.log(formatIssue(template, issue, Math.ceil(maxWidth)));
+    };
+}
+function errorEmitter(message, error) {
+    if ((0, cspell_lib_1.isSpellingDictionaryLoadError)(error)) {
+        error = error.cause;
+    }
+    console.error(chalk.red(message), error.toString());
+}
+function nullEmitter() {
+    /* empty */
+}
+function relativeFilename(filename, cwd = process.cwd()) {
+    const rel = path.relative(cwd, filename);
+    if (rel.startsWith('..'))
+        return filename;
+    return '.' + path.sep + rel;
+}
+function relativeUriFilename(uri, fsPathRoot) {
+    const fsPath = vscode_uri_1.URI.parse(uri).fsPath;
+    const rel = path.relative(fsPathRoot, fsPath);
+    if (rel.startsWith('..'))
+        return fsPath;
+    return '.' + path.sep + rel;
+}
+function reportProgress(p) {
+    if (p.type === 'ProgressFileComplete') {
+        return reportProgressFileComplete(p);
+    }
+    if (p.type === 'ProgressFileBegin') {
+        return reportProgressFileBegin(p);
+    }
+}
+function reportProgressFileBegin(p) {
+    const fc = '' + p.fileCount;
+    const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
+    const idx = fn + '/' + fc;
+    const filename = chalk.gray(relativeFilename(p.filename));
+    process.stderr.write(`\r${idx} ${filename}`);
+}
+function reportProgressFileComplete(p) {
+    const time = reportTime(p.elapsedTimeMs, !!p.cached);
+    const skipped = p.processed === false ? ' skipped' : '';
+    const hasErrors = p.numErrors ? chalk.red ` X` : '';
+    console.error(` ${time}${skipped}${hasErrors}`);
+}
+function reportTime(elapsedTimeMs, cached) {
+    if (cached)
+        return chalk.green('cached');
+    if (elapsedTimeMs === undefined)
+        return '-';
+    const color = elapsedTimeMs < 1000 ? chalk.white : elapsedTimeMs < 2000 ? chalk.yellow : chalk.redBright;
+    return color(elapsedTimeMs.toFixed(2) + 'ms');
+}
+function getReporter(options) {
+    const issueTemplate = options.wordsOnly
+        ? templateIssueWordsOnly
+        : options.legacy
+            ? templateIssueLegacy
+            : options.showContext
+                ? options.showSuggestions
+                    ? templateIssueWithContextWithSuggestions
+                    : templateIssueWithContext
+                : options.showSuggestions
+                    ? templateIssueWithSuggestions
+                    : templateIssue;
+    const { fileGlobs, silent, summary, issues, progress, verbose, debug } = options;
+    const emitters = {
+        Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
+        Info: !silent && verbose ? (s) => console.info(chalk.yellow(s)) : nullEmitter,
+        Warning: (s) => console.info(chalk.yellow(s)),
+    };
+    function infoEmitter(message, msgType) {
+        var _a;
+        (_a = emitters[msgType]) === null || _a === void 0 ? void 0 : _a.call(emitters, message);
+    }
+    const root = vscode_uri_1.URI.file(options.root || process.cwd());
+    const fsPathRoot = root.fsPath;
+    function relativeIssue(fn) {
+        const fnFilename = options.relative
+            ? (uri) => relativeUriFilename(uri, fsPathRoot)
+            : (uri) => vscode_uri_1.URI.parse(uri).fsPath;
+        return (i) => {
+            const filename = i.uri ? fnFilename(i.uri) : '';
+            const r = { ...i, filename };
+            fn(r);
+        };
+    }
+    const resultEmitter = (result) => {
+        if (!fileGlobs.length && !result.files) {
+            return;
+        }
+        if (result.cachedFiles) {
+            console.error('CSpell: Files checked: %d (%d from cache), Issues found: %d in %d files', result.files, result.cachedFiles, result.issues, result.filesWithIssues.size);
+            return;
+        }
+        console.error('CSpell: Files checked: %d, Issues found: %d in %d files', result.files, result.issues, result.filesWithIssues.size);
+    };
+    return {
+        issue: relativeIssue(silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate)),
+        error: silent ? nullEmitter : errorEmitter,
+        info: infoEmitter,
+        debug: emitters.Debug,
+        progress: !silent && progress ? reportProgress : nullEmitter,
+        result: !silent && summary ? resultEmitter : nullEmitter,
+    };
+}
+exports.getReporter = getReporter;
+function formatIssue(templateStr, issue, maxIssueTextWidth) {
+    var _a;
+    function clean(t) {
+        return t.replace(/\s+/, ' ');
+    }
+    const { uri = '', filename, row, col, text, context, offset } = issue;
+    const contextLeft = clean(context.text.slice(0, offset - context.offset));
+    const contextRight = clean(context.text.slice(offset + text.length - context.offset));
+    const contextFull = clean(context.text);
+    const padContext = ' '.repeat(Math.max(maxIssueTextWidth - text.length, 0));
+    const rowText = row.toString();
+    const colText = col.toString();
+    const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
+    const suggestions = ((_a = issue.suggestions) === null || _a === void 0 ? void 0 : _a.join(', ')) || '';
+    const message = issue.isFlagged ? '{yellow Forbidden word}' : 'Unknown word';
+    const substitutions = {
+        $col: colText,
+        $contextFull: contextFull,
+        $contextLeft: contextLeft,
+        $contextRight: contextRight,
+        $filename: filename,
+        $padContext: padContext,
+        $padRowCol: padRowCol,
+        $row: rowText,
+        $suggestions: suggestions,
+        $text: text,
+        $uri: uri,
+    };
+    const t = template(templateStr.replace(/\$message/g, message));
+    return substitute(chalk(t), substitutions);
+}
+class TS extends Array {
+    constructor(s) {
+        super(s);
+        this.raw = [s];
+    }
+}
+function template(s) {
+    return new TS(s);
+}
+function substitute(text, substitutions) {
+    const subs = [];
+    for (const [match, replaceWith] of Object.entries(substitutions)) {
+        const len = match.length;
+        for (let i = text.indexOf(match); i >= 0; i = text.indexOf(match, i + 1)) {
+            subs.push([i, i + len, replaceWith]);
+        }
+    }
+    subs.sort((a, b) => a[0] - b[0]);
+    let i = 0;
+    function sub(r) {
+        const [a, b, t] = r;
+        const prefix = text.slice(i, a);
+        i = b;
+        return prefix + t;
+    }
+    const parts = subs.map(sub);
+    return parts.join('') + text.slice(i);
+}
+exports.__testing__ = {
+    formatIssue,
+};
+//# sourceMappingURL=cli-reporter.js.map

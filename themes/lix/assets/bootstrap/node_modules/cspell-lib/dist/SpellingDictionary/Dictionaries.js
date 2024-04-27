@@ -1,0 +1,61 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.getDictionaryInternalSync = exports.getDictionaryInternal = exports.refreshDictionaryCache = exports.loadDictionaryDefsSync = exports.loadDictionaryDefs = void 0;
+const DictionarySettings_1 = require("../Settings/DictionarySettings");
+const util_1 = require("../util/util");
+const createSpellingDictionary_1 = require("./createSpellingDictionary");
+const DictionaryLoader_1 = require("./DictionaryLoader");
+const SpellingDictionaryCollection_1 = require("./SpellingDictionaryCollection");
+function loadDictionaryDefs(defsToLoad) {
+    return defsToLoad.map(DictionaryLoader_1.loadDictionary);
+}
+exports.loadDictionaryDefs = loadDictionaryDefs;
+function loadDictionaryDefsSync(defsToLoad) {
+    return defsToLoad.map(DictionaryLoader_1.loadDictionarySync);
+}
+exports.loadDictionaryDefsSync = loadDictionaryDefsSync;
+function refreshDictionaryCache(maxAge) {
+    return (0, DictionaryLoader_1.refreshCacheEntries)(maxAge);
+}
+exports.refreshDictionaryCache = refreshDictionaryCache;
+const emptyWords = Object.freeze([]);
+async function getDictionaryInternal(settings) {
+    const spellDictionaries = await Promise.all(loadDictionaryDefs((0, DictionarySettings_1.calcDictionaryDefsToLoad)(settings)));
+    return _getDictionaryInternal(settings, spellDictionaries);
+}
+exports.getDictionaryInternal = getDictionaryInternal;
+function getDictionaryInternalSync(settings) {
+    const spellDictionaries = loadDictionaryDefsSync((0, DictionarySettings_1.calcDictionaryDefsToLoad)(settings));
+    return _getDictionaryInternal(settings, spellDictionaries);
+}
+exports.getDictionaryInternalSync = getDictionaryInternalSync;
+function _getDictionaryInternal(settings, spellDictionaries) {
+    const { words = emptyWords, userWords = emptyWords, flagWords = emptyWords, ignoreWords = emptyWords } = settings;
+    const settingsWordsDictionary = (0, createSpellingDictionary_1.createSpellingDictionary)(words, '[words]', 'From Settings `words`', {
+        caseSensitive: true,
+        weightMap: undefined,
+    });
+    const settingsUserWordsDictionary = userWords.length
+        ? (0, createSpellingDictionary_1.createSpellingDictionary)(userWords, '[userWords]', 'From Settings `userWords`', {
+            caseSensitive: true,
+            weightMap: undefined,
+        })
+        : undefined;
+    const ignoreWordsDictionary = (0, createSpellingDictionary_1.createSpellingDictionary)(ignoreWords, '[ignoreWords]', 'From Settings `ignoreWords`', {
+        caseSensitive: true,
+        noSuggest: true,
+        weightMap: undefined,
+    });
+    const flagWordsDictionary = (0, createSpellingDictionary_1.createForbiddenWordsDictionary)(flagWords, '[flagWords]', 'From Settings `flagWords`', {
+        weightMap: undefined,
+    });
+    const dictionaries = [
+        ...spellDictionaries,
+        settingsWordsDictionary,
+        settingsUserWordsDictionary,
+        ignoreWordsDictionary,
+        flagWordsDictionary,
+    ].filter(util_1.isDefined);
+    return (0, SpellingDictionaryCollection_1.createCollection)(dictionaries, 'dictionary collection');
+}
+//# sourceMappingURL=Dictionaries.js.map

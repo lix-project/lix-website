@@ -1,0 +1,67 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__testing__ = exports.calcCacheSettings = exports.createCache = exports.DEFAULT_CACHE_LOCATION = void 0;
+const assert_1 = __importDefault(require("assert"));
+const fs_extra_1 = require("fs-extra");
+const path_1 = __importDefault(require("path"));
+const errors_1 = require("../errors");
+const DiskCache_1 = require("./DiskCache");
+const DummyCache_1 = require("./DummyCache");
+// cspell:word cspellcache
+exports.DEFAULT_CACHE_LOCATION = '.cspellcache';
+const versionSuffix = '';
+/**
+ * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
+ */
+function createCache(options) {
+    const { useCache, cacheLocation, cacheStrategy } = options;
+    return useCache
+        ? new DiskCache_1.DiskCache(path_1.default.resolve(cacheLocation), cacheStrategy === 'content', normalizeVersion(options.version))
+        : new DummyCache_1.DummyCache();
+}
+exports.createCache = createCache;
+async function calcCacheSettings(config, cacheOptions, root) {
+    var _a, _b, _c, _d, _e, _f, _g;
+    const cs = (_a = config.cache) !== null && _a !== void 0 ? _a : {};
+    const useCache = (_c = (_b = cacheOptions.cache) !== null && _b !== void 0 ? _b : cs.useCache) !== null && _c !== void 0 ? _c : false;
+    const cacheLocation = await resolveCacheLocation(path_1.default.resolve(root, (_e = (_d = cacheOptions.cacheLocation) !== null && _d !== void 0 ? _d : cs.cacheLocation) !== null && _e !== void 0 ? _e : exports.DEFAULT_CACHE_LOCATION));
+    const cacheStrategy = (_g = (_f = cacheOptions.cacheStrategy) !== null && _f !== void 0 ? _f : cs.cacheStrategy) !== null && _g !== void 0 ? _g : 'metadata';
+    return {
+        useCache,
+        cacheLocation,
+        cacheStrategy,
+        version: cacheOptions.version,
+    };
+}
+exports.calcCacheSettings = calcCacheSettings;
+async function resolveCacheLocation(cacheLocation) {
+    try {
+        const s = await (0, fs_extra_1.stat)(cacheLocation);
+        if (s.isFile())
+            return cacheLocation;
+        return path_1.default.join(cacheLocation, exports.DEFAULT_CACHE_LOCATION);
+    }
+    catch (err) {
+        if ((0, errors_1.isError)(err) && err.code === 'ENOENT') {
+            return cacheLocation;
+        }
+        throw err;
+    }
+}
+/**
+ * Normalizes the version and return only `major.minor + versionSuffix`
+ * @param version The cspell semantic version.
+ */
+function normalizeVersion(version) {
+    const parts = version.split('.').slice(0, 2);
+    (0, assert_1.default)(parts.length === 2);
+    return parts.join('.') + versionSuffix;
+}
+exports.__testing__ = {
+    normalizeVersion,
+    versionSuffix,
+};
+//# sourceMappingURL=createCache.js.map

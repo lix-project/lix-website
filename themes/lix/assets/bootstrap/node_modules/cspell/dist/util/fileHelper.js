@@ -1,0 +1,179 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isNotDir = exports.isDir = exports.isFile = exports.readFileListFile = exports.readFileListFiles = exports.calcFinalConfigInfo = exports.findFiles = exports.readFile = exports.readFileInfo = exports.fileInfoToDocument = exports.readConfig = void 0;
+const cspell = __importStar(require("cspell-lib"));
+const cspell_lib_1 = require("cspell-lib");
+const fs_1 = require("fs");
+const get_stdin_1 = __importDefault(require("get-stdin"));
+const path = __importStar(require("path"));
+const async_1 = require("./async");
+const errors_1 = require("./errors");
+const glob_1 = require("./glob");
+const stdin_1 = require("./stdin");
+const UTF8 = 'utf8';
+const STDIN = 'stdin';
+async function readConfig(configFile, root) {
+    var _a;
+    if (configFile) {
+        const config = (await cspell.loadConfig(configFile)) || {};
+        return { source: configFile, config };
+    }
+    const config = await cspell.searchForConfig(root);
+    return { source: ((_a = config === null || config === void 0 ? void 0 : config.__importRef) === null || _a === void 0 ? void 0 : _a.filename) || 'None found', config: config || {} };
+}
+exports.readConfig = readConfig;
+function fileInfoToDocument(fileInfo, languageId, locale) {
+    const { filename, text } = fileInfo;
+    languageId = languageId || undefined;
+    locale = locale || undefined;
+    if (filename === STDIN) {
+        return {
+            uri: 'stdin:///',
+            text,
+            languageId,
+            locale,
+        };
+    }
+    return (0, cspell_lib_1.fileToDocument)(filename, text, languageId, locale);
+}
+exports.fileInfoToDocument = fileInfoToDocument;
+function readFileInfo(filename, encoding = UTF8, handleNotFound = false) {
+    const pText = filename === STDIN ? (0, get_stdin_1.default)() : fs_1.promises.readFile(filename, encoding);
+    return pText.then((text) => ({ text, filename }), (e) => {
+        const error = (0, errors_1.toError)(e);
+        return handleNotFound && error.code === 'EISDIR'
+            ? Promise.resolve({ text: '', filename, errorCode: error.code })
+            : handleNotFound && error.code === 'ENOENT'
+                ? Promise.resolve({ text: '', filename, errorCode: error.code })
+                : Promise.reject(new errors_1.IOError(`Error reading file: "${filename}"`, error));
+    });
+}
+exports.readFileInfo = readFileInfo;
+function readFile(filename, encoding = UTF8) {
+    return readFileInfo(filename, encoding).then((info) => info.text);
+}
+exports.readFile = readFile;
+/**
+ * Looks for matching glob patterns or stdin
+ * @param globPatterns patterns or stdin
+ */
+async function findFiles(globPatterns, options) {
+    const globPats = globPatterns.filter((filename) => filename !== STDIN);
+    const stdin = globPats.length < globPatterns.length ? [STDIN] : [];
+    const globResults = globPats.length ? await (0, glob_1.globP)(globPats, options) : [];
+    const cwd = options.cwd || process.cwd();
+    return stdin.concat(globResults.map((filename) => path.resolve(cwd, filename)));
+}
+exports.findFiles = findFiles;
+function calcFinalConfigInfo(configInfo, settingsFromCommandLine, filename, text) {
+    var _a, _b, _c;
+    const ext = path.extname(filename);
+    const fileSettings = cspell.calcOverrideSettings(configInfo.config, path.resolve(filename));
+    const loadDefault = (_c = (_b = (_a = settingsFromCommandLine.loadDefaultConfiguration) !== null && _a !== void 0 ? _a : configInfo.config.loadDefaultConfiguration) !== null && _b !== void 0 ? _b : fileSettings.loadDefaultConfiguration) !== null && _c !== void 0 ? _c : true;
+    const settings = cspell.mergeSettings(cspell.getDefaultSettings(loadDefault), cspell.getGlobalSettings(), fileSettings, settingsFromCommandLine);
+    const languageIds = settings.languageId ? [settings.languageId] : cspell.getLanguagesForExt(ext);
+    const config = cspell.constructSettingsForText(settings, text, languageIds);
+    return {
+        configInfo: { ...configInfo, config },
+        filename,
+        text,
+        languageIds,
+    };
+}
+exports.calcFinalConfigInfo = calcFinalConfigInfo;
+function resolveFilename(filename) {
+    return path.resolve(filename);
+}
+const resolveFilenames = (0, async_1.asyncMap)(resolveFilename);
+/**
+ * Read
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+function readFileListFiles(listFiles) {
+    let useStdin = false;
+    const files = listFiles.filter((file) => {
+        const isStdin = file === 'stdin';
+        useStdin = useStdin || isStdin;
+        return !isStdin;
+    });
+    const found = (0, async_1.asyncPipe)(files, (0, async_1.asyncMap)((file) => readFileListFile(file)), (0, async_1.asyncAwait)(), (0, async_1.asyncFlatten)());
+    // Move `stdin` to the end.
+    const stdin = useStdin ? (0, stdin_1.readStdin)() : [];
+    return (0, async_1.asyncPipe)((0, async_1.mergeAsyncIterables)(found, stdin), resolveFilenames);
+}
+exports.readFileListFiles = readFileListFiles;
+/**
+ * Read a `listFile` and return the containing file paths resolved relative to the `listFile`.
+ * @param listFiles - array of file paths to read that will contain a list of files. Paths contained in each
+ *   file will be resolved relative to the containing file.
+ * @returns - a list of files to be processed.
+ */
+async function readFileListFile(listFile) {
+    try {
+        const relTo = path.resolve(path.dirname(listFile));
+        const content = await readFile(listFile);
+        const lines = content
+            .split('\n')
+            .map((a) => a.trim())
+            .filter((a) => !!a)
+            .map((file) => path.resolve(relTo, file));
+        return lines;
+    }
+    catch (err) {
+        throw (0, errors_1.toApplicationError)(err, `Error reading file list from: "${listFile}"`);
+    }
+}
+exports.readFileListFile = readFileListFile;
+async function isFile(filename) {
+    try {
+        const stat = await fs_1.promises.stat(filename);
+        return stat.isFile();
+    }
+    catch (e) {
+        return false;
+    }
+}
+exports.isFile = isFile;
+async function isDir(filename) {
+    try {
+        const stat = await fs_1.promises.stat(filename);
+        return stat.isDirectory();
+    }
+    catch (e) {
+        return false;
+    }
+}
+exports.isDir = isDir;
+function isNotDir(filename) {
+    return isDir(filename).then((a) => !a);
+}
+exports.isNotDir = isNotDir;
+//# sourceMappingURL=fileHelper.js.map

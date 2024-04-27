@@ -1,0 +1,15 @@
+enabled: true
+id: "hero"
+
+content:
+  title: "declarative. reproducible. **human-friendly.**"
+  text: "Lix is a modern, delicious implementation of the Nix package manager, focused on correctness, usability, and growth -- and committed to doing right by its community."
+
+  buttonPrimary:
+    label: "Why Lix?"
+    url: "#"
+
+  buttonSecondary:
+    label: "Start using lix"
+    url: ""
+

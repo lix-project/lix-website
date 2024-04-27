@@ -1,0 +1,67 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.commandTrace = void 0;
+const commander_1 = require("commander");
+const App = __importStar(require("./application"));
+const traceEmitter_1 = require("./emitters/traceEmitter");
+const errors_1 = require("./util/errors");
+function commandTrace(prog) {
+    return prog
+        .command('trace')
+        .description(`Trace words -- Search for words in the configuration and dictionaries.`)
+        .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+        .option('--locale <locale>', 'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+        .option('--language-id <language>', 'Use programming language. i.e. "php" or "scala"')
+        .addOption(new commander_1.Option('--languageId <language>', 'Use programming language. i.e. "php" or "scala"').hideHelp())
+        .option('--allow-compound-words', 'Turn on allowCompoundWords')
+        .addOption(new commander_1.Option('--allowCompoundWords', 'Turn on allowCompoundWords').hideHelp())
+        .option('--no-allow-compound-words', 'Turn off allowCompoundWords')
+        .option('--no-ignore-case', 'Do not ignore case and accents when searching for words')
+        .option('--stdin', 'Read words from stdin.')
+        .option('--no-color', 'Turn off color.')
+        .option('--color', 'Force color')
+        .addOption(new commander_1.Option('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
+        .addOption(new commander_1.Option('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
+        .arguments('[words...]')
+        .action(async (words, options) => {
+        let numFound = 0;
+        for await (const results of App.trace(words, options)) {
+            (0, traceEmitter_1.emitTraceResults)(results, { cwd: process.cwd() });
+            numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
+            const numErrors = results.map((r) => { var _a; return ((_a = r.errors) === null || _a === void 0 ? void 0 : _a.length) || 0; }).reduce((n, r) => n + r, 0);
+            if (numErrors) {
+                console.error('Dictionary Errors.');
+                throw new errors_1.CheckFailed('dictionary errors', 1);
+            }
+        }
+        if (!numFound) {
+            console.error('No matches found');
+            throw new errors_1.CheckFailed('no matches', 1);
+        }
+    });
+}
+exports.commandTrace = commandTrace;
+//# sourceMappingURL=commandTrace.js.map

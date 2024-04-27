@@ -1,0 +1,3 @@
+import { Command } from 'commander';
+export declare function commandLint(prog: Command): Command;
+//# sourceMappingURL=commandLint.d.ts.map

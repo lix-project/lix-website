@@ -1,0 +1,329 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__testing__ = exports.extractDependencies = exports.getSources = exports.checkFilenameMatchesGlob = exports.toInternalSettings = exports.finalizeSettings = exports.calcOverrideSettings = exports.mergeInDocSettings = exports.mergeSettings = exports.ENV_CSPELL_GLOB_ROOT = exports.currentSettingsFileVersion = exports.configSettingsFileVersion0_2 = exports.configSettingsFileVersion0_1 = void 0;
+const cspell_glob_1 = require("cspell-glob");
+const path = __importStar(require("path"));
+const CSpellSettingsInternalDef_1 = require("../Models/CSpellSettingsInternalDef");
+const util = __importStar(require("../util/util"));
+const DictionarySettings_1 = require("./DictionarySettings");
+const patterns_1 = require("./patterns");
+exports.configSettingsFileVersion0_1 = '0.1';
+exports.configSettingsFileVersion0_2 = '0.2';
+exports.currentSettingsFileVersion = exports.configSettingsFileVersion0_2;
+exports.ENV_CSPELL_GLOB_ROOT = 'CSPELL_GLOB_ROOT';
+function _unique(a) {
+    return [...new Set(a)];
+}
+function mergeListUnique(left, right) {
+    if (left === undefined)
+        return right;
+    if (right === undefined)
+        return left;
+    if (!right.length)
+        return left;
+    if (!left.length)
+        return right;
+    return _unique([...left, ...right]);
+}
+function mergeList(left, right) {
+    if (left === undefined)
+        return right;
+    if (right === undefined)
+        return left;
+    if (!left.length)
+        return right;
+    if (!right.length)
+        return left;
+    return left.concat(right);
+}
+const emptyWords = [];
+Object.freeze(emptyWords);
+function mergeWordsCached(left, right) {
+    if (left === undefined)
+        return !right || right.length ? right : emptyWords;
+    if (right === undefined)
+        return !left || left.length ? left : emptyWords;
+    if (!left.length)
+        return !right || right.length ? right : emptyWords;
+    if (!right.length)
+        return !left || left.length ? left : emptyWords;
+    return left.concat(right);
+}
+function mergeObjects(left, right) {
+    if (left === undefined)
+        return right;
+    if (right === undefined)
+        return left;
+    return { ...left, ...right };
+}
+function replaceIfNotEmpty(left = [], right = []) {
+    const filtered = right.filter((a) => !!a);
+    if (filtered.length) {
+        return filtered;
+    }
+    return left;
+}
+function mergeSettings(left, ...settings) {
+    const rawSettings = settings.filter((a) => !!a).reduce(merge, toInternalSettings(left));
+    return util.clean(rawSettings);
+}
+exports.mergeSettings = mergeSettings;
+// eslint-disable-next-line @typescript-eslint/ban-types
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+function merge(left, right) {
+    const _left = toInternalSettings(left);
+    const _right = toInternalSettings(right);
+    if (left === right) {
+        return _left;
+    }
+    if (isEmpty(right)) {
+        return _left;
+    }
+    if (isEmpty(left)) {
+        return _right;
+    }
+    if (isLeftAncestorOfRight(_left, _right)) {
+        return _right;
+    }
+    if (doesLeftHaveRightAncestor(_left, _right)) {
+        return _left;
+    }
+    const leftId = _left.id || _left.languageId || '';
+    const rightId = _right.id || _right.languageId || '';
+    const includeRegExpList = takeRightOtherwiseLeft(_left.includeRegExpList, _right.includeRegExpList);
+    const optionals = (includeRegExpList === null || includeRegExpList === void 0 ? void 0 : includeRegExpList.length) ? { includeRegExpList } : {};
+    const version = max(_left.version, _right.version);
+    const settings = (0, CSpellSettingsInternalDef_1.createCSpellSettingsInternal)({
+        ..._left,
+        ..._right,
+        ...optionals,
+        version,
+        id: [leftId, rightId].join('|'),
+        name: [_left.name || '', _right.name || ''].join('|'),
+        words: mergeWordsCached(_left.words, _right.words),
+        userWords: mergeWordsCached(_left.userWords, _right.userWords),
+        flagWords: mergeWordsCached(_left.flagWords, _right.flagWords),
+        ignoreWords: mergeWordsCached(_left.ignoreWords, _right.ignoreWords),
+        enabledLanguageIds: replaceIfNotEmpty(_left.enabledLanguageIds, _right.enabledLanguageIds),
+        enableFiletypes: mergeList(_left.enableFiletypes, _right.enableFiletypes),
+        ignoreRegExpList: mergeListUnique(_left.ignoreRegExpList, _right.ignoreRegExpList),
+        patterns: mergeListUnique(_left.patterns, _right.patterns),
+        dictionaryDefinitions: mergeListUnique(_left.dictionaryDefinitions, _right.dictionaryDefinitions),
+        dictionaries: mergeListUnique(_left.dictionaries, _right.dictionaries),
+        noSuggestDictionaries: mergeListUnique(_left.noSuggestDictionaries, _right.noSuggestDictionaries),
+        languageSettings: mergeList(_left.languageSettings, _right.languageSettings),
+        enabled: _right.enabled !== undefined ? _right.enabled : _left.enabled,
+        files: mergeListUnique(_left.files, _right.files),
+        ignorePaths: versionBasedMergeList(_left.ignorePaths, _right.ignorePaths, version),
+        overrides: versionBasedMergeList(_left.overrides, _right.overrides, version),
+        features: mergeObjects(_left.features, _right.features),
+        source: mergeSources(_left, _right),
+        description: undefined,
+        globRoot: undefined,
+        import: undefined,
+        __imports: mergeImportRefs(_left, _right),
+        __importRef: undefined,
+    });
+    return settings;
+}
+function versionBasedMergeList(left, right, version) {
+    if (version === exports.configSettingsFileVersion0_1) {
+        return takeRightOtherwiseLeft(left, right);
+    }
+    return mergeListUnique(left, right);
+}
+/**
+ * Check to see if left is a left ancestor of right.
+ * If that is the case, merging is not necessary:
+ * @param left - setting on the left side of a merge
+ * @param right - setting on the right side of a merge
+ */
+function isLeftAncestorOfRight(left, right) {
+    return hasAncestor(right, left, 0);
+}
+/**
+ * Check to see if left has right as an ancestor to the right.
+ * If that is the case, merging is not necessary:
+ * @param left - setting on the left side of a merge
+ * @param right - setting on the right side of a merge
+ */
+function doesLeftHaveRightAncestor(left, right) {
+    return hasAncestor(left, right, 1);
+}
+function hasAncestor(s, ancestor, side) {
+    var _a;
+    const sources = (_a = s.source) === null || _a === void 0 ? void 0 : _a.sources;
+    if (!sources)
+        return false;
+    // calc the first or last index of the source array.
+    const i = side ? sources.length - 1 : 0;
+    const src = sources[i];
+    return src === ancestor || (src && hasAncestor(src, ancestor, side)) || false;
+}
+function mergeInDocSettings(left, right) {
+    const merged = {
+        ...mergeSettings(left, right),
+        includeRegExpList: mergeListUnique(left.includeRegExpList, right.includeRegExpList),
+    };
+    return util.clean(merged);
+}
+exports.mergeInDocSettings = mergeInDocSettings;
+function takeRightOtherwiseLeft(left, right) {
+    if (right === null || right === void 0 ? void 0 : right.length) {
+        return right;
+    }
+    return left || right;
+}
+function calcOverrideSettings(settings, filename) {
+    const _settings = toInternalSettings(settings);
+    const overrides = _settings.overrides || [];
+    const result = overrides
+        .filter((override) => checkFilenameMatchesGlob(filename, override.filename))
+        .reduce((settings, override) => mergeSettings(settings, override), _settings);
+    return result;
+}
+exports.calcOverrideSettings = calcOverrideSettings;
+/**
+ *
+ * @param settings - settings to finalize
+ * @returns settings where all globs and file paths have been resolved.
+ */
+function finalizeSettings(settings) {
+    return _finalizeSettings(toInternalSettings(settings));
+}
+exports.finalizeSettings = finalizeSettings;
+function _finalizeSettings(settings) {
+    // apply patterns to any RegExpLists.
+    const finalized = {
+        ...settings,
+        finalized: true,
+        ignoreRegExpList: (0, patterns_1.resolvePatterns)(settings.ignoreRegExpList, settings.patterns),
+        includeRegExpList: (0, patterns_1.resolvePatterns)(settings.includeRegExpList, settings.patterns),
+    };
+    finalized.name = 'Finalized ' + (finalized.name || '');
+    finalized.source = { name: settings.name || 'src', sources: [settings] };
+    return finalized;
+}
+function toInternalSettings(settings) {
+    var _a;
+    if (settings === undefined)
+        return undefined;
+    if ((0, CSpellSettingsInternalDef_1.isCSpellSettingsInternal)(settings))
+        return settings;
+    const { dictionaryDefinitions: defs, ...rest } = settings;
+    const dictionaryDefinitions = (0, DictionarySettings_1.mapDictDefsToInternal)(defs, filenameToDirectory((_a = settings.source) === null || _a === void 0 ? void 0 : _a.filename) || resolveCwd());
+    const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
+    return (0, CSpellSettingsInternalDef_1.createCSpellSettingsInternal)(setting);
+}
+exports.toInternalSettings = toInternalSettings;
+function filenameToDirectory(filename) {
+    return filename ? path.dirname(filename) : undefined;
+}
+/**
+ * @param filename - filename
+ * @param globs - globs
+ * @returns true if it matches
+ * @deprecated true
+ * @deprecationMessage No longer actively supported. Use package: `cspell-glob`.
+ */
+function checkFilenameMatchesGlob(filename, globs) {
+    const m = new cspell_glob_1.GlobMatcher(globs);
+    return m.match(filename);
+}
+exports.checkFilenameMatchesGlob = checkFilenameMatchesGlob;
+function mergeSources(left, right) {
+    const { source: a = { name: 'left' } } = left;
+    const { source: b = { name: 'right' } } = right;
+    return {
+        name: [left.name || a.name, right.name || b.name].join('|'),
+        sources: [left, right],
+    };
+}
+function max(a, b) {
+    if (a === undefined)
+        return b;
+    if (b === undefined)
+        return a;
+    return a > b ? a : b;
+}
+/**
+ * Return a list of Setting Sources used to create this Setting.
+ * @param settings the settings to search
+ */
+function getSources(settings) {
+    const visited = new Set();
+    const sources = [];
+    function _walkSourcesTree(settings) {
+        var _a, _b;
+        if (!settings || visited.has(settings))
+            return;
+        visited.add(settings);
+        if (!((_b = (_a = settings.source) === null || _a === void 0 ? void 0 : _a.sources) === null || _b === void 0 ? void 0 : _b.length)) {
+            sources.push(settings);
+            return;
+        }
+        settings.source.sources.forEach(_walkSourcesTree);
+    }
+    _walkSourcesTree(settings);
+    return sources;
+}
+exports.getSources = getSources;
+function mergeImportRefs(left, right = {}) {
+    var _a;
+    const imports = new Map(left.__imports || []);
+    if (left.__importRef) {
+        imports.set(left.__importRef.filename, left.__importRef);
+    }
+    if (right.__importRef) {
+        imports.set(right.__importRef.filename, right.__importRef);
+    }
+    const rightImports = ((_a = right.__imports) === null || _a === void 0 ? void 0 : _a.values()) || [];
+    for (const ref of rightImports) {
+        imports.set(ref.filename, ref);
+    }
+    return imports.size ? imports : undefined;
+}
+function extractDependencies(settings) {
+    const settingsI = toInternalSettings(settings);
+    const configFiles = [...(mergeImportRefs(settingsI) || [])].map(([filename]) => filename);
+    const dictionaryFiles = (0, DictionarySettings_1.calcDictionaryDefsToLoad)(settingsI).map((dict) => dict.path);
+    return {
+        configFiles,
+        dictionaryFiles,
+    };
+}
+exports.extractDependencies = extractDependencies;
+function resolveCwd() {
+    const envGlobRoot = process.env[exports.ENV_CSPELL_GLOB_ROOT];
+    const cwd = envGlobRoot || process.cwd();
+    return cwd;
+}
+exports.__testing__ = {
+    mergeObjects,
+};
+//# sourceMappingURL=CSpellSettingsServer.js.map

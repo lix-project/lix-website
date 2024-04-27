@@ -1,0 +1,105 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createInit = exports.suggestions = exports.checkText = exports.trace = exports.lint = exports.IncludeExcludeFlag = void 0;
+const cspell_pipe_1 = require("@cspell/cspell-pipe");
+const cspell_lib_1 = require("cspell-lib");
+const path = __importStar(require("path"));
+const lint_1 = require("./lint");
+const options_1 = require("./options");
+const repl_1 = require("./repl");
+const fileHelper_1 = require("./util/fileHelper");
+const stdin_1 = require("./util/stdin");
+const timer_1 = require("./util/timer");
+const util = __importStar(require("./util/util"));
+var cspell_lib_2 = require("cspell-lib");
+Object.defineProperty(exports, "IncludeExcludeFlag", { enumerable: true, get: function () { return cspell_lib_2.IncludeExcludeFlag; } });
+function lint(fileGlobs, options, emitters) {
+    options = (0, options_1.fixLegacy)(options);
+    const cfg = new lint_1.LintRequest(fileGlobs, options, emitters);
+    return (0, lint_1.runLint)(cfg);
+}
+exports.lint = lint;
+async function* trace(words, options) {
+    var _a, _b;
+    options = (0, options_1.fixLegacy)(options);
+    const iWords = options.stdin ? (0, cspell_pipe_1.toAsyncIterable)(words, (0, stdin_1.readStdin)()) : words;
+    const { languageId, locale, allowCompoundWords, ignoreCase } = options;
+    const configFile = await (0, fileHelper_1.readConfig)(options.config, undefined);
+    const loadDefault = (_b = (_a = options.defaultConfiguration) !== null && _a !== void 0 ? _a : configFile.config.loadDefaultConfiguration) !== null && _b !== void 0 ? _b : true;
+    const config = (0, cspell_lib_1.mergeSettings)((0, cspell_lib_1.getDefaultSettings)(loadDefault), (0, cspell_lib_1.getGlobalSettings)(), configFile.config);
+    yield* (0, cspell_lib_1.traceWordsAsync)(iWords, config, { languageId, locale, ignoreCase, allowCompoundWords });
+}
+exports.trace = trace;
+async function checkText(filename, options) {
+    options = (0, options_1.fixLegacy)(options);
+    const pSettings = (0, fileHelper_1.readConfig)(options.config, path.dirname(filename));
+    const [foundSettings, text] = await Promise.all([pSettings, (0, fileHelper_1.readFile)(filename)]);
+    const settingsFromCommandLine = util.clean({
+        languageId: options.languageId || undefined,
+        language: options.locale || options.local || undefined,
+        loadDefaultConfiguration: options.defaultConfiguration,
+    });
+    const info = (0, fileHelper_1.calcFinalConfigInfo)(foundSettings, settingsFromCommandLine, filename, text);
+    return (0, cspell_lib_1.checkText)(text, info.configInfo.config);
+}
+exports.checkText = checkText;
+async function* suggestions(words, options) {
+    options = (0, options_1.fixLegacy)(options);
+    const configFile = await (0, fileHelper_1.readConfig)(options.config, undefined);
+    let timer;
+    function tapStart() {
+        timer = (0, timer_1.getTimeMeasurer)();
+    }
+    function mapStart(v) {
+        tapStart();
+        return v;
+    }
+    function mapEnd(v) {
+        const elapsedTimeMs = timer === null || timer === void 0 ? void 0 : timer();
+        return { ...v, elapsedTimeMs };
+    }
+    const iWords = options.repl
+        ? (0, cspell_pipe_1.pipeAsync)((0, cspell_pipe_1.toAsyncIterable)(words, (0, repl_1.simpleRepl)()), (0, cspell_pipe_1.opTap)(tapStart))
+        : options.useStdin
+            ? (0, cspell_pipe_1.pipeAsync)((0, cspell_pipe_1.toAsyncIterable)(words, (0, stdin_1.readStdin)()), (0, cspell_pipe_1.opTap)(tapStart))
+            : words.map(mapStart);
+    try {
+        const results = (0, cspell_pipe_1.pipeAsync)((0, cspell_lib_1.suggestionsForWords)(iWords, options, configFile.config), (0, cspell_pipe_1.opMap)(mapEnd));
+        yield* results;
+    }
+    catch (e) {
+        if (!(e instanceof cspell_lib_1.SuggestionError))
+            throw e;
+        console.error(e.message);
+        process.exitCode = 1;
+    }
+}
+exports.suggestions = suggestions;
+function createInit() {
+    return Promise.reject();
+}
+exports.createInit = createInit;
+//# sourceMappingURL=application.js.map

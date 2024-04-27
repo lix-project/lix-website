@@ -1,0 +1,3 @@
+import { Command } from 'commander';
+export declare function commandCheck(prog: Command): Command;
+//# sourceMappingURL=commandCheck.d.ts.map

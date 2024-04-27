@@ -1,0 +1,116 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.__testing__ = exports.createCollection = exports.SpellingDictionaryCollection = void 0;
+const cspell_trie_lib_1 = require("cspell-trie-lib");
+const gensequence_1 = require("gensequence");
+const Settings_1 = require("../Settings");
+const Memorizer_1 = require("../util/Memorizer");
+const util_1 = require("../util/util");
+const SpellingDictionary_1 = require("./SpellingDictionary");
+const SpellingDictionaryFromTrie_1 = require("./SpellingDictionaryFromTrie");
+const SpellingDictionaryMethods_1 = require("./SpellingDictionaryMethods");
+function identityString(w) {
+    return w;
+}
+class SpellingDictionaryCollection {
+    constructor(dictionaries, name) {
+        this.dictionaries = dictionaries;
+        this.name = name;
+        this.options = { weightMap: undefined };
+        this.mapWord = identityString;
+        this.type = 'SpellingDictionaryCollection';
+        this._isForbiddenInDict = (0, Memorizer_1.memorizer)((word) => isWordForbiddenInAnyDictionary(this.dictionaries, word), SpellingDictionaryFromTrie_1.SpellingDictionaryFromTrie.cachedWordsLimit);
+        this._isNoSuggestWord = (0, Memorizer_1.memorizerKeyBy)((word, options) => {
+            if (!this.containsNoSuggestWords)
+                return false;
+            return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || {});
+        }, (word, options) => {
+            const opts = (0, SpellingDictionaryMethods_1.hasOptionToSearchOption)(options);
+            return [word, opts.useCompounds, opts.ignoreCase].join();
+        }, SpellingDictionaryFromTrie_1.SpellingDictionaryFromTrie.cachedWordsLimit);
+        this.dictionaries = this.dictionaries.sort((a, b) => b.size - a.size);
+        this.source = dictionaries.map((d) => d.name).join(', ');
+        this.isDictionaryCaseSensitive = this.dictionaries.reduce((a, b) => a || b.isDictionaryCaseSensitive, false);
+        this.containsNoSuggestWords = this.dictionaries.reduce((a, b) => a || b.containsNoSuggestWords, false);
+    }
+    has(word, hasOptions) {
+        const options = (0, SpellingDictionaryMethods_1.hasOptionToSearchOption)(hasOptions);
+        return !!isWordInAnyDictionary(this.dictionaries, word, options) && !this.isForbidden(word);
+    }
+    find(word, hasOptions) {
+        const options = (0, SpellingDictionaryMethods_1.hasOptionToSearchOption)(hasOptions);
+        const { found = false, forbidden = false, noSuggest = false, } = findInAnyDictionary(this.dictionaries, word, options) || {};
+        return { found, forbidden, noSuggest };
+    }
+    isNoSuggestWord(word, options) {
+        return this._isNoSuggestWord(word, options);
+    }
+    isForbidden(word) {
+        return !!this._isForbiddenInDict(word) && !this.isNoSuggestWord(word);
+    }
+    suggest(...args) {
+        const [word] = args;
+        const suggestOptions = (0, SpellingDictionaryMethods_1.suggestArgsToSuggestOptions)(args);
+        return this._suggest(word, suggestOptions);
+    }
+    _suggest(word, suggestOptions) {
+        const { numSuggestions = (0, Settings_1.getDefaultSettings)(false).numSuggestions || SpellingDictionaryMethods_1.defaultNumSuggestions, numChanges, ignoreCase, includeTies, timeout, } = suggestOptions;
+        const prefixNoCase = cspell_trie_lib_1.CASE_INSENSITIVE_PREFIX;
+        const filter = (word, _cost) => {
+            return ((ignoreCase || word[0] !== prefixNoCase) &&
+                !this.isForbidden(word) &&
+                !this.isNoSuggestWord(word, suggestOptions));
+        };
+        const collector = (0, SpellingDictionaryMethods_1.suggestionCollector)(word, (0, util_1.clean)({
+            numSuggestions,
+            filter,
+            changeLimit: numChanges,
+            includeTies,
+            ignoreCase,
+            timeout,
+        }));
+        this.genSuggestions(collector, suggestOptions);
+        return collector.suggestions.map((r) => ({ ...r, word: r.word }));
+    }
+    get size() {
+        return this.dictionaries.reduce((a, b) => a + b.size, 0);
+    }
+    genSuggestions(collector, suggestOptions) {
+        const _suggestOptions = { ...suggestOptions };
+        const { compoundMethod = SpellingDictionary_1.CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
+        _suggestOptions.compoundMethod = this.options.useCompounds ? SpellingDictionary_1.CompoundWordsMethod.JOIN_WORDS : compoundMethod;
+        this.dictionaries.forEach((dict) => dict.genSuggestions(collector, _suggestOptions));
+    }
+    getErrors() {
+        return this.dictionaries.reduce((errors, dict) => { var _a; return errors.concat(((_a = dict.getErrors) === null || _a === void 0 ? void 0 : _a.call(dict)) || []); }, []);
+    }
+}
+exports.SpellingDictionaryCollection = SpellingDictionaryCollection;
+function createCollection(dictionaries, name) {
+    return new SpellingDictionaryCollection(dictionaries, name);
+}
+exports.createCollection = createCollection;
+function isWordInAnyDictionary(dicts, word, options) {
+    return (0, gensequence_1.genSequence)(dicts).first((dict) => dict.has(word, options));
+}
+function findInAnyDictionary(dicts, word, options) {
+    const found = dicts.map((dict) => dict.find(word, options)).filter(util_1.isDefined);
+    if (!found.length)
+        return undefined;
+    return found.reduce((a, b) => ({
+        found: a.forbidden ? a.found : b.forbidden ? b.found : a.found || b.found,
+        forbidden: a.forbidden || b.forbidden,
+        noSuggest: a.noSuggest || b.noSuggest,
+    }));
+}
+function isNoSuggestWordInAnyDictionary(dicts, word, options) {
+    return (0, gensequence_1.genSequence)(dicts).first((dict) => dict.isNoSuggestWord(word, options));
+}
+function isWordForbiddenInAnyDictionary(dicts, word) {
+    return (0, gensequence_1.genSequence)(dicts).first((dict) => dict.isForbidden(word));
+}
+exports.__testing__ = {
+    isWordInAnyDictionary,
+    isWordForbiddenInAnyDictionary,
+};
+//# sourceMappingURL=SpellingDictionaryCollection.js.map

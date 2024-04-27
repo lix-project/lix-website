@@ -1,0 +1,7 @@
+import { TrieRoot } from './TrieNode';
+/**
+ * Consolidate to DAWG
+ * @param root the root of the Trie tree
+ */
+export declare function consolidate(root: TrieRoot): TrieRoot;
+//# sourceMappingURL=consolidate.d.ts.map

@@ -1,0 +1,9 @@
+import { TrieNode } from './TrieNode';
+import { TrieRefNode } from './trieRef';
+export interface Emitter {
+    push: (n: TrieRefNode) => number;
+}
+export declare function flattenToTrieRefNode(root: TrieNode, nodes: Emitter): number;
+export declare function flattenToTrieRefNodeIterable(root: TrieNode): IterableIterator<TrieRefNode>;
+export declare function flattenToTrieRefNodeArray(root: TrieNode): TrieRefNode[];
+//# sourceMappingURL=flatten.d.ts.map

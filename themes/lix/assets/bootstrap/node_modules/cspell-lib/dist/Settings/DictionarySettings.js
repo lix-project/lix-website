@@ -1,0 +1,138 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.isDictionaryDefinitionInternal = exports.calcDictionaryDefsToLoad = exports.isDictionaryDefinitionWithSource = exports.mapDictDefToInternal = exports.mapDictDefsToInternal = exports.filterDictDefsToLoad = void 0;
+const path = __importStar(require("path"));
+const resolveFile_1 = require("../util/resolveFile");
+const DictionaryReferenceCollection_1 = require("./DictionaryReferenceCollection");
+const cspell_trie_lib_1 = require("cspell-trie-lib");
+const util_1 = require("../util/util");
+/**
+ * Combines the list of desired dictionaries with the list of dictionary
+ * definitions. Order does not matter, but the number of leading `!` does.
+ *
+ * Excluding dictionaries.
+ * - Adding `!` to a dictId will remove the dictionary.
+ * - Adding `!!` will add it back.
+ *
+ * @param dictRefCol - dictionaries desired
+ * @param defs - dictionary definitions
+ * @returns map from dictIds to definitions
+ */
+function filterDictDefsToLoad(dictRefCol, defs) {
+    const allActiveDefs = defs.filter(({ name }) => dictRefCol.isEnabled(name)).map(fixPath);
+    return [...new Map(allActiveDefs.map((d) => [d.name, d])).values()];
+}
+exports.filterDictDefsToLoad = filterDictDefsToLoad;
+function fixPath(def) {
+    if (def instanceof _DictionaryDefinitionInternalWithSource) {
+        return def;
+    }
+    const { path: filePath = '', file = '' } = def;
+    const newPath = !filePath && !file ? '' : path.join(filePath, file);
+    return {
+        ...def,
+        file: undefined,
+        path: newPath,
+    };
+}
+function mapDictDefsToInternal(defs, pathToSettingsFile) {
+    return defs === null || defs === void 0 ? void 0 : defs.map((def) => mapDictDefToInternal(def, pathToSettingsFile));
+}
+exports.mapDictDefsToInternal = mapDictDefsToInternal;
+function mapDictDefToInternal(def, pathToSettingsFile) {
+    if (isDictionaryDefinitionWithSource(def)) {
+        if (def.__source !== pathToSettingsFile) {
+            throw new Error('Trying to normalize a dictionary definition with a different source.');
+        }
+        return def;
+    }
+    return new _DictionaryDefinitionInternalWithSource(def, pathToSettingsFile);
+}
+exports.mapDictDefToInternal = mapDictDefToInternal;
+function isDictionaryDefinitionWithSource(d) {
+    return d instanceof _DictionaryDefinitionInternalWithSource;
+}
+exports.isDictionaryDefinitionWithSource = isDictionaryDefinitionWithSource;
+function determineName(filename, options) {
+    return options.name || path.basename(filename);
+}
+function calcDictionaryDefsToLoad(settings) {
+    const { dictionaries = [], dictionaryDefinitions = [], noSuggestDictionaries = [] } = settings;
+    const colNoSug = (0, DictionaryReferenceCollection_1.createDictionaryReferenceCollection)(noSuggestDictionaries);
+    const colDicts = (0, DictionaryReferenceCollection_1.createDictionaryReferenceCollection)(dictionaries.concat(colNoSug.enabled()));
+    const modDefs = dictionaryDefinitions.map((def) => {
+        const enabled = colNoSug.isEnabled(def.name);
+        if (enabled === undefined)
+            return def;
+        return { ...def, noSuggest: enabled };
+    });
+    return filterDictDefsToLoad(colDicts, modDefs);
+}
+exports.calcDictionaryDefsToLoad = calcDictionaryDefsToLoad;
+function isDictionaryDefinitionInternal(def) {
+    return def instanceof _DictionaryDefinitionInternalWithSource;
+}
+exports.isDictionaryDefinitionInternal = isDictionaryDefinitionInternal;
+class _DictionaryDefinitionInternalWithSource {
+    constructor(def, __source) {
+        this.__source = __source;
+        // this bit of assignment is to have the compiler help use if any new fields are added.
+        const defAll = def;
+        const { path: relPath = '', file = '', addWords, description, dictionaryInformation, type, repMap, noSuggest, scope, useCompounds, } = defAll;
+        const defaultPath = path.dirname(__source);
+        const filePath = path.join(relPath, file);
+        const name = determineName(filePath, def);
+        const r = (0, resolveFile_1.resolveFile)(filePath, defaultPath);
+        const ddi = {
+            name,
+            file: undefined,
+            path: r.filename,
+            addWords,
+            description,
+            dictionaryInformation,
+            type,
+            repMap,
+            noSuggest,
+            scope,
+            useCompounds,
+        };
+        Object.assign(this, (0, util_1.clean)(ddi));
+        this.ddi = ddi;
+        this.name = ddi.name;
+        this.file = ddi.file;
+        this.path = ddi.path;
+        this._weightMap = this.dictionaryInformation
+            ? (0, cspell_trie_lib_1.mapDictionaryInformationToWeightMap)(this.dictionaryInformation)
+            : undefined;
+    }
+    get weightMap() {
+        return this._weightMap;
+    }
+    toJSON() {
+        return this.ddi;
+    }
+}
+//# sourceMappingURL=DictionarySettings.js.map

@@ -1,0 +1,119 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.commandLint = void 0;
+const commander_1 = require("commander");
+const App = __importStar(require("./application"));
+const cli_reporter_1 = require("./cli-reporter");
+const cache_1 = require("./util/cache");
+const errors_1 = require("./util/errors");
+// interface InitOptions extends Options {}
+const usage = `
+
+Examples:
+    cspell "*.js"                   Check all .js files in the current directory
+    cspell "**/*.js"                Check all .js files from the current directory
+    cspell "src/**/*.js"            Only check .js under src
+    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.
+    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.
+    cat LICENSE | cspell stdin      Check stdin
+`;
+function collect(value, previous) {
+    if (!previous) {
+        return [value];
+    }
+    return previous.concat([value]);
+}
+function commandLint(prog) {
+    const spellCheckCommand = prog.command('lint', { isDefault: true });
+    spellCheckCommand
+        .description('Check spelling')
+        .option('-c, --config <cspell.json>', 'Configuration file to use.  By default cspell looks for cspell.json in the current directory.')
+        .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
+        .option('--locale <locale>', 'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.')
+        .option('--language-id <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"')
+        .addOption(new commander_1.Option('--languageId <language>', 'Force programming language for unknown extensions. i.e. "php" or "scala"').hideHelp())
+        .option('--words-only', 'Only output the words not found in the dictionaries.')
+        .addOption(new commander_1.Option('--wordsOnly', 'Only output the words not found in the dictionaries.').hideHelp())
+        .option('-u, --unique', 'Only output the first instance of a word not found in the dictionaries.')
+        .option('-e, --exclude <glob>', 'Exclude files matching the glob pattern. This option can be used multiple times to add multiple globs. ', collect)
+        .option('--file-list <path or stdin>', 'Specify a list of files to be spell checked.' +
+        ' The list is filtered against the glob file patterns.' +
+        ' Note: the format is 1 file path per line.', collect)
+        .option('--no-issues', 'Do not show the spelling errors.')
+        .option('--no-progress', 'Turn off progress messages')
+        .option('--no-summary', 'Turn off summary message in console.')
+        .option('-s, --silent', 'Silent mode, suppress error messages.')
+        .option('--fail-fast', 'Exit after first file with an issue or error.')
+        .addOption(new commander_1.Option('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
+        .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
+        .option('--relative', 'Issues are displayed relative to root.')
+        .option('--show-context', 'Show the surrounding text around an issue.')
+        .option('--show-suggestions', 'Show spelling suggestions.')
+        .addOption(new commander_1.Option('--must-find-files', 'Error if no files are found.').default(true).hideHelp())
+        .option('--no-must-find-files', 'Do not error if no files are found.')
+        // The following options are planned features
+        // .option('-w, --watch', 'Watch for any changes to the matching files and report any errors')
+        // .option('--force', 'Force the exit value to always be 0')
+        .addOption(new commander_1.Option('--legacy', 'Legacy output').hideHelp())
+        .addOption(new commander_1.Option('--local <local>', 'Deprecated -- Use: --locale').hideHelp())
+        .option('--cache', 'Use cache to only check changed files.')
+        .option('--no-cache', 'Do not use cache.')
+        .option('--cache-reset', 'Reset the cache file.')
+        .addOption(new commander_1.Option('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
+        'metadata',
+        'content',
+    ]))
+        .option('--cache-location <path>', `Path to the cache file or directory. (default: "${cache_1.DEFAULT_CACHE_LOCATION}")`)
+        .option('--dot', 'Include files and directories starting with `.` (period) when matching globs.')
+        .option('--gitignore', 'Ignore files matching glob patterns found in .gitignore files.')
+        .option('--no-gitignore', 'Do NOT use .gitignore files.')
+        .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
+        .option('--no-color', 'Turn off color.')
+        .option('--color', 'Force color.')
+        .addOption(new commander_1.Option('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
+        .addOption(new commander_1.Option('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
+        .option('--debug', 'Output information useful for debugging cspell.json files.')
+        .addHelpText('after', usage)
+        .arguments('[globs...]')
+        .action((fileGlobs, options) => {
+        const { mustFindFiles, fileList } = options;
+        const cliReporter = (0, cli_reporter_1.getReporter)({ ...options, fileGlobs });
+        const lintOptions = { ...options, fileLists: fileList };
+        return App.lint(fileGlobs, lintOptions, cliReporter).then((result) => {
+            if (!fileGlobs.length && !result.files && !result.errors && !fileList) {
+                spellCheckCommand.outputHelp();
+                throw new errors_1.CheckFailed('outputHelp', 1);
+            }
+            if (result.issues || result.errors || (mustFindFiles && !result.files)) {
+                throw new errors_1.CheckFailed('check failed', 1);
+            }
+            return;
+        });
+    });
+    return spellCheckCommand;
+}
+exports.commandLint = commandLint;
+//# sourceMappingURL=commandLint.js.map

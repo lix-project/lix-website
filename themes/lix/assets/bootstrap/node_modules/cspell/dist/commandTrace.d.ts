@@ -1,0 +1,3 @@
+import { Command } from 'commander';
+export declare function commandTrace(prog: Command): Command;
+//# sourceMappingURL=commandTrace.d.ts.map

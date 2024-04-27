@@ -1,0 +1,135 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createSpellingDictionaryTrie = exports.SpellingDictionaryFromTrie = void 0;
+const cspell_trie_lib_1 = require("cspell-trie-lib");
+const Settings_1 = require("../Settings");
+const Memorizer_1 = require("../util/Memorizer");
+const repMap_1 = require("../util/repMap");
+const util_1 = require("../util/util");
+const SpellingDictionaryMethods_1 = require("./SpellingDictionaryMethods");
+class SpellingDictionaryFromTrie {
+    constructor(trie, name, options, source = 'from trie', size) {
+        var _a;
+        this.trie = trie;
+        this.name = name;
+        this.options = options;
+        this.source = source;
+        this._size = 0;
+        this.knownWords = new Set();
+        this.unknownWords = new Set();
+        this.type = 'SpellingDictionaryFromTrie';
+        this._find = (0, Memorizer_1.memorizer)((word, useCompounds, ignoreCase) => this.findAnyForm(word, useCompounds, ignoreCase), SpellingDictionaryFromTrie.cachedWordsLimit);
+        this.mapWord = (0, repMap_1.createMapper)(options.repMap || []);
+        this.isDictionaryCaseSensitive = (_a = options.caseSensitive) !== null && _a !== void 0 ? _a : !trie.isLegacy;
+        this.containsNoSuggestWords = options.noSuggest || false;
+        this._size = size || 0;
+        this.weightMap = options.weightMap || (0, SpellingDictionaryMethods_1.createWeightMapFromDictionaryInformation)(options.dictionaryInformation);
+    }
+    get size() {
+        if (!this._size) {
+            // walk the trie and get the approximate size.
+            const i = this.trie.iterate();
+            let deeper = true;
+            let size = 0;
+            for (let r = i.next(); !r.done; r = i.next(deeper)) {
+                // count all nodes even though they are not words.
+                // because we are not going to all the leaves, this should give a good enough approximation.
+                size += 1;
+                deeper = r.value.text.length < 5;
+            }
+            this._size = size;
+        }
+        return this._size;
+    }
+    has(word, hasOptions) {
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        return !!r && !r.forbidden && !!r.found;
+    }
+    find(word, hasOptions) {
+        const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
+        const r = this._find(word, useCompounds, ignoreCase);
+        const { forbidden = this.isForbidden(word) } = r || {};
+        if (!r && !forbidden)
+            return undefined;
+        const { found = forbidden ? word : false } = r || {};
+        const noSuggest = found !== false && this.containsNoSuggestWords;
+        return { found, forbidden, noSuggest };
+    }
+    resolveOptions(hasOptions) {
+        const { useCompounds = this.options.useCompounds, ignoreCase = true } = (0, SpellingDictionaryMethods_1.hasOptionToSearchOption)(hasOptions);
+        return { useCompounds, ignoreCase };
+    }
+    findAnyForm(word, useCompounds, ignoreCase) {
+        const mWord = this.mapWord(word.normalize('NFC'));
+        const opts = { caseSensitive: !ignoreCase };
+        const findResult = this.trie.findWord(mWord, opts);
+        if (findResult.found !== false) {
+            return findResult;
+        }
+        const forms = (0, SpellingDictionaryMethods_1.wordSearchForms)(mWord, this.isDictionaryCaseSensitive, ignoreCase);
+        for (const w of forms) {
+            const findResult = this.trie.findWord(w, opts);
+            if (findResult.found !== false) {
+                return findResult;
+            }
+        }
+        if (useCompounds) {
+            opts.useLegacyWordCompounds = useCompounds;
+            for (const w of forms) {
+                const findResult = this.trie.findWord(w, opts);
+                if (findResult.found !== false) {
+                    return findResult;
+                }
+            }
+        }
+        return undefined;
+    }
+    isNoSuggestWord(word, options) {
+        return this.containsNoSuggestWords ? this.has(word, options) : false;
+    }
+    isForbidden(word) {
+        return this.trie.isForbiddenWord(word);
+    }
+    suggest(...args) {
+        const [word] = args;
+        const suggestOptions = (0, SpellingDictionaryMethods_1.suggestArgsToSuggestOptions)(args);
+        return this._suggest(word, suggestOptions);
+    }
+    _suggest(word, suggestOptions) {
+        const { numSuggestions = (0, Settings_1.getDefaultSettings)(false).numSuggestions || SpellingDictionaryMethods_1.defaultNumSuggestions, numChanges, includeTies, ignoreCase, timeout, } = suggestOptions;
+        function filter(_word) {
+            return true;
+        }
+        const collector = (0, cspell_trie_lib_1.suggestionCollector)(word, (0, util_1.clean)({
+            numSuggestions,
+            filter,
+            changeLimit: numChanges,
+            includeTies,
+            ignoreCase,
+            timeout,
+            weightMap: this.weightMap,
+        }));
+        this.genSuggestions(collector, suggestOptions);
+        return collector.suggestions.map((r) => ({ ...r, word: r.word }));
+    }
+    genSuggestions(collector, suggestOptions) {
+        var _a;
+        if (this.options.noSuggest)
+            return;
+        const _compoundMethod = (_a = suggestOptions.compoundMethod) !== null && _a !== void 0 ? _a : (this.options.useCompounds ? cspell_trie_lib_1.CompoundWordsMethod.JOIN_WORDS : cspell_trie_lib_1.CompoundWordsMethod.NONE);
+        (0, SpellingDictionaryMethods_1.wordSuggestFormsArray)(collector.word).forEach((w) => this.trie.genSuggestions((0, SpellingDictionaryMethods_1.impersonateCollector)(collector, w), _compoundMethod));
+    }
+    getErrors() {
+        return [];
+    }
+}
+exports.SpellingDictionaryFromTrie = SpellingDictionaryFromTrie;
+SpellingDictionaryFromTrie.cachedWordsLimit = 50000;
+function createSpellingDictionaryTrie(data, name, source, options) {
+    const trieNode = (0, cspell_trie_lib_1.importTrie)(data);
+    const trie = new cspell_trie_lib_1.Trie(trieNode);
+    return new SpellingDictionaryFromTrie(trie, name, options, source);
+}
+exports.createSpellingDictionaryTrie = createSpellingDictionaryTrie;
+//# sourceMappingURL=SpellingDictionaryFromTrie.js.map
