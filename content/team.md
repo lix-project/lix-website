@@ -21,6 +21,7 @@ Members (in alphabetical order):
   hexchen is working primarily on mantaining and extending the Lix project infrastructure.
 
 - **Irenes ([@IreneKnapp](https://github.com/IreneKnapp), they/them)**
+  Irenes are an outside-context problem. They are fond of cats.
 
 - **jade ([@lf-](https://github.com/lf-), they/them)**  
   jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of 
