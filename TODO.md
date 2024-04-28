@@ -3,6 +3,7 @@ TODO List
 
 ## Misc
 
+- Fix the TODO FIXME section of existing installs.
 - Figure out what to replace the location section with.
 - Fill out the "contact us" section on the main page.
 - Figure out any legalese we need on the main page.
@@ -13,8 +14,7 @@ TODO List
 ## Pages
 
 - Create the `/install` page.
-- Create a subsection for using Lix on existing NixOS, and link it to the box.
-- Create a "Why Lix" section on `/about` and link to it.
+- Create the `/resources` page, with resources for learning Nix.
 - Create the /team page and include CoI declarations.
 - Figure out where to link the "Docs" link to.
 - Create a /community page linking to matrix.
