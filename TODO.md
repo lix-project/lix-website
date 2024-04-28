@@ -5,7 +5,6 @@ TODO List
 
 - Fix the favicon
 - Fix the TODO FIXME section of install / existing installs.
-- Fix the TODO FIXME section of add-to-config / non-flake.
 - Figure out what to replace the location section with.
 - Fill out the "contact us" section on the main page.
 - Figure out any legalese we need on the main page.

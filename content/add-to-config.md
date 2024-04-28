@@ -22,14 +22,19 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # Note that this assumes you have a flake-input called nixpkgs,
     # which is often the case. If you've named it something else, 
     # you'll need to change the `nixpkgs` below.
+    lix = {
+      url = "git+ssh://git@git.lix.systems/lix-project/lix";
+      flake = false;
+    };
     lix-module = {
       url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.lix.follows = "lix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
   }
 
-  # <rest of configuration ommitted>
+  # <rest of configuration omitted>
 }
 ```
 
@@ -41,7 +46,7 @@ Next, add the `lix-module` as one of the arguments to your output function:
 
   # Add the `lix-module` argument to your output function, as below:
   outputs = {nixpkgs, lix-module, ...}: {
-      # <rest of configuration ommitted>
+      # <rest of configuration omitted>
   }
 }
 ```
@@ -69,7 +74,7 @@ Finally, add the Lix _NixOS Module_ to your configuration:
       };
   }
 
-  # <configuration below ommitted>
+  # <configuration below omitted>
 }
 ```
 
@@ -107,17 +112,23 @@ section, and add the line provided in the configuration
       ./hardware-configuration.nix
 
       # This is the core line -- it pulls down the Lix module and
-      # includes it in your configuration.
+      # includes it in your configuration. It looks much nicer with a let
+      # binding -- but for clarity, we'll leave that as an exercise for the 
+      # reader. :)
       #
       # Note that the tag (e.g. v2.90) in the URL here is what determines
       # which version of Lix you'll wind up with.
-      # *** TODO FIXME ***
-      (import "${your-pinning-thingy.lix-nixos-module}/module.nix" { 
-        lix = your-pinning-thingy.lix; 
-      })
+      (import 
+        (
+          (fetchTarball { url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz"; }) + "/module.nix"
+        ) 
+        { 
+          lix = fetchTarball { url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz"; }; 
+        }
+      )
     ];
 
-  # <configuration below ommitted>
+  # <configuration below omitted>
 }
 ```
 
