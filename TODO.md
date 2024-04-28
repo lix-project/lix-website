@@ -3,7 +3,8 @@ TODO List
 
 ## Misc
 
-- Fix the TODO FIXME section of existing installs.
+- Fix the TODO FIXME section of install / existing installs.
+- Fix the TODO FIXME section of add-to-config / non-flake.
 - Figure out what to replace the location section with.
 - Fill out the "contact us" section on the main page.
 - Figure out any legalese we need on the main page.
@@ -13,7 +14,6 @@ TODO List
 
 ## Pages
 
-- Create the `/install` page.
 - Create the `/resources` page, with resources for learning Nix.
 - Create the /team page and include CoI declarations.
 - Figure out where to link the "Docs" link to.
@@ -31,4 +31,4 @@ TODO List
 
 # Wishlist
 
-- Screenshots (incl. maybe of Xil) showing ergonomics enhancements.
+- Screenshots (incl. maybe of Xil) showing ergonomics enhancements in the /about page.

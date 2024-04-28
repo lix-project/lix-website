@@ -59,6 +59,8 @@ The installer will guide you through installing Lix -- and once it's finished,
 you'll have a full, working installation. If you're not sure what to do, now is a
 great time to check out some of the [community's resources on Nix](/resources).
 
+[^1]: a customized variant of the [Determinant Nix Installer](https://github.com/DeterminateSystems/nix-installer).
+
 ### Existing Installs
 
 If you have an existing Nix installation, you should be able to upgrade by using a variant
@@ -73,10 +75,11 @@ of the `upgrade-nix` command.
 Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
 
 ```sh
-sudo nix run --extra-experimental-features "nix-command flakes" "git+https://git.lix.systems/lix-project/lix" -- upgrade-nix
+sudo nix run --extra-experimental-features "nix-command flakes" \
+   "git+https://git.lix.systems/lix-project/lix" -- upgrade-nix
 ```
 
-You should now have an upgraded version of Nix. You can verify this by asking Lix
+You should now have upgraded to Lix! You can verify this by asking the `nix` command
 to report its version:
 
 ```sh
@@ -92,4 +95,7 @@ great time to check out some of the [community's resources on Nix](/resources).
 If you're having difficulty installing Lix, don't panic! Hop on over to our
 [community page](/community), and check out the various ways to find help.
 
-[^1]: a customized variant of the [Determinant Nix Installer](https://github.com/DeterminateSystems/nix-installer).
+## Feedback?
+
+If you have thoughts on these instructions, feel free to drop by our [community](/community),
+or to [make a pull request to our website](git@git.lix.systems:lix-project/lix-website.git)!
