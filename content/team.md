@@ -29,7 +29,7 @@ Members (in alphabetical order):
 - **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])**  
   A performance art piece written live by a collective of hardware hackers & low-level engineers. 
   Kate works on Lix as part of a commitment to helping you do cool things, and is seriously considering
-  rewriting every bit of documentation that has ever crossed paths with Nix.
+  rewriting every bit of documentation ever to cross paths with Nix.
 - **Lily ([@lilyinstarlight](https://github.com/lilyinstarlight), she/they)**
 
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])**  
