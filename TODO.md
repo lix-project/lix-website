@@ -3,6 +3,7 @@ TODO List
 
 ## Misc
 
+- Move "The Team" to under community
 - Fix the favicon
 - Remove the "pending pull request" from the install page, once that's merged.
 - Add social media icons below lix for mastodon/github/etc.
