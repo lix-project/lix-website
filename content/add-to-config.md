@@ -145,5 +145,9 @@ great time to check out some of the [community's resources on Nix](/resources).
 
 ## Having Trouble?
 
-If you're having difficulty installing Lix, don't panic! Hop on over to our
+**One quick thing to check:** have you set `nix.package` anywhere in your configuration?   
+If so, your configuration option will override the Lix module. You'll want to remove it, first -- 
+or, if you're feeling savvy, point it to the provided Lix package.
+
+**Otherwise:** If you're having difficulty installing Lix, don't panic! Hop on over to our
 [community page](/community), and check out the various ways to find help.
