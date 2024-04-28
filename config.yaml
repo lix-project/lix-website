@@ -40,8 +40,8 @@ menus:
       url: "/about"
       weight: 2
 
-    - name: "Code"
-      url: "https://git.lix.systems/lix-project/lix"
+    - name: "The Team"
+      url: "/team"
       weight: 3
 
         #- name: "Docs"
@@ -50,15 +50,19 @@ menus:
 
     - name: "Resources"
       url: "/resources"
-      weight: 4
+      weight: 5
 
     - name: "Community"
       url: "/community"
-      weight: 5
+      weight: 6
+
+    - name: "Code"
+      url: "https://git.lix.systems/lix-project/lix"
+      weight: 7
 
     - name: "Wiki"
       url: "https://wiki.lix.systems/books"
-      weight: 6
+      weight: 8
 
   buttons:
     - name: "Install Lix"
