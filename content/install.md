@@ -52,7 +52,7 @@ The easiest way to install Lix is to use the [Lix Installer](https://git.lix.sys
 Open a terminal, and run the following command:
 
 ```sh
-$ curl -sSf -L https://install.lix.systems/lix | sh -s -- install
+curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
 The installer will guide you through installing Lix -- and once it's finished, 
@@ -70,16 +70,10 @@ of the `upgrade-nix` command.
 <br/>
 <br/>
 
-**If you have flakes enabled**, the following command should perform an upgrade:
+Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
 
 ```sh
-$ sudo nix run 'https://git.lix.systems/lix-project/lix' -- upgrade-nix
-```
-
-**If you don't have flakes enabled**, you can perform a slightly more complex command:
-
-```sh
-$   ***TODO FIXME***
+sudo nix run --extra-experimental-features "nix-command flakes" "git+https://git.lix.systems/lix-project/lix" -- upgrade-nix
 ```
 
 You should now have an upgraded version of Nix. You can verify this by asking Lix
