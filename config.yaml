@@ -55,7 +55,7 @@ menus:
       weight: 5
 
     - name: "Wiki"
-      url: "https://wiki.lix.systems"
+      url: "https://wiki.lix.systems/books"
       weight: 6
 
   buttons:
@@ -98,3 +98,6 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+
+  highlight:
+    style: manni
