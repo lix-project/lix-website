@@ -24,11 +24,9 @@ params:
   social:
     twitter: "https://twitter.com/LixProject"
 
-  location:
-    - ""
-
   contact:
-    - "info@lix.systems"
+    - "General Inquiries: info@lix.systems"
+    - "Security Reports: security@lix.systems"
 
   copyright: "Content licenced under CC-BY-SA-4.0 or LGPL-2.0-or-later."
 
@@ -50,6 +48,10 @@ menus:
         #  url: "/#"
         #  weight: 4
 
+    - name: "Resources"
+      url: "/resources"
+      weight: 4
+
     - name: "Community"
       url: "/community"
       weight: 5
@@ -64,30 +66,40 @@ menus:
       weight: 5
       pre: "btn btn-primary text-light"
 
-  footer:
+  aboutus:
+    - name: "Why Lix?"
+      url: "/about#why-lix"
+      weight: 1
+
     - name: "About Lix"
       url: "/about"
       weight: 2
 
-    - name: "Source Repositories"
-      url: "https://git.lix.systems"
     - name: "The Lix Team"
       url: "/team"
-      weight: 3
-
-      weight: 3
-
-    - name: "Documentation"
-      url: "/#"
       weight: 4
 
-    - name: "Community"
-      url: "/community"
+    - name: "FAQs"
+      url: "/about#frequently-asked-questions-relatively-speaking"
       weight: 5
+
+  resources:
 
     - name: "Wiki"
       url: "https://wiki.lix.systems"
-      weight: 6
+      weight: 1
+
+    - name: "Community"
+      url: "/community"
+      weight: 2
+
+    - name: "Nix Resources"
+      url: "/resources"
+      weight: 2
+
+    - name: "Source Repositories"
+      url: "https://git.lix.systems"
+      weight: 4
 
 
 taxonomies:

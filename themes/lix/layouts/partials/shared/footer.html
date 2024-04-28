@@ -16,7 +16,7 @@
       <div class="col-12 col-xl-2 text-center text-xl-start pb-4">
         <h5 class="fs-6 fw-semibold text-primary">About us</h5>
         <ul class="list-unstyled">
-          {{ range .Site.Menus.footer }}
+          {{ range .Site.Menus.aboutus }}
             <li class="">
               <a class="small text-black-61 text-decoration-none" href="{{ .URL }}">{{ .Name }}</a>
             </li>
@@ -24,18 +24,17 @@
         </ul>
       </div>
       <div class="col-12 col-xl-3 text-center text-xl-start pb-4">
-        <h5 class="fs-6 fw-semibold text-primary">Location</h5>
+        <h5 class="fs-6 fw-semibold text-primary">Resources</h5>
         <ul class="list-unstyled">
-          {{ range .Site.Params.location }}
-            <li class="d-flex justify-content-center justify-content-xl-start mb-2">
-              <div class="d-flex align-items-center text-primary">{{ partial "icons/geo-alt.html" }}</div>
-              <p class="small text-black-61 m-0 ps-2">{{ . }}</p>
+          {{ range .Site.Menus.resources }}
+            <li class="">
+              <a class="small text-black-61 text-decoration-none" href="{{ .URL }}">{{ .Name }}</a>
             </li>
           {{ end }}
         </ul>
       </div>
       <div class="col-12 col-xl-3 text-center text-xl-start pb-4">
-        <h5 class="fs-6 fw-semibold text-primary">Contact us</h5>
+        <h5 class="fs-6 fw-semibold text-primary">Points of Contact</h5>
         {{ range .Site.Params.contact }}
           <p class="small text-black-61 mb-1">{{ . }}</p>
         {{ end }}
