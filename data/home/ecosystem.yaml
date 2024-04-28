@@ -24,4 +24,4 @@ content:
       text: "Lix can also be used as the core Nix implementation for Nix-based operating systems and system managers, including the full NixOS distribution, as well as system management software like Home Manager or nix-darwin."
       button:
         label: "use lix with NixOS"
-        url: "/install"
+        url: "/install#on-nixos"

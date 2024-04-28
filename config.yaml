@@ -46,9 +46,9 @@ menus:
       url: "https://git.lix.systems/lix-project/lix"
       weight: 3
 
-    - name: "Docs"
-      url: "/#"
-      weight: 4
+        #- name: "Docs"
+        #  url: "/#"
+        #  weight: 4
 
     - name: "Community"
       url: "/community"
