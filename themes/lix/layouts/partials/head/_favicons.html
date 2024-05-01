@@ -4,7 +4,7 @@
 {{- end -}}
 {{- $favicon = slice $favicon | resources.Concat "favicon.ico" -}}
 
-{{- $logo := resources.Get "images/logo.png" -}}
+{{- $logo := resources.Get "images/favicon.png" -}}
 {{- with .Site.Params.logo -}}
   {{- with resources.Get . -}}
     {{- $logo = . -}}
