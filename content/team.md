@@ -44,7 +44,7 @@ Members (in alphabetical order):
 - **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])**  
   Build system experts who delve way, way too deep into tooling -- so you don't have to. 
 
-- **raito ([@RaitoBezarius](https://github.com/RaitoBezarius), he/they)**  
+- **raito ([@RaitoBezarius](https://github.com/RaitoBezarius), he/him)**  
   Raito is working on nixpkgs packaging, infrastructure, and review in Lix. 
   They are a Tvix developer focusing on the store and the evaluator.
 
@@ -66,11 +66,26 @@ and to recuse themselves from any leadership decisions affected.
 As transparency is important, we've included declarations from each core team member regarding any possible
 conflicts of interest.
 
-- **hexchen** <mark>TODO</mark>
+- **hexchen**
+  hexchen's employer and its sister companies use Nix/Lix internally and offer Nix-based consulting.
+  hexchen has no stake in the company, does not work in the consulting teams and there is no
+  expectation for her to contribute to Lix on company time. **Should a governance decision involving
+  these or any other financial ties arise, hexchen will recuse herself from decision-making.**
 
-- **Irenes** <mark>TODO</mark>
+- **Irene Knapp** (they/them) is the technology director of Internet Safety Labs (ISL), a US-based 501(c)(3) 
+  non-profit. To the best of Irene's knowledge, ISL has no financial involvement with any Lix or Nix 
+  effort or organization, other than its own internal infrastructure. 
+  Irene is also involved in an advisory capacity with the Coworker Solidarity Fund, a US-based 501(c)(4). 
+  **Should a governance decision involving these or any other financial ties arise, Irene will recuse themselves 
+  from decision-making.** Additionally, while the following does not fall within the scope of any reasonable
+  conflict of interest policy and is not within the scope of the recusal promise, 
+  Irene chooses to affirm that they have many personal ties to trans, disabled and 
+  neurodivergent tech workers, and are involved with providing and encouraging peer support to same. 
+  Irene views the broader queer, disabled, and neurodivergent communities as the primary people to whom 
+  they are responsible as an activist, regardless of whatever other affiliations they may have.
 
-- **jade** <mark>TODO</mark>
+- **Jade** is currently not working on anything else relevant to Lix development. 
+- She thus declares that she has **no conflicts of interest** regarding the governance of Lix. 
 
 - **Kate Temkin** is the CEO and one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently 
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
@@ -80,17 +95,24 @@ conflicts of interest.
 
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
-- **pennae** <mark>TODO</mark>
+- **pennae** declare that they have **no conflicts of interest** regarding the governance of Lix. 
 
-- **puck** <mark>TODO</mark>
+- **Puck** is working on a NLnet project involving Nix. Should a governance decision involving relevant 
+  financial interests arise, she will recuse herself from the relevant decision-making.
 
 - **Qyriad** is a one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently 
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
   no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
-  owned by individuals, and not VC investors. Qyriad accordingly declares she has **no conflicts of interest**
-  regarding governance of Lix.
+  owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are 
+  relevant, Qyriad will recuse herself from the relevant decision-making**.
 
-- **raito** <mark>TODO</mark>
+- **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training. 
+  He has currently no stake in the cooperative, though this will change soon. He's also employed by INRIA until
+  August 2024 on Rust formal verification matters. **Should a governance decision involving these or any other 
+  financial ties arise, raitobezarius will recuse himself from decision-making.**
+  Additionally, raitobezarius is co-president of DGNum (dgnum.eu), a French "loi 1901" nonprofit organization 
+  aiming to promote the parisian Ecole Normale Superieure (45 rue d'Ulm, 75005 Paris) excellence on computer 
+  science using heavily Nix/NixOS based technologies.
 
 - **wiggles** <mark>TODO</mark>
 

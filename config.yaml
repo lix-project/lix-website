@@ -40,9 +40,9 @@ menus:
       url: "/about"
       weight: 2
 
-    - name: "The Team"
-      url: "/team"
-      weight: 3
+    - name: "FAQs"
+      url: "/faq"
+      weight: 2
 
         #- name: "Docs"
         #  url: "/#"
@@ -65,7 +65,7 @@ menus:
       weight: 8
 
   buttons:
-    - name: "Install Lix"
+    - name: "Install Lix (beta)"
       url: "/install"
       weight: 5
       pre: "btn btn-primary text-light"
