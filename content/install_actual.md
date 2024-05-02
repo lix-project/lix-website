@@ -59,7 +59,7 @@ The installer will guide you through installing Lix -- and once it's finished,
 you'll have a full, working installation. If you're not sure what to do, now is a
 great time to check out some of the [community's resources on Nix](/resources).
 
-[^1]: a customized variant of the [Determinant Nix Installer](https://github.com/DeterminateSystems/nix-installer).
+[^1]: a customized variant of the [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer).
 
 ### Existing Installs
 
