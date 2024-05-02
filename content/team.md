@@ -117,7 +117,7 @@ conflicts of interest.
   aiming to promote the parisian Ecole Normale Superieure (45 rue d'Ulm, 75005 Paris) excellence on computer 
   science using heavily Nix/NixOS based technologies.
 
-- **wiggles** <mark>TODO</mark>
+- **wiggles** works for mercury.com, a company that uses nix to build software. **Should a governance decision involving these or any other financial ties arise, wiggles will recuse herself from the relevant decision-making.**
 
 <br />
 
