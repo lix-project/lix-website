@@ -8,9 +8,9 @@ content:
     title: "an ever-evolving lix codebase, for a language that can evolve"
     text: "Lix is designed to grow and evolve — in a way that never breaks backwards compatibility. Lix intends to support language versioning features — so we can continuously improve the language without affecting existing configurations."
 
-    buttons: 
-      - label: "see our roadmap"
-        url: "/roadmap"
+    #buttons:
+    #  - label: "see our roadmap"
+    #    url: "/roadmap"
 
 
   - image: "images/services-web-development.png"
@@ -18,15 +18,15 @@ content:
     title: "community-owned infrastructure"
     text: "Lix is designed to avoid ecosystem lock-in: you can build and use Lix without any dependency on corporate-controlled infrastructure, like Microsoft's GitHub."
 
-    buttons: 
-      - label: "read about our infrastructure"
-        url: "#"
+    #buttons:
+    #  - label: "read about our infrastructure"
+    #    url: "#"
 
   - image: "images/services-web-development.png"
     pretitle: "a human-friendly implementation"
     title: "a configuration language for everyone — human or otherwise"
     text: "Declarative configurations may run on machines — but their interface shouldn't be designed for them! The Lix team is constantly working on usability and ergonomics enhancements — including tools that let you better see and interact with your configuration."
 
-    buttons: 
-      - label: "see existing & proposed improvements"
-        url: "/roadmap"
+    #buttons:
+    #  - label: "see existing & proposed improvements"
+    #    url: "/roadmap"

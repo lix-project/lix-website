@@ -61,3 +61,8 @@ provide a collection of necessary improvements over CppNix:
   And room to grow means room for [usability and ergonomics improvements](#) -- both in the langauge and in
   tooling.
   
+
+## Community, Team & Governance
+
+**Looking for information about the people behind the project?**  
+Check out our [community](/community) and [team](/team) pages.

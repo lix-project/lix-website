@@ -7,7 +7,6 @@ TODO List
 
 - Add "beta" to the lix logo.
 - Remove the "pending pull request" from the install page, once that's merged.
-- Add social media icons below lix for mastodon/github/etc.
 - Figure out where "usability" should link to.
 
 ### Pages
@@ -32,8 +31,8 @@ TODO List
 ### Content
 
 - Screenshots (incl. maybe of Xil) showing ergonomics enhancements in the /about page.
-- Create /roadmap.
-- Create /infrastructure.
+- Create `/roadmap`.
+- Create `/infrastructure`.
  
 ### Graphics
  

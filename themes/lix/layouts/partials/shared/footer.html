@@ -6,10 +6,10 @@
         <p class="small text-black-61">{{ .Site.Params.description }}</p>
         {{ with .Site.Params.social }}
         <ul class="d-flex justify-content-center justify-content-xl-start list-unstyled">
-          {{ with .dribbble }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16" href="{{ . }}">{{ partial "icons/dribbble.html" }}</a></li>{{ end }}
-          {{ with .instagram }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16" href="{{ . }}">{{ partial "icons/instagram.html" }}</a></li>{{ end }}
-          {{ with .facebook }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16" href="{{ . }}">{{ partial "icons/facebook.html" }}</a></li>{{ end }}
-          {{ with .twitter }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16" href="{{ . }}">{{ partial "icons/twitter.html" }}</a></li>{{ end }}
+          {{ with .mastodon }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16 svglogo" href="{{ . }}">{{ partial "icons/mastodon.html" }}</a></li>{{ end }}
+          {{ with .matrix }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16 svglogo" href="{{ . }}">{{ partial "icons/matrix.html" }}</a></li>{{ end }}
+          {{ with .github }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16 svglogo" href="{{ . }}">{{ partial "icons/github.html" }}</a></li>{{ end }}
+          {{ with .git }}<li class="rounded-circle bg-blue-63 me-2 p-2"><a class="d-flex align-items-center justify-content-center size-16 svglogo" href="{{ . }}">{{ partial "icons/git.html" }}</a></li>{{ end }}
         </ul>
         {{ end }}
       </div>
