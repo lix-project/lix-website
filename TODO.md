@@ -3,11 +3,10 @@ TODO List
 
 ## Move to lix.systems Blockers
 
-- Fix the fact that Hugo is sticking the wrong thing into the alt texts.
 - Add "beta" to the lix logo.
 - Replace the "lix-managed systems" graphic with an image of our logo on a screen.
 - Replace the placeholders for each of the three main page "why lix" points.
-- Get this hosted.
+- Put this up on GH pages?
 
 ## Soft Release Blockers
 
