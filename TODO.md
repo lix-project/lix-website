@@ -5,7 +5,7 @@ TODO List
 
 ### Misc
 
-- Move "The Team" to under community
+- Add "beta" to the lix logo.
 - Remove the "pending pull request" from the install page, once that's merged.
 - Add social media icons below lix for mastodon/github/etc.
 - Figure out where "usability" should link to.
@@ -21,7 +21,7 @@ TODO List
 - Replace the "lix-managed systems" graphic with an image of our logo on a screen.
 - Replace the placeholders for each of the three main page "why lix" points.
 
-## Wishlist
+## After Soft Release
 
 ### Misc
 

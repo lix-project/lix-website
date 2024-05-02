@@ -1,0 +1,101 @@
+---
+title:  "Installing Lix"
+description: "or: how to make your configuration Delicious"
+date: "2024-04-27"
+author: "Lix Team"
+---
+
+Whether you're a new or returning user, **we're thrilled you've decided to pick up Lix!**
+
+Lix works out-of-the-box on most Linux and MacOS systems, including with system management tools
+such as [home-manager](https://github.com/nix-community/home-manager) and 
+[nix-darwin](https://github.com/LnL7/nix-darwin) -- but, like any Nix-based system, some Nix background
+knowledge is recommended before installation.
+
+If you're new to the Nix ecosystem, you may want to check out some [community resources](/resources)
+first, to get familiar with how Nix works.
+
+
+## On NixOS
+
+If you haven't already installed NixOS, do so using any upstream 
+[install image](https://nixos.org/download/#NixOS) and the instructions in the 
+[NixOS Manual](https://nixos.org/manual/nixos/stable/#sec-installation). Then, follow 
+the instructions for either:
+
+- [flake-based configurations](/add-to-config#flake-based-configurations); or
+- [non-flake configurations](/add-to-config#non-flake-configurations)
+
+depending on how you prefer to configure your system.
+
+
+## On an Existing `nix-darwin` Install
+
+If you already have a [nix-darwin](https://github.com/LnL7/nix-darwin) installation, you
+can use the same instructions as installing on a NixOS-based system. Follow the instructions
+for either:
+
+- [flake-based configurations](/add-to-config#flake-based-configurations); or
+- [non-flake configurations](/add-to-config#non-flake-configurations)
+
+depending on how you prefer to configure your system.
+
+
+## On Any Other Linux/MacOS System
+
+You can either perform a **new install**, or choose to 
+**upgrade an existing install** to Lix.
+
+### New Installs
+
+The easiest way to install Lix is to use the [Lix Installer](https://git.lix.systems/lix-project/lix-installer)[^1].
+Open a terminal, and run the following command:
+
+```sh
+curl -sSf -L https://install.lix.systems/lix | sh -s -- install
+```
+
+The installer will guide you through installing Lix -- and once it's finished, 
+you'll have a full, working installation. If you're not sure what to do, now is a
+great time to check out some of the [community's resources on Nix](/resources).
+
+[^1]: a customized variant of the [Determinant Nix Installer](https://github.com/DeterminateSystems/nix-installer).
+
+### Existing Installs
+
+If you have an existing Nix installation, you should be able to upgrade by using a variant
+of the `upgrade-nix` command.
+
+<mark>
+<b>This section is currently pending on a pull request, so these instructions are for proofreading only.</b>
+</mark>
+<br/>
+<br/>
+
+Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
+
+```sh
+sudo nix run --extra-experimental-features "nix-command flakes" \
+   "git+https://git.lix.systems/lix-project/lix" -- upgrade-nix
+```
+
+You should now have upgraded to Lix! You can verify this by asking the `nix` command
+to report its version:
+
+```sh
+$ nix --version
+nix (Lix, like Nix) 2.90.0-lix
+```
+
+As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
+great time to check out some of the [community's resources on Nix](/resources).
+
+## Having Trouble?
+
+If you're having difficulty installing Lix, don't panic! Hop on over to our
+[community page](/community), and check out the various ways to find help.
+
+## Feedback?
+
+If you have thoughts on these instructions, feel free to drop by our [community](/community),
+or to [make a pull request to our website](git@git.lix.systems:lix-project/lix-website.git)!
