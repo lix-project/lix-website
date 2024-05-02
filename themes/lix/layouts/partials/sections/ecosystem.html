@@ -14,7 +14,7 @@
       {{ range .content.cards }}
         <div class="col-12 col-xl-4">
           <div class="card bg-blue-16 border-0 border-radius-34 p-4">
-            {{ with .image }}{{ partial "utilities/image-fluid.html" . }}{{ end }}
+            {{ partial "utilities/image-fluid.html" (dict "image" .image "alt" .alt) }}
             <div class="card-body text-center">
               {{ with .title }}<h4 class="card-title text-center text-primary pb-4">{{ . }}</h4>{{ end }}
               {{ with .text }}<p class="card-text text-black-61 pb-4">{{ . }}</p>{{ end }}

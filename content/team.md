@@ -20,7 +20,7 @@ Members (in alphabetical order):
 - **hexchen ([@hexchen](https://github.com/hexchen), she/her)**  
   hexchen is working primarily on mantaining and extending the Lix project infrastructure.
 
-- **Irenes ([@IreneKnapp](https://github.com/IreneKnapp), they/them)**
+- **Irenes ([@IreneKnapp](https://github.com/IreneKnapp), they/them)**  
   Irenes are an outside-context problem. They are fond of cats.
 
 - **jade ([@lf-](https://github.com/lf-), they/them)**  
@@ -31,6 +31,7 @@ Members (in alphabetical order):
   A performance art piece written live by a collective of hardware hackers & low-level engineers. 
   Kate works on Lix as part of a commitment to helping you do cool things, and is seriously considering
   rewriting every bit of documentation ever to cross paths with Nix.
+  
 - **Lily ([@lilyinstarlight](https://github.com/lilyinstarlight), she/they)**
 
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])**  
@@ -85,13 +86,15 @@ conflicts of interest.
   they are responsible as an activist, regardless of whatever other affiliations they may have.
 
 - **Jade** is currently not working on anything else relevant to Lix development. 
-- She thus declares that she has **no conflicts of interest** regarding the governance of Lix. 
+  She thus declares that she has **no conflicts of interest** regarding the governance of Lix. 
 
 - **Kate Temkin** is the CEO and one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently 
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
   no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
-  owned by individuals, and not VC investors. Kate accordingly declares she has **no conflicts of interest**
-  regarding governance of Lix.
+  owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are
+  relevant,Qyriad will recuse herself from the relevant decision-making**.
+
+- **Lily** is currently on leave, and will not participate in governance decisions until she returns.
 
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
@@ -104,7 +107,7 @@ conflicts of interest.
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
   no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
   owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are 
-  relevant, Qyriad will recuse herself from the relevant decision-making**.
+  relevant,Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training. 
   He has currently no stake in the cooperative, though this will change soon. He's also employed by INRIA until
@@ -118,6 +121,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **April 27th, 2024**, and are believed to be up-to-date to the current date. 
+These declarations were last updated on **May 1st, 2024**, and are believed to be up-to-date to the current date. 
 If the bolded date is more than 28 days in the past, feel free to reach out via our 
 [community channels](/community) to request these declarations be updated.
