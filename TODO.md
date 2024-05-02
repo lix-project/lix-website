@@ -1,24 +1,21 @@
 TODO List
 ==========
 
-## Soft Release
-
-### Misc
+## Move to lix.systems Blockers
 
 - Add "beta" to the lix logo.
-- Remove the "pending pull request" from the install page, once that's merged.
-- Figure out where "usability" should link to.
-
-### Pages
-
-- Create a `/community-standards` page (jade is creating text)
-- Create our contributor guide and squish it onto `/contributing`
-
-### Graphics
-
-- Fix the fact that Hugo is sticking the wrong thing into the alt texts.
 - Replace the "lix-managed systems" graphic with an image of our logo on a screen.
 - Replace the placeholders for each of the three main page "why lix" points.
+- Get this hosted.
+- Fix the fact that Hugo is sticking the wrong thing into the alt texts.
+
+## Soft Release Blockers
+
+- Remove the "pending pull request" from the install page, once that's merged.
+- Figure out where "usability" should link to.
+- Create a `/community-standards` page (jade is creating text)
+- Create our contributor guide and squish it onto `/contributing`
+- Replace the favicon with a flavicon (the lix logo).
 
 ## After Soft Release
 
@@ -38,3 +35,4 @@ TODO List
  
 - Add nice images to the "/about" page.
 - Replace the primary "hero" graphic with a Lix one.
+- Monocolor the social media icons and then apply the color filter.
