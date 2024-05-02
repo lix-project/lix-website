@@ -12,9 +12,8 @@ TODO List
 
 ### Pages
 
-- Create the `/resources` page, with resources for learning Nix.
-- Create a /community-standards page (raito is creating text)
-- Link "/contributing" to... maybe the wiki?
+- Create a `/community-standards` page (jade is creating text)
+- Create our contributor guide and squish it onto `/contributing`
 
 ### Graphics
 
