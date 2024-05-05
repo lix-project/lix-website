@@ -51,7 +51,7 @@ Next, add the `lix-module` as one of the arguments to your output function:
 }
 ```
 
-Finally, add the Lix _NixOS Module_ to your configuration:
+Add the Lix _NixOS Module_ to your configuration:
 
 ```nix
 {
@@ -64,7 +64,7 @@ Finally, add the Lix _NixOS Module_ to your configuration:
       # based on your platform (NixOS, nix-darwin) and architecture.
       nixosConfigurations.your-box = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux"
-        
+
         modules = [
 
           # This is the important part -- add this line to your module list!
@@ -78,12 +78,27 @@ Finally, add the Lix _NixOS Module_ to your configuration:
 }
 ```
 
+Finally, to add our binary cache (optional), add the following to any NixOS module in your configuration
+(e.g. configuration.nix):
+
+```nix
+{
+  nix.settings.extra-substituters = [
+    "https://cache.lix.systems"
+  ];
+
+  nix.settings.trusted-public-keys = [
+    "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+  ];
+}
+```
+
 Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
 You should now be using Lix! You can verify this by asking the `nix` command to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-lix
+nix (Lix, like Nix) 2.90.0-beta.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -132,12 +147,27 @@ section, and add the line provided in the configuration
 }
 ```
 
+Finally, to add our binary cache (optional), add the following to any NixOS module in your configuration
+(e.g. configuration.nix):
+
+```nix
+{
+  nix.settings.extra-substituters = [
+    "https://cache.lix.systems"
+  ];
+
+  nix.settings.trusted-public-keys = [
+    "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
+  ];
+}
+```
+
 Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
 You should now be using Lix! You can verify this by asking the `nix` command to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-lix
+nix (Lix, like Nix) 2.90.0-beta.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
