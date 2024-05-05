@@ -38,7 +38,7 @@ Besides being a fork of CppNix and an implementation of the Nix language, Lix is
 effort of a number of long-time Nix, Nixpkgs, NixOS, and Tvix contributors and maintainers -- and has
 been developed in partnership with a number of prolific Nix-documenters, bloggers, and users.
 
-We welcome anyone who wants to develop for both Lix and another implementation -- including CppNix and _Tvix_,
+We welcome anyone who wants to develop for both Lix and another implementation -- including CppNix and Tvix,
 and our open-source implementation absolutely allows any developer to integrate our code into any
 license-compatible project.
 
@@ -55,7 +55,7 @@ compiling lists of resources, web design, bug tracker triage, and more. If you'r
 to get started on, we have triaged some tasks
 [that we believe should be straightforward](https://git.lix.systems/lix-project/lix/issues?q=&type=all&sort=&state=open&labels=157&milestone=0&project=0&assignee=0&poster=0). To read more
 about which tasks we recommend taking on, see
-[Freezes and recommended contributions](https://git.lix.systems/lix-project/lix/issues?q=&type=all&sort=&state=open&labels=157&milestone=0&project=0&assignee=0&poster=0).
+[Freezes and recommended contributions](https://github.com/lix-project/lix/blob/main/CONTRIBUTING.md).
 
 Feel free to ask for help in the Lix development channel. Especially feel free to ask for us to write down 
 more work that we would like help with, or to write contribution information that is missing; 
