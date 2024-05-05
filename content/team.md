@@ -68,8 +68,7 @@ and to recuse themselves from any leadership decisions affected.
 As transparency is important, we've included declarations from each core team member regarding any possible
 conflicts of interest.
 
-- **hexchen**
-  hexchen's employer and its sister companies use Nix/Lix internally and offer Nix-based consulting.
+- **hexchen**'s employer and its sister companies use Nix/Lix internally and offer Nix-based consulting.
   hexchen has no stake in the company, does not work in the consulting teams and there is no
   expectation for her to contribute to Lix on company time. **Should a governance decision involving
   these or any other financial ties arise, hexchen will recuse herself from decision-making.**
