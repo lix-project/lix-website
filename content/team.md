@@ -101,8 +101,8 @@ conflicts of interest.
 
 - **pennae** declare that they have **no conflicts of interest** regarding the governance of Lix. 
 
-- **Puck** is working on a NLnet project involving Nix. Should a governance decision involving relevant 
-  financial interests arise, she will recuse herself from the relevant decision-making.
+- **Puck** is working on a NLnet project involving Nix. **Should a governance decision involving relevant 
+  financial interests arise, she will recuse herself from the relevant decision-making.**
 
 - **Qyriad** is a one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently 
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
