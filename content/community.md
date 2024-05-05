@@ -39,11 +39,10 @@ Joining is relatively straightforward -- you can find us on the `lix.systems` Ma
 The easiest way to connect with us is to join our [Matrix space](https://matrix.to/#/#space:lix.systems),
 which will allow you to see previews of and join the most relevant community rooms.
 
-Note that all community venues -- including our Matrix rooms -- are subject to our [community standards]
-(/community-standards).
+Note that all community venues -- including our Matrix rooms -- are subject to our [community standards](/community-standards).
 
 ### Community Resources
 
 In order to help folks who are getting started or who want to learn more about Lix, we've created a curated
-list of [community resources](/community) that you may find helpful. If you have suggestions, feel free to
+list of [community resources](/resources) that you may find helpful. If you have suggestions, feel free to
 drop them in our Matrix chat!
