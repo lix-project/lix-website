@@ -1,6 +1,6 @@
 {{ $img := resources.Get .image }}
 {{ if eq $img.MediaType.SubType "svg" }}
-  <img class="img-fluid svg" src="{{ $img.Permalink }}" alt="{{ .alt }}">
+  <img class="img-fluid svg" src="{{ $img.Permalink }}" alt="{{ .alt }}" width="{{ .width }}">
 {{ else }}
   <img class="img-fluid raster" src="{{ $img.Permalink }}" alt="{{ .alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}">
 {{ end }}

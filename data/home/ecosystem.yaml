@@ -21,7 +21,7 @@ content:
         label: "visit nixpkgs"
         url: "https://github.com/nixos/nixpkgs"
 
-    - image: "images/ecosystem-nixpkgs.svg"
+    - image: "images/ecosystem-nixos.svg"
       alt: "image of the lix logo on a monitor"
       title: "Lix-Managed Systems"
       text: "Lix can also be used as the core Nix implementation for Nix-based systems, including the full NixOS distribution, as well as system management software like Home Manager or nix-darwin."

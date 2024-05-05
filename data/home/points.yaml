@@ -3,7 +3,8 @@ id: "portfolio"
 
 content:
 
-  - image: "images/services-web-development.png"
+  - image: "images/points-evolution.svg"
+    width: "70%"
     alt: "replace me 1"
     pretitle: "nix with a modern flavor"
     title: "an ever-evolving lix codebase, for a language that can evolve"
@@ -14,8 +15,9 @@ content:
     #    url: "/roadmap"
 
 
-  - image: "images/services-web-development.png"
-    alt: "replace me 2"
+  - image: "images/points-selfhosted.svg"
+    width: "70%"
+    alt: "an image of a laptop computer exchanging data with a lix-colored cloud"
     pretitle: "an independent ecosystem"
     title: "community-owned infrastructure"
     text: "Lix is designed to avoid ecosystem lock-in: you can build and use Lix without any dependency on corporate-controlled infrastructure, like Microsoft's GitHub."
@@ -24,8 +26,9 @@ content:
     #  - label: "read about our infrastructure"
     #    url: "#"
 
-  - image: "images/services-web-development.png"
-    alt: "replace me 3"
+  - image: "images/points-configuration.svg"
+    width: "70%"
+    alt: "an image of a laptop computer exchanging data with a lix-colored cloud"
     pretitle: "a human-friendly implementation"
     title: "a configuration language for everyone — human or otherwise"
     text: "Declarative configurations may run on machines — but their interface shouldn't be designed for them! The Lix team is constantly working on usability and ergonomics enhancements — including tools that let you better see and interact with your configuration."

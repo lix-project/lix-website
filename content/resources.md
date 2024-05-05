@@ -28,7 +28,7 @@ once available.
 ## Understanding Flakes
 
 - [Flakes aren't real and can't hurt you](https://jade.fyi/blog/flakes-arent-real/), by our own **jade**.
-- Several of Lix community member [Xe Laso]()'s blog posts:
+- Several of Lix community member [Xe Iaso]()'s blog posts:
   - [Nix Flakes: An Introduction](https://xeiaso.net/blog/nix-flakes-1-2022-02-21/)
   - [Nix Flakes: Exposing and using NixOS Modules](https://xeiaso.net/blog/nix-flakes-1-2022-02-21/)
   - [Nix Flakes: Packages and How To Use Them](https://xeiaso.net/blog/nix-flakes-2-2022-02-27/)

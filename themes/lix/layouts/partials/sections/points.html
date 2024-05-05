@@ -3,7 +3,7 @@
     {{ range .content }}
     <div class="row portfolio-feature">
       <div class="col-12 col-xl-6 d-flex flex-column justify-content-center">
-          {{ partial "utilities/image-fluid.html" (dict "image" .image "alt" .alt) }}
+          {{ partial "utilities/image-fluid.html" (dict "image" .image "alt" .alt "width" .width) }}
       </div>
       <div class="col-12 col-xl-6 d-flex flex-column justify-content-center">
         {{ with .pretitle }}

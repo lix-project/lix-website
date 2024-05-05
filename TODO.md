@@ -10,16 +10,13 @@ TODO List
 ## Soft Release Blockers
 
 - Remove the "pending pull request" from the install page, once that's merged.
-- Figure out where "usability" should link to.
-- Create a `/community-standards` page (jade is creating text)
-- Create our contributor guide and squish it onto `/contributing` (raito is providing text).
 - Replace the favicon with a flavicon (the lix logo).
+- Fix the way CSS makes the page look on narrower monitors / mobile phones/
 
 ## After Soft Release
 
 ### Misc
 
-- Fix the way CSS makes the page look on narrower monitors
 - Fix the CSS vertical alignment on webkit mobile
 - Figure out where to link the "Docs" link to, and uncomment it.
 
@@ -27,6 +24,7 @@ TODO List
 
 - Screenshots (incl. maybe of Xil) showing ergonomics enhancements in the /about page.
 - Create `/roadmap`.
+- Create '/usability'.
 - Create `/infrastructure`.
  
 ### Graphics

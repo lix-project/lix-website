@@ -92,7 +92,7 @@ conflicts of interest.
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
   no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
   owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are
-  relevant,Qyriad will recuse herself from the relevant decision-making**.
+  relevant, Kate will recuse herself from the relevant decision-making**.
 
 - **Lily** is currently on leave, and will not participate in governance decisions until she returns.
 

@@ -56,9 +56,9 @@ provide a collection of necessary improvements over CppNix:
   programming language -- to both supplement and replace sections of the current C++ codebase. 
 
 - **A language with room to grow.**  
-  Unlike upstream Nix, Lix intends to be an evolving language -- a robust [language versioning](/roadmap)
+  Unlike upstream Nix, Lix intends to be an evolving language -- a robust language versioning
   system will allow the language to grow and evolve without sacrificing backwards-compatibility or correctness.
-  And room to grow means room for [usability and ergonomics improvements](#) -- both in the langauge and in
+  And room to grow means room for **usability and ergonomics improvements** -- both in the langauge and in
   tooling.
   
 
