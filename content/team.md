@@ -41,7 +41,7 @@ Members (in alphabetical order):
 - **pennae (aka "eldritch horrors", they/them)**  
   The shadow at the end of a dark hallway. An ancient, nameless evil. Likes cookies
 
-- **puck ([@puckipedia](https://github.com/puckipedia), she++/her++)**
+- **puck ([@puckipedia](https://github.com/puckipedia), she/her [singular] or they/them [plural])**
 
 - **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])**  
   Build system experts who delve way, way too deep into tooling -- so you don't have to. 
