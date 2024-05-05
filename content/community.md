@@ -7,7 +7,7 @@ author: "Lix Team"
 
 Lix exists **first and foremost for its community** -- and we very much hope that will include you!
 If you're looking for help, have any questions, want to pitch in -- or just want to talk -- join us
-using [one of the venues below](Engaging-with-the-Community) .
+using [one of the venues below](#engaging-with-the-community) .
 
 ## Community Standards
 
@@ -39,7 +39,8 @@ Joining is relatively straightforward -- you can find us on the `lix.systems` Ma
 The easiest way to connect with us is to join our [Matrix space](https://matrix.to/#/#space:lix.systems),
 which will allow you to see previews of and join the most relevant community rooms.
 
-Note that all community venues -- including our Matrix rooms -- are subject to our [community standards].
+Note that all community venues -- including our Matrix rooms -- are subject to our [community standards]
+(/community-standards).
 
 ### Community Resources
 
