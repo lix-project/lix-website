@@ -122,6 +122,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **May 1st, 2024**, and are believed to be up-to-date to the current date. 
+These declarations were last updated on **May 5st, 2024**, and are believed to be up-to-date to the current date. 
 If the bolded date is more than 28 days in the past, feel free to reach out via our 
 [community channels](/community) to request these declarations be updated.
