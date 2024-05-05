@@ -38,7 +38,8 @@ Members (in alphabetical order):
   Lunaphied spend a disproportionate amount of their time considering how to get FPGAs as far from Earth as possible.
   When they're not working on Space Stuff, they consider doing the same for Nix regressions.
 
-- **pennae (aka "eldrich horrors", they/them)**
+- **pennae (aka "eldritch horrors", they/them)**
+  The shadow at the end of dark hallway. An ancient, nameless evil. Likes cookies.
 
 - **puck ([@puckipedia](https://github.com/puckipedia), she/her)**
 
