@@ -1,10 +1,8 @@
-baseURL: "https://scratch.lix.systems/"
+baseURL: "https://lix.systems/"
 theme: "lix"
 languageCode: "en-us"
 
 title: "Lix"
-
-# googleAnalytics: ""
 
 summaryLength: 20
 
