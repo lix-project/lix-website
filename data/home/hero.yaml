@@ -10,6 +10,6 @@ content:
     url: "/about#why-lix"
 
   buttonSecondary:
-    label: "Start using lix"
+    label: "Start using Lix"
     url: "/install"
 

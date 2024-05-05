@@ -1,14 +1,11 @@
 TODO List
 ==========
 
-## Move to lix.systems Blockers
-
-- Put this up on GH pages?
-
 ## Soft Release Blockers
 
 - Remove the "pending pull request" from the install page, once that's merged.
-- Fix the way CSS makes the page look on narrower monitors / mobile phones/
+- Fix the way CSS makes the page look on narrower monitors / mobile phones
+- Fix the logo to have proper transparency
 
 ## After Soft Release
 
