@@ -18,7 +18,7 @@ tasks is to establish a lasting governance model -- and other teams to handle th
 Members (in alphabetical order):
 
 - **hexchen ([@hexchen](https://github.com/hexchen), she/her)**  
-  hexchen is working primarily on mantaining and extending the Lix project infrastructure.
+  hexchen is working primarily on maintaining and extending the Lix project infrastructure.
 
 - **Irenes ([@IreneKnapp](https://github.com/IreneKnapp), they/them)**  
   Irenes are an outside-context problem. They are fond of cats.
@@ -41,7 +41,7 @@ Members (in alphabetical order):
 - **pennae (aka "eldritch horrors", they/them)**
   The shadow at the end of a dark hallway. An ancient, nameless evil. Likes cookies.
 
-- **puck ([@puckipedia](https://github.com/puckipedia), she/her)**
+- **puck ([@puckipedia](https://github.com/puckipedia), she++/her++)**
 
 - **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])**  
   Build system experts who delve way, way too deep into tooling -- so you don't have to. 
