@@ -86,7 +86,7 @@ menus:
       weight: 4
 
     - name: "FAQs"
-      url: "/about#frequently-asked-questions-relatively-speaking"
+      url: "/faq"
       weight: 5
 
   resources:

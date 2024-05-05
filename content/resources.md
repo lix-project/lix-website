@@ -20,7 +20,7 @@ once available.
 
 ## Using Nix
 
-- [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/), by [bobvanderlinden](https://bobvanderlinden.me/customizing-packages-in-nix/).
+- [Customizing packages in Nix](https://bobvanderlinden.me/customizing-packages-in-nix/), by [bobvanderlinden](https://bobvanderlinden.me).
 - [Finding functions in Nixpkgs](https://jade.fyi/blog/finding-functions-in-nixpkgs/), by our own **jade**.
 - [Getting started with Home Manager for Nix](https://ghedam.at/24353/tutorial-getting-started-with-home-manager-for-nix), by [Mattia Gheda](https://ghedam.at/).
 
@@ -30,7 +30,7 @@ once available.
 - [Flakes aren't real and can't hurt you](https://jade.fyi/blog/flakes-arent-real/), by our own **jade**.
 - Several of Lix community member [Xe Iaso]()'s blog posts:
   - [Nix Flakes: An Introduction](https://xeiaso.net/blog/nix-flakes-1-2022-02-21/)
-  - [Nix Flakes: Exposing and using NixOS Modules](https://xeiaso.net/blog/nix-flakes-1-2022-02-21/)
   - [Nix Flakes: Packages and How To Use Them](https://xeiaso.net/blog/nix-flakes-2-2022-02-27/)
+  - [Nix Flakes: Exposing and using NixOS Modules](https://xeiaso.net/blog/nix-flakes-3-2022-04-07/)
   - [Building Go Packages with Nix Flakes](https://xeiaso.net/blog/nix-flakes-go-programs/)
 
