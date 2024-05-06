@@ -4,4 +4,13 @@
       flex-direction: row-reverse;
     }
   }
+
+  img {
+	margin-left: auto;
+	margin-right: auto;
+
+	@media (max-width: 900px) {
+	  margin-bottom: 3rem;
+	}
+  }
 }

@@ -7,6 +7,12 @@
     //   }
     // }
   }
+
+  @media (max-width: 400px) {
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+  }
+
   .hero-title {
     strong {
       color: $danger;
