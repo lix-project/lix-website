@@ -30,7 +30,7 @@ governance.
 
 ## Engaging with the Community
 
-The best way to engage with the community currently is to **join our Matrix space** -- a decentralized 
+The best way to engage with the community currently is to **join our Matrix space** -- a decentralized
 chat platform commonly used among open-source projects.
 
 ### Lix Matrix
