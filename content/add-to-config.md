@@ -1,6 +1,6 @@
 ---
 title:  "Switching To Lix"
-description: "or: how to make your existing configruation Delicious"
+description: "or: how to make your existing configuration Delicious"
 date: "2024-04-27"
 author: "Lix Team"
 ---
