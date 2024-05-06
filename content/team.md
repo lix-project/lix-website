@@ -50,7 +50,7 @@ Members (in alphabetical order):
   Raito is working on nixpkgs packaging, infrastructure, and review in Lix. 
   They are a Tvix developer focusing on the store and the evaluator.
 
-- **wiggles ([@9999years](https://github.com/9999years), she/her)**
+- **Rebecca Turner ([@9999years](https://github.com/9999years), she/her)**
 
 <br/>
 
@@ -117,7 +117,7 @@ conflicts of interest.
   aiming to promote the parisian Ecole Normale Superieure (45 rue d'Ulm, 75005 Paris) excellence on computer 
   science using heavily Nix/NixOS based technologies.
 
-- **wiggles** works for mercury.com, a company that uses nix to build software. **Should a governance decision involving these or any other financial ties arise, wiggles will recuse herself from the relevant decision-making.**
+- **Rebecca Turner** works for mercury.com, a company that uses nix to build software. **Should a governance decision involving these or any other financial ties arise, wiggles will recuse herself from the relevant decision-making.**
 
 <br />
 
