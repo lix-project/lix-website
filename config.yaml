@@ -22,7 +22,7 @@ params:
   social:
     twitter: "https://twitter.com/LixProject"
     mastodon: "https://chaos.social/@lix_project"
-    matrix: "https://matrix.to/#/#space:lix.system"
+    matrix: "https://matrix.to/#/#space:lix.systems"
     github: "https://github.com/lix-project"
     git: "https://git.lix.systems/lix-project"
 
