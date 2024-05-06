@@ -17,9 +17,9 @@ TODO List
 - Create `/roadmap`.
 - Create '/usability'.
 - Create `/infrastructure`.
- 
+
 ### Graphics
- 
+
 - Add nice images to the "/about" page.
 - Replace the primary "hero" graphic with a Lix one.
 - Monocolor the social media icons and then apply the color filter.
