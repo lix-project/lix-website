@@ -15,7 +15,7 @@ you're looking for, please feel free to ask over in the [community](/community).
 Absolutely. A primary goal of the Lix project is compatibility, which means that we very much support
 using Lix in any existing Nix or NixOS configuration.
 
-Check out the [install page](/install_actual) to see how to use Lix with your existing configurations.
+Check out the [install page](/install) to see how to use Lix with your existing configurations.
 
 #### Q: What are your plans for flakes?
 
