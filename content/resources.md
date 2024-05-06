@@ -5,7 +5,7 @@ date: "2024-04-27"
 author: "Lix Team"
 ---
 
-Lix doesn't exist in a vacuum -- but instead builds atop the incredible work of dozens of
+Lix doesn't exist in a vacuum --- but instead builds atop the incredible work of dozens of
 NixOS community members. This page collects resources that have been recommended by members
 of the community.
 
