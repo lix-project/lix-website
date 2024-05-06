@@ -5,7 +5,7 @@ date: "2024-05-01"
 author: "Lix Team"
 ---
 
-These are the most common questions we get -- or anticipate getting. If you can't find the answer
+These are the most common questions we get --- or anticipate getting. If you can't find the answer
 you're looking for, please feel free to ask over in the [community](/community).
 
 <br/>
@@ -20,12 +20,12 @@ Check out the [install page](/install) to see how to use Lix with your existing 
 #### Q: What are your plans for flakes?
 
 One of our primary goals is compatibility. While flakes are an experimental technology, their use is
-widespread enough that they've become a de-facto part of the Nix ecosystem -- and thus we consider them
+widespread enough that they've become a de-facto part of the Nix ecosystem --- and thus we consider them
 to be part of our compatibility guarantee.
 
 That said, we're not tied to any particular flake implementation. As Lix develops, we plan on adding an
-extension system for the tooling -- which will allow technologies like flakes, as well as new and different
-extensions -- to seamlessly act with the Lix core without needing to reside long-term in the Lix tree.
+extension system for the tooling --- which will allow technologies like flakes, as well as new and different
+extensions --- to seamlessly act with the Lix core without needing to reside long-term in the Lix tree.
 
 _Flakes are not the only way to write Nix language code in Lix, and we intend to provide a good experience
 to those using flakes -- while also improving the experience for those not using them --
@@ -35,16 +35,16 @@ by evolving a compatible but more flexible flake-like abstraction in the periphe
 #### Q: What relation does Lix have to the Nix Foundation, and to related projects?
 
 Besides being a fork of CppNix and an implementation of the Nix language, Lix is the
-effort of a number of long-time Nix, Nixpkgs, NixOS, and Snix contributors and maintainers -- and has
+effort of a number of long-time Nix, Nixpkgs, NixOS, and Snix contributors and maintainers --- and has
 been developed in partnership with a number of prolific Nix-documenters, bloggers, and users.
 
-We welcome anyone who wants to develop for both Lix and another implementation -- including CppNix and Snix,
+We welcome anyone who wants to develop for both Lix and another implementation --- including CppNix and Snix,
 and our open-source implementation absolutely allows any developer to integrate our code into any
 license-compatible project.
 
 However, ___Lix does not fall under the NixOS Foundation umbrella___, is funded independently of the foundation,
 and is not in any way controlled by its leadership. With the recent reboot of the foundation's governance,
-we are in communication with -- and open to collaboration with -- the foundation.
+we are in communication with --- and open to collaboration with --- the foundation.
 
 #### Q: How does Lix work? How can I contribute or help out?
 
@@ -88,11 +88,11 @@ will gladly make you one manually.
 #### Q: If Lix plans to adopt Rust, what makes it different from Snix?
 
 Unlike Lix, [Snix](https://snix.dev/) is a ground-up re-implementation of the Nix language in Rust,
-which shares many of the same modernization goals as Lix -- but also has a long way to go before it can
+which shares many of the same modernization goals as Lix --- but also has a long way to go before it can
 reach feature parity (and parity in correctness) with the CppNix and Lix implementations.
 
-Lix instead plans a _top-down_, _piecewise_ approach to our Rust extensions and replacements -- which means
-that Lix already has feature-parity with -- and correctness exceeding -- the original CppNix.
+Lix instead plans a _top-down_, _piecewise_ approach to our Rust extensions and replacements --- which means
+that Lix already has feature-parity with --- and correctness exceeding --- the original CppNix.
 
 
 #### Q: What does the name Lix stand for? How is it pronounced?
@@ -100,5 +100,5 @@ that Lix already has feature-parity with -- and correctness exceeding -- the ori
 Like Nix, Lix isn't really short for anything. The name originally derives from the term _Layered Nix_,
 based on the premise of layering new language and tooling features atop a fully-compatible, rock-solid base.
 
-Lix is pronounced like _licks_ -- i.e. what you might do if someone handed you a delicious ice cream cone;
+Lix is pronounced like _licks_ --- i.e. what you might do if someone handed you a delicious ice cream cone;
 which may or may not be stacked up with lambdas.

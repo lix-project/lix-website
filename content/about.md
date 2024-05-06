@@ -15,7 +15,7 @@ can easily configure a system into a known state -- and the packages that are cr
 way are guaranteed to run _exactly the same way_ on any system of the same architecture.
 
 As a fork of CppNix (last shared release: 2.18), Lix is designed to be fully compatible with the original CppNix
-implementation -- but also designed to allow evolution of the language and tooling, so
+implementation --- but also designed to allow evolution of the language and tooling, so
 its developers can improve usability and ergonomics without sacrificing correctness.
 
 ### Why use Nix?
@@ -56,7 +56,7 @@ provide a collection of necessary improvements over CppNix:
 - **A language with room to grow.** <br>
   Unlike upstream Nix, Lix intends to be an evolving language -- a robust language versioning
   system will allow the language to grow and evolve without sacrificing backwards-compatibility or correctness.
-  And room to grow means room for **usability and ergonomics improvements** -- both in the language and in
+  And room to grow means room for **usability and ergonomics improvements** --- both in the language and in
   tooling.
 
 - **Clear stability guarantees.** <br>
