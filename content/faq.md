@@ -55,7 +55,7 @@ compiling lists of resources, web design, bug tracker triage, and more. If you'r
 to get started on, we have triaged some tasks
 [that we believe should be straightforward](https://git.lix.systems/lix-project/lix/issues?q=&type=all&sort=&state=open&labels=157&milestone=0&project=0&assignee=0&poster=0). To read more
 about which tasks we recommend taking on, see
-[Freezes and recommended contributions](https://git.lix.systems/lix-project/lix/src/branch/main/CONTRIBUTING.md).
+[Freezes and recommended contributions](https://wiki.lix.systems/link/9).
 
 Feel free to ask for help in the Lix development channel. Especially feel free to ask for us to write down 
 more work that we would like help with, or to write contribution information that is missing; 
