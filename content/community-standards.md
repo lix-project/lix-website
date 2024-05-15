@@ -1,7 +1,7 @@
 ---
 title:  "Community Standards"
 description: "making Lix a safe and productive environment <3"
-date: "2024-04-27"
+date: "2024-05-14"
 author: "Lix Team"
 ---
 
@@ -15,7 +15,7 @@ The following are *principles* and do not in any way limit the authority of the 
     - We want to avoid creating unnecessary social hierarchy and avoid unaccountable positions in the project.
     - These expectations apply to everyone in the project including the core team and the interim community team.
 - The Lix community is significantly comprised of people of various marginalised backgrounds. We are committed to protecting these people and providing a safe environment for them.
-    - If you are of a less-marginalised background, keep in mind that you are a guest in our spaces and although you are welcome, you are nonetheless a guest.
+    - If you are of a less-marginalised background, keep in mind that you are a guest in our spaces but are nonetheless welcome. Think of it like staying at a friend's place where they might have different cultural customs; you may have to take your shoes off at the door or do other things a little bit differently.
 - We want to build leadership in community members and help them grow.
 - Technology is neither neutral nor apolitical. We consider how decisions affect different groups of people, and how they may create power dynamics or other consequences.
 - Impact is more important than intent.
