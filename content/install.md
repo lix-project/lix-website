@@ -69,7 +69,7 @@ of the `upgrade-nix` command.
 Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
 
 ```sh
-sudo nix run \
+sudo --preserve-env=PATH nix run \
      --experimental-features "nix-command flakes" \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
      'git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1' -- \
