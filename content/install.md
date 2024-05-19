@@ -71,10 +71,10 @@ Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the 
 ```sh
 sudo nix run \
      --experimental-features "nix-command flakes" \
-     --extra-substituters https://cache.lix.systems \
-     --trusted-public-keys "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
-     'git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.0' -- \
-     upgrade-nix
+     --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
+     'git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1' -- \
+     upgrade-nix \
+     --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
 ```
 
 You should now have upgraded to Lix! You can verify this by asking the `nix` command
