@@ -31,7 +31,7 @@ to clusters of critical infrastructure. With this in mind, the Lix team has been
 provide a collection of necessary improvements over CppNix:
 
 - **Built for a community, not for a corporation.**  
-  Lix is built by a team of open-source volunteers -- and exists to provide a alternative to the
+  Lix is built by a team of open-source volunteers -- and exists to provide an alternative to the
   commercial interests that have long plagued both upstream CppNix and corporate-authored forks.
   We're proud to stand by our open [conflict of interest statements](/team#conflict-of-interest-statements),
   and proud to listen to community voices on issues of sponsorship, direction, and moderation.
