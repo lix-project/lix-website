@@ -96,4 +96,4 @@ If you're having difficulty installing Lix, don't panic! Hop on over to our
 ## Feedback?
 
 If you have thoughts on these instructions, feel free to drop by our [community](/community),
-or to [make a pull request to our website](git@git.lix.systems:lix-project/lix-website.git)!
+or to [make a pull request to our website](https://git.lix.systems/lix-project/lix-website/pulls)!
