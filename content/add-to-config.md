@@ -23,7 +23,7 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # which is often the case. If you've named it something else, 
     # you'll need to change the `nixpkgs` below.
     lix = {
-      url = "git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+      url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
       flake = false;
     };
     lix-module = {
