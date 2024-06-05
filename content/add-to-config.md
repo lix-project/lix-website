@@ -98,7 +98,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-beta.0
+nix (Lix, like Nix) 2.90.0-beta.1
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -167,7 +167,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-beta.0
+nix (Lix, like Nix) 2.90.0-beta.1
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
