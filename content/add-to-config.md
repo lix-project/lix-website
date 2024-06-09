@@ -83,7 +83,7 @@ Add the following to any NixOS module in your configuration (e.g. `configuration
 
 ```nix
 {
-  nix.settings.extra-substituters = [
+  nix.settings.substituters = [
     "https://cache.lix.systems"
   ];
 
@@ -152,7 +152,7 @@ Add the following to any NixOS module in your configuration (e.g. `configuration
 
 ```nix
 {
-  nix.settings.extra-substituters = [
+  nix.settings.substituters = [
     "https://cache.lix.systems"
   ];
 
