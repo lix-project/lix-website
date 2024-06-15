@@ -12,6 +12,15 @@ of the community.
 We're also currently in the process of writing brand new documentation, which will be listed here
 once available.
 
+## A note of caution
+
+Nix has a long history. Some things that seemed like good ideas once are no longer common practice. In particular:
+
+- It's probably a good idea to ignore `nix-env` and mutable environments in favor of declarative configuration
+- If you don't already use channels, it's probably a good idea to learn about flakes or some other pinning mechanism instead
+
+If you're learning about those topics because you want to understand the ideas that are currently in favor in the historical contexts they are responses to, or because you think you see a benefit to them that others don't, that's totally fine; this warning is only here to help beginners have a fruitful experience.
+
 ## Understanding Nix
 
 - [The official Nix ecosystem documentation](https://nix.dev), maintained by the **NixOS Foundation**.
