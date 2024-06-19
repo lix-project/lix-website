@@ -8,7 +8,7 @@ author: "Lix Team"
 Whether you're a new or returning user, **we're thrilled you've decided to pick up Lix!**
 
 Lix works out-of-the-box on most Linux and MacOS systems, including with system management tools
-such as [home-manager](https://github.com/nix-community/home-manager) and 
+such as [home-manager](https://github.com/nix-community/home-manager) and
 [nix-darwin](https://github.com/LnL7/nix-darwin) -- but, like any Nix-based system, some Nix background
 knowledge is recommended before installation.
 
@@ -18,9 +18,9 @@ first, to get familiar with how Nix works.
 
 ## On NixOS
 
-If you haven't already installed NixOS, do so using any upstream 
-[install image](https://nixos.org/download/#NixOS) and the instructions in the 
-[NixOS Manual](https://nixos.org/manual/nixos/stable/#sec-installation). Then, follow 
+If you haven't already installed NixOS, do so using any upstream
+[install image](https://nixos.org/download/#NixOS) and the instructions in the
+[NixOS Manual](https://nixos.org/manual/nixos/stable/#sec-installation). Then, follow
 the instructions for either:
 
 - [flake-based configurations](/add-to-config#flake-based-configurations); or
@@ -43,7 +43,7 @@ depending on how you prefer to configure your system.
 
 ## On Any Other Linux/MacOS System
 
-You can either perform a **new install**, or choose to 
+You can either perform a **new install**, or choose to
 **upgrade an existing install** to Lix.
 
 ### New Installs
@@ -55,7 +55,7 @@ Open a terminal, and run the following command:
 curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
-The installer will guide you through installing Lix -- and once it's finished, 
+The installer will guide you through installing Lix -- and once it's finished,
 you'll have a full, working installation. If you're not sure what to do, now is a
 great time to check out some of the [community's resources on Nix](/resources).
 
@@ -72,7 +72,7 @@ Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the 
 sudo --preserve-env=PATH nix run \
      --experimental-features "nix-command flakes" \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
-     'git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1' -- \
+     'git+https://git@git.lix.systems/lix-project/lix?ref=refs/tags/2.90.0-rc1' -- \
      upgrade-nix \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
 ```
@@ -82,7 +82,7 @@ to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-beta.1
+nix (Lix, like Nix) 2.90.0-rc1-lixpre20240615-253546d
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a

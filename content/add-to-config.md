@@ -20,10 +20,10 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # Add this section to your flake inputs!
     #
     # Note that this assumes you have a flake-input called nixpkgs,
-    # which is often the case. If you've named it something else, 
+    # which is often the case. If you've named it something else,
     # you'll need to change the `nixpkgs` below.
     lix = {
-      url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90-beta.1";
+      url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90.0-rc1";
       flake = false;
     };
     lix-module = {
@@ -78,7 +78,7 @@ Add the Lix _NixOS Module_ to your configuration:
 }
 ```
 
-Finally, if you'd prefer not to build Lix yourself, you can add our binary cache. 
+Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
 Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
 
 ```nix
@@ -98,7 +98,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-beta.1
+nix (Lix, like Nix) 2.90.0-rc1-lixpre20240615-253546d
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -111,7 +111,7 @@ If you're not using flakes, you can set up your configuration to automatically p
 Lix release tarball, and then add it to your `configuration.nix`.
 
 Open your `/etc/nixos/configuration.nix` in the editor of your choice. Find the `imports`
-section, and add the line provided in the configuration 
+section, and add the line provided in the configuration
 
 <mark>
 <b>This section is currently pending on a quick update.</b>
@@ -128,17 +128,17 @@ section, and add the line provided in the configuration
 
       # This is the core line -- it pulls down the Lix module and
       # includes it in your configuration. It looks much nicer with a let
-      # binding -- but for clarity, we'll leave that as an exercise for the 
+      # binding -- but for clarity, we'll leave that as an exercise for the
       # reader. :)
       #
       # Note that the tag (e.g. v2.90) in the URL here is what determines
       # which version of Lix you'll wind up with.
-      (import 
+      (import
         (
           (fetchTarball { url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz"; }) + "/module.nix"
-        ) 
-        { 
-          lix = fetchTarball { url = "https://git.lix.systems/lix-project/lix/archive/2.90-beta.1.tar.gz"; }; 
+        )
+        {
+          lix = fetchTarball { url = "https://git.lix.systems/lix-project/lix/archive/2.90.0-rc1.tar.gz"; };
         }
       )
     ];
@@ -147,7 +147,7 @@ section, and add the line provided in the configuration
 }
 ```
 
-Finally, if you'd prefer not to build Lix yourself, you can add our binary cache. 
+Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
 Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
 
 ```nix
@@ -167,7 +167,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-beta.1
+nix (Lix, like Nix) 2.90.0-rc1-lixpre20240615-253546d
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -175,8 +175,8 @@ great time to check out some of the [community's resources on Nix](/resources).
 
 ## Having Trouble?
 
-**One quick thing to check:** have you set `nix.package` anywhere in your configuration?   
-If so, your configuration option will override the Lix module. You'll want to remove it, first -- 
+**One quick thing to check:** have you set `nix.package` anywhere in your configuration?
+If so, your configuration option will override the Lix module. You'll want to remove it, first --
 or, if you're feeling savvy, point it to the provided Lix package.
 
 **Otherwise:** If you're having difficulty installing Lix, don't panic! Hop on over to our
