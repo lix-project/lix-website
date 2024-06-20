@@ -5,9 +5,54 @@ date: "2024-04-27"
 author: "Lix Team"
 ---
 
-If you have an existing configuration on **NixOS** or **nix-darwin**, the easiest way
-to switch to Lix is currently by using our provided _NixOS module_. Fortunately, this
-usually means adding only a couple of lines to your configuration.
+If you have an existing configuration on **NixOS** or **nix-darwin**, there are
+a couple of ways to switch to Lix, all of which are relatively easy.
+
+- Using Lix from nixpkgs:
+  - Potentially slightly older version of Lix
+  - Working binary caching
+  - Programs like nix-eval-jobs and colmena still use the default version of
+    Nix (may be unacceptable depending on your use case)
+- Using the Lix NixOS module:
+  - Fresh version of Lix right out of the freezer
+  - You will be compiling Lix yourself, for now at least
+  - Programs like nix-eval-jobs and colmena have the version of Nix they use
+    overridden by an overlay such that most of the system uses Lix.
+
+# Using Lix from nixpkgs
+
+This approach has some caveats: since it is not using an overlay, it does not
+set the version of Nix depended on by other tools like colmena or
+nix-eval-jobs. Consequently, those tools will be using whichever version of
+CppNix is default in nixpkgs, likely leading to an inconsistent experience. It
+is, however, easy, and it does not take the few minutes to compile Lix from
+source.
+
+Add the following code to your NixOS configuration:
+
+```nix
+{ pkgs, ... }:
+{
+  nix.package = pkgs.lix;
+}
+```
+
+That's it, you're done.
+
+You can verify that it works by running the following command:
+
+```sh
+$ nix --version
+nix (Lix, like Nix) 2.90.0-rc1
+```
+
+# Using the Lix NixOS module
+
+The Lix NixOS module is the way to get the most consistent experience using
+Lix, and to have a system that has Lix as the default Nix implementation
+wherever possible by using an overlay to replace `pkgs.nix`. It will result in
+building Lix from source, which takes a few minutes on every update, which is a
+perfect time to get up, get some water, and stretch for a bit.
 
 ## Flake-based Configurations
 
@@ -22,13 +67,8 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # Note that this assumes you have a flake-input called nixpkgs,
     # which is often the case. If you've named it something else,
     # you'll need to change the `nixpkgs` below.
-    lix = {
-      url = "git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90.0-rc1";
-      flake = false;
-    };
     lix-module = {
-      url = "git+https://git.lix.systems/lix-project/nixos-module";
-      inputs.lix.follows = "lix";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0-rc1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -78,6 +118,11 @@ Add the Lix _NixOS Module_ to your configuration:
 }
 ```
 
+<!--
+FIXME: the binary cache doesn't do much good given that everyone is running a
+different nixpkgs than Lix is actually cached with during the release process.
+We need a hydra to be able to fix that.
+
 Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
 Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
 
@@ -93,12 +138,14 @@ Add the following to any NixOS module in your configuration (e.g. `configuration
 }
 ```
 
+-->
+
 Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
 You should now be using Lix! You can verify this by asking the `nix` command to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-rc1-lixpre20240615-253546d
+nix (Lix, like Nix) 2.90.0-rc1
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -113,12 +160,6 @@ Lix release tarball, and then add it to your `configuration.nix`.
 Open your `/etc/nixos/configuration.nix` in the editor of your choice. Find the `imports`
 section, and add the line provided in the configuration
 
-<mark>
-<b>This section is currently pending on a quick update.</b>
-</mark>
-<br/>
-<br/>
-
 ```nix
 { config, lib, pkgs, ... }:
 {
@@ -126,26 +167,39 @@ section, and add the line provided in the configuration
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
 
-      # This is the core line -- it pulls down the Lix module and
-      # includes it in your configuration. It looks much nicer with a let
-      # binding -- but for clarity, we'll leave that as an exercise for the
-      # reader. :)
+      # This includes the Lix NixOS module in your configuration along with the
+      # matching version of Lix itself.
+      #
+      # The sha256 hashes were obtained with the following command in Lix (n.b.
+      # this relies on --unpack, which is only in Lix and CppNix > 2.18):
+      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/2.90.0-rc1.tar.gz
       #
       # Note that the tag (e.g. v2.90) in the URL here is what determines
       # which version of Lix you'll wind up with.
-      (import
-        (
-          (fetchTarball { url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz"; }) + "/module.nix"
-        )
-        {
-          lix = fetchTarball { url = "https://git.lix.systems/lix-project/lix/archive/2.90.0-rc1.tar.gz"; };
-        }
+      (let
+        module = fetchTarball {
+          name = "source";
+          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0-rc1.tar.gz";
+          sha256 = "sha256-64lB/NO6AQ6z6EDCemPSYZWX/Qc6Rt04cPia5T5v01g=";
+        };
+        lixSrc = fetchTarball {
+          name = "source";
+          url = "https://git.lix.systems/lix-project/lix/archive/2.90.0-rc1.tar.gz";
+          sha256 = "sha256-WY7BGnu5PnbK4O8cKKv9kvxwzZIGbIQUQLGPHFXitI0=";
+        };
+        # This is the core of the code you need; it is an exercise to the
+        # reader to write the sources in a nicer way, or by using npins or
+        # similar pinning tools.
+        in import "${module}/module.nix" { lix = lixSrc; }
       )
     ];
 
   # <configuration below omitted>
 }
 ```
+
+<!--
+FIXME: as above, doesn't work, we should not recommend it.
 
 Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
 Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
@@ -161,6 +215,7 @@ Add the following to any NixOS module in your configuration (e.g. `configuration
   ];
 }
 ```
+-->
 
 Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
 You should now be using Lix! You can verify this by asking the `nix` command to report its version:
