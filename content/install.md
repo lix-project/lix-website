@@ -20,13 +20,11 @@ first, to get familiar with how Nix works.
 
 If you haven't already installed NixOS, do so using any upstream
 [install image](https://nixos.org/download/#NixOS) and the instructions in the
-[NixOS Manual](https://nixos.org/manual/nixos/stable/#sec-installation). Then, follow
-the instructions for either:
+[NixOS Manual](https://nixos.org/manual/nixos/stable/#sec-installation).
 
-- [flake-based configurations](/add-to-config#flake-based-configurations); or
-- [non-flake configurations](/add-to-config#non-flake-configurations)
-
-depending on how you prefer to configure your system.
+Then, follow the [instructions to add Lix to your
+configuration](/add-to-config). Both flake-based and non-flake-based
+configurations are fully supported.
 
 
 ## On an Existing `nix-darwin` Install
