@@ -49,3 +49,4 @@ If you wish to contact a member of the interim community team about a concern, c
 - qyriad (@qyriad:katesiria.org)
 - hexchen (@hexchen:colon.at)
 - lunaphied (@lunaphied:lunaphied.me)
+- piegames (@piegames:flausch.social)
