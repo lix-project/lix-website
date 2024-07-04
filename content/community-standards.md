@@ -44,9 +44,9 @@ We encourage working through conflicts privately with involved parties, but we a
 
 If you wish to contact a member of the interim community team about a concern, consider contacting one of the following people:
 
-- ktemkin (@ktemkin:katesiria.org)
-- jade (@jade_:matrix.org)
 - qyriad (@qyriad:katesiria.org)
+- piegames (@piegames:flausch.social)
+- ktemkin (@ktemkin:katesiria.org)
 - hexchen (@hexchen:colon.at)
 - lunaphied (@lunaphied:lunaphied.me)
-- piegames (@piegames:flausch.social)
+- jade (@jade_:matrix.org)
