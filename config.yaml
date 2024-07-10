@@ -46,16 +46,20 @@ menus:
       url: "/faq"
       weight: 2
 
-        #- name: "Docs"
-        #  url: "/#"
-        #  weight: 4
-
     - name: "Resources"
       url: "/resources"
-      weight: 5
+      weight: 3
 
     - name: "Community"
       url: "/community"
+      weight: 4
+
+    - name: News
+      url: "/blog"
+      weight: 5
+
+    - name: "Docs"
+      url: "https://docs.lix.systems/manual/lix/stable"
       weight: 6
 
     - name: "Code"
@@ -67,7 +71,7 @@ menus:
       weight: 8
 
   buttons:
-    - name: "Install Lix (beta)"
+    - name: "Install Lix"
       url: "/install"
       weight: 5
       pre: "btn btn-primary text-light"

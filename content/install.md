@@ -80,7 +80,7 @@ to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0-rc1-lixpre20240615-253546d
+nix (Lix, like Nix) 2.90.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
