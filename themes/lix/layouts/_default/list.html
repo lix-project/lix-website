@@ -21,7 +21,7 @@
               {{ end }}
             </div>
             <div class="card-body">
-              <h5 class="card-title fw-semibold">{{ .Title }}</h5>
+              <h5 class="card-title fw-semibold">{{ .Title | safeHTML }}</h5>
               <p class="card-text text-black-61">{{ .Summary }}</p>
             </div>
           </a>
