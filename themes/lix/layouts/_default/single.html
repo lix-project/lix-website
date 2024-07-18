@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row justify-content-center pb-5">
         <div class="col-12">
-          {{ with .Title }}
+          {{ with .Title | safeHTML }}
             <h2 class="display-1 fw-bold text-center text-primary pb-3">{{ . }}</h2>
           {{ end }}
           {{ with .Params.description }}
