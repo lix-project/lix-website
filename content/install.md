@@ -69,7 +69,7 @@ great time to check out some of the [community's resources on Nix](/resources).
 
 ### Existing Installs
 
-If you have an existing Nix installation, you should be able to upgrade by using a variant
+If you have an existing Nix installation (either CppNix or Lix), you should be able to upgrade by using a variant
 of the `upgrade-nix` command.
 
 Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
