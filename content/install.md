@@ -69,7 +69,7 @@ great time to check out some of the [community's resources on Nix](/resources).
 
 ### Existing Installs
 
-If you have an existing Nix installation, you should be able to upgrade by using a variant
+If you have an existing Nix installation (either CppNix or Lix), you should be able to upgrade by using a variant
 of the `upgrade-nix` command.
 
 Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
@@ -78,7 +78,7 @@ Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the 
 sudo --preserve-env=PATH nix run \
      --experimental-features "nix-command flakes" \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
-     'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.90.0' -- \
+     'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.91.0' -- \
      upgrade-nix \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
 ```
@@ -88,7 +88,7 @@ to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.90.0
+nix (Lix, like Nix) 2.91.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a

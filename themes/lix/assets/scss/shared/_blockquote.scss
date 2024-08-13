@@ -1,0 +1,21 @@
+@use 'sass:color';
+
+$blockquote-y-padding: 0.7rem;
+
+blockquote {
+  border-left-color: desaturate($primary, 20%);
+  border-left-width: 0.4rem;
+  border-left-style: solid;
+  padding-left: 0.5rem;
+  padding-top: $blockquote-y-padding;
+  padding-bottom: $blockquote-y-padding;
+
+  >:first-child {
+    margin-top: 0;
+  }
+
+  >:last-child {
+    margin-bottom: 0;
+  }
+}
+

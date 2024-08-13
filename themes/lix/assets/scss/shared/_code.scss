@@ -1,0 +1,12 @@
+$code-colour: darken($light, 5%);
+pre {
+  background-color: $code-colour;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+}
+:not(pre)>code {
+  background-color: $code-colour;
+  font-size: 0.85em;
+  padding: 0.2em;
+  border-radius: 0.3em;
+}
