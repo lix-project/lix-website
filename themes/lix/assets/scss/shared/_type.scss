@@ -1,0 +1,10 @@
+html {
+  /* The default body text size of 16px is slightly too small. Make it 18px
+   * (relatively, of course, so that people can change their browser settings).
+   *
+   * Doing it this way ensures that the entire type scale aligns with the body
+   * text size rather than being detached from it (and possibly having
+   * too-small headers and similar problems).
+   */
+  font-size: 112.5%;
+}
