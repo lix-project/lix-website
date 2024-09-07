@@ -35,4 +35,4 @@
   url: https://matrix.to/#/#space:lix.systems
 
 - label: |
-    `git clone ssh://gerrit.lix.systems:2022/lix`
+    `git clone ssh://{username}@gerrit.lix.systems:2022/lix`
