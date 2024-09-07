@@ -1,0 +1,38 @@
+---
+# This defines the cards that appear in `index.md`
+
+- label: user manual
+  url: https://docs.lix.systems/manual/lix/stable/
+
+- label: (nightly)
+  url: https://docs.lix.systems/manual/lix/nightly/
+
+- label: git repo
+  url: https://git.lix.systems/lix-project/lix
+
+- label: issue tracker
+  url: https://git.lix.systems/lix-project/lix/issues
+
+- label: lix-installer
+  url: https://git.lix.systems/lix-project/lix-installer
+
+- label: lix-website
+  url: https://git.lix.systems/lix-project/lix-website
+
+- label: code review
+  url: https://gerrit.lix.systems/
+
+- label: buildbot (ci)
+  url: https://buildbot.lix.systems/
+
+- label: gitiles
+  url: https://gerrit.lix.systems/plugins/gitiles/lix
+
+- label: wiki
+  url: https://wiki.lix.systems/books
+
+- label: matrix (chat)
+  url: https://matrix.to/#/#space:lix.systems
+
+- label: |
+    `git clone ssh://gerrit.lix.systems:2022/lix`
