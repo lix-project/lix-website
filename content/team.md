@@ -95,7 +95,7 @@ conflicts of interest.
   owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are
   relevant, Kate will recuse herself from the relevant decision-making**.
 
-- **Lily** is currently on leave, and will not participate in governance decisions until she returns.
+- **Lily** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
@@ -111,8 +111,7 @@ conflicts of interest.
   relevant,Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training. 
-  He has currently no stake in the cooperative, though this will change soon. He's also employed by INRIA until
-  August 2024 on Rust formal verification matters. **Should a governance decision involving these or any other 
+  He has currently no stake in the cooperative. **Should a governance decision involving these or any other 
   financial ties arise, raitobezarius will recuse himself from decision-making.**
   Additionally, raitobezarius is co-president of DGNum (dgnum.eu), a French "loi 1901" nonprofit organization 
   aiming to promote the parisian Ecole Normale Superieure (45 rue d'Ulm, 75005 Paris) excellence on computer 
@@ -127,6 +126,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **May 5st, 2024**, and are believed to be up-to-date to the current date. 
-If the bolded date is more than 28 days in the past, feel free to reach out via our 
+These declarations were last updated on **Sept 25th, 2024**, and are believed to be up-to-date to the current date. 
+If the bolded date is more than 56 days in the past, feel free to reach out via our 
 [community channels](/community) to request these declarations be updated.
