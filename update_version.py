@@ -29,9 +29,12 @@ def go(version: str):
         Path('./content/install.md')
     ]
 
+    version_notrail = version.partition('-')[0]
+
     substitutions = {
+        '@VERSION_NOTRAIL@': version_notrail,
         '@VERSION@': version,
-        '@LIX_ARCHIVE_HASH@': get_archive_hash(BASE_URL + f'/lix-project/lix/archive/{version}.tar.gz'),
+        '@LIX_ARCHIVE_HASH@': get_archive_hash(BASE_URL + f'/lix-project/lix/archive/{version_notrail}.tar.gz'),
         '@NIXOS_MODULE_HASH@': get_archive_hash(BASE_URL + f'/lix-project/nixos-module/archive/{version}.tar.gz'),
     }
 

@@ -51,7 +51,7 @@ You can verify that it works by running the following command:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) @VERSION@
+nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
 # Using the Lix NixOS module
@@ -153,7 +153,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) @VERSION@
+nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -180,9 +180,9 @@ section, and add the line provided in the configuration
       #
       # The sha256 hashes were obtained with the following command in Lix (n.b.
       # this relies on --unpack, which is only in Lix and CppNix > 2.18):
-      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/@VERSION@.tar.gz
+      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/@VERSION_NOTRAIL@.tar.gz
       #
-      # Note that the tag (e.g. @VERSION@) in the URL here is what determines
+      # Note that the tag (e.g. @VERSION_NOTRAIL@) in the URL here is what determines
       # which version of Lix you'll wind up with.
       (let
         module = fetchTarball {
@@ -192,7 +192,7 @@ section, and add the line provided in the configuration
         };
         lixSrc = fetchTarball {
           name = "source";
-          url = "https://git.lix.systems/lix-project/lix/archive/@VERSION@.tar.gz";
+          url = "https://git.lix.systems/lix-project/lix/archive/@VERSION_NOTRAIL@.tar.gz";
           sha256 = "@LIX_ARCHIVE_HASH@";
         };
         # This is the core of the code you need; it is an exercise to the
@@ -230,7 +230,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) @VERSION@
+nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
