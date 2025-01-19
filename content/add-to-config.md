@@ -51,7 +51,7 @@ You can verify that it works by running the following command:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.91.1
+nix (Lix, like Nix) 2.92.0
 ```
 
 # Using the Lix NixOS module
@@ -76,7 +76,7 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # which is often the case. If you've named it something else,
     # you'll need to change the `nixpkgs` below.
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -153,7 +153,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.91.1
+nix (Lix, like Nix) 2.92.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
@@ -180,20 +180,20 @@ section, and add the line provided in the configuration
       #
       # The sha256 hashes were obtained with the following command in Lix (n.b.
       # this relies on --unpack, which is only in Lix and CppNix > 2.18):
-      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/2.91.1.tar.gz
+      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/2.92.0.tar.gz
       #
-      # Note that the tag (e.g. 2.91.1) in the URL here is what determines
+      # Note that the tag (e.g. 2.92.0) in the URL here is what determines
       # which version of Lix you'll wind up with.
       (let
         module = fetchTarball {
           name = "source";
-          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-2.tar.gz";
-          sha256 = "sha256-DN5/166jhiiAW0Uw6nueXaGTueVxhfZISAkoxasmz/g=";
+          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0.tar.gz";
+          sha256 = "sha256-YMLrcBpf0TR5r/eaqm8lxzFPap2TxCor0ZGcK3a7+b8=";
         };
         lixSrc = fetchTarball {
           name = "source";
-          url = "https://git.lix.systems/lix-project/lix/archive/2.91.1.tar.gz";
-          sha256 = "sha256-hiGtfzxFkDc9TSYsb96Whg0vnqBVV7CUxyscZNhed0U=";
+          url = "https://git.lix.systems/lix-project/lix/archive/2.92.0.tar.gz";
+          sha256 = "sha256-CCKIAE84dzkrnlxJCKFyffAxP3yfsOAbdvydUGqq24g=";
         };
         # This is the core of the code you need; it is an exercise to the
         # reader to write the sources in a nicer way, or by using npins or
@@ -230,7 +230,7 @@ You should now be using Lix! You can verify this by asking the `nix` command to 
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.91.1
+nix (Lix, like Nix) 2.92.0
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
