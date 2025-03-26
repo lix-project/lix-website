@@ -76,7 +76,7 @@ Adding Lix to a flake-based configuration is relatively simple. First, add the L
     # which is often the case. If you've named it something else,
     # you'll need to change the `nixpkgs` below.
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-2.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -187,8 +187,8 @@ section, and add the line provided in the configuration
       (let
         module = fetchTarball {
           name = "source";
-          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-2.tar.gz";
-          sha256 = "sha256-+Wy+bMNZXDTfMuCFKRWbd2Rcpj6UZcrQ8tlT5vhtgm4=";
+          url = "https://git.lix.systems/lix-project/nixos-module/archive/2.92.0-3.tar.gz";
+          sha256 = "sha256-fprwZKE1uMzO9tiWWOrmLWBW3GPkMayQfb0xOvVFIno=";
         };
         lixSrc = fetchTarball {
           name = "source";
