@@ -20,9 +20,6 @@ Members (in alphabetical order):
 - **hexchen ([@hexchen](https://github.com/hexchen), she/her)**  
   hexchen is working primarily on maintaining and extending the Lix project infrastructure.
 
-- **Irenes ([@IreneKnapp](https://github.com/IreneKnapp), they/them)**  
-  Irenes are an outside-context problem. They are fond of cats.
-
 - **jade ([@lf-](https://github.com/lf-), they/them)**  
   jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of 
   the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
@@ -73,18 +70,6 @@ conflicts of interest.
   hexchen has no stake in the company, does not work in the consulting teams and there is no
   expectation for her to contribute to Lix on company time. **Should a governance decision involving
   these or any other financial ties arise, hexchen will recuse herself from decision-making.**
-
-- **Irene Knapp** (they/them) is the technology director of Internet Safety Labs (ISL), a US-based 501(c)(3) 
-  non-profit. To the best of Irene's knowledge, ISL has no financial involvement with any Lix or Nix 
-  effort or organization, other than its own internal infrastructure. 
-  Irene is also involved in an advisory capacity with the Coworker Solidarity Fund, a US-based 501(c)(4). 
-  **Should a governance decision involving these or any other financial ties arise, Irene will recuse themselves 
-  from decision-making.** Additionally, while the following does not fall within the scope of any reasonable
-  conflict of interest policy and is not within the scope of the recusal promise, 
-  Irene chooses to affirm that they have many personal ties to trans, disabled and 
-  neurodivergent tech workers, and are involved with providing and encouraging peer support to same. 
-  Irene views the broader queer, disabled, and neurodivergent communities as the primary people to whom 
-  they are responsible as an activist, regardless of whatever other affiliations they may have.
 
 - **Jade** works for [Mercury](https://mercury.com/), a financial
   services startup that [uses
