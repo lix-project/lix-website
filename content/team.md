@@ -44,8 +44,9 @@ Members (in alphabetical order):
   Build system experts who delve way, way too deep into tooling -- so you don't have to. 
 
 - **raito ([@RaitoBezarius](https://github.com/RaitoBezarius), he/him)**  
-  Raito is working on nixpkgs packaging, infrastructure, and review in Lix. 
-  They are a Tvix developer focusing on the store and the evaluator.
+  Raito is working on infrastructure, review of core parts in Lix and lands smalls contributions when bored.
+  He focus on the ongoing asyncification work and general scalability of Lix for large build farm usecases.
+  Additionally, interested into bridging the Snix project with Lix.
 
 - **Rebecca Turner ([@9999years](https://github.com/9999years), she/her)**  
   Rebecca is working on the evaluator and error messages.
@@ -100,11 +101,9 @@ conflicts of interest.
   relevant,Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training. 
-  He has currently no stake in the cooperative. **Should a governance decision involving these or any other 
-  financial ties arise, raitobezarius will recuse himself from decision-making.**
-  Additionally, raitobezarius is co-president of DGNum (dgnum.eu), a French "loi 1901" nonprofit organization 
-  aiming to promote the parisian Ecole Normale Superieure (45 rue d'Ulm, 75005 Paris) excellence on computer 
-  science using heavily Nix/NixOS based technologies.
+  He currently possess stakes in the cooperative in minority and may be involved in IT strategic decisions. 
+  **Should a governance decision involving these or any other financial ties
+  arise, raitobezarius will recuse himself from decision-making.**
 
 - **Rebecca Turner** works for [Mercury](https://mercury.com/), a financial
   services startup that [uses
