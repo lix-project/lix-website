@@ -1,7 +1,7 @@
 +++
 title = "Critical correctness bug in Lix"
 author = "Lix Team"
-date = "2025-06-28"
+date = "2025-06-27"
 +++
 
 *This is an ongoing incident. This post will be updated regularly.*
