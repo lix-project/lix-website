@@ -46,8 +46,8 @@ menus:
       url: "/faq"
       weight: 2
 
-    - name: "Resources"
-      url: "/resources"
+    - name: "Team"
+      url: "/team"
       weight: 3
 
     - name: "Community"
