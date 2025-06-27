@@ -28,7 +28,7 @@ The following are *principles* and do not in any way limit the authority of the 
 
 The following are hard lines for which we will likely ban on sight. These are not intended as an encompassing set of things that will not be tolerated, but rather as things that we promise will not be in our community. This can extend to patterns of behaviour outside our spaces.
 
-For the avoidance of doubt, we do not tolerate discrimination such as racism, sexism, transmisia, pluralphobia, ableism or other sorts of discrimination; we do not tolerate unwelcome sexual advances, stalking, harassment or doxing.
+For the avoidance of doubt, we do not tolerate discrimination such as racism, sexism, transphobia, pluralphobia, ableism or other sorts of discrimination; we do not tolerate unwelcome sexual advances, stalking, harassment or doxing.
 
 We do not tolerate peddling right-wing ideology, including but not limited to fascism, denying discrimination exists, and other such things.
 
