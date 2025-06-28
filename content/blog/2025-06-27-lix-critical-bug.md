@@ -16,6 +16,14 @@ If you have already upgraded and built your system, **read below carefully**. If
 
 We are deeply sorry for the disruption. We are working on a fix, which will undergo approximately **72 hours of testing** before we declare it safe. This post will be updated with progress.
 
+Lix versions which are affected are the following ones:
+
+- Lix 2.91.2
+- Lix 2.92.3
+- Lix 2.93.1
+
+This problem has been witnessed on Linux, the root cause is platform independent and we believe it can occur on Darwin as well.
+
 ## What to do now
 
 To avoid further breakage:
@@ -23,16 +31,23 @@ To avoid further breakage:
 * **Stop the Nix garbage collector**:
 
   ```bash
-  systemctl stop nix-gc.service nix-gc.timer
+  systemctl stop nix-gc.service nix-gc.timer # On Linux
   ```
 
 * **Stop the Nix daemon**:
 
   ```bash
-  systemctl stop nix-daemon.service nix-daemon.socket
+  systemctl stop nix-daemon.service nix-daemon.socket # On Linux
   ```
 
 * **Download a static Nix binary**, e.g. using `curl`, without relying on the broken interpreter. This will help you run recovery commands without making things worse.
+
+  Here are options from https://hydra.nixos.org -- the official build farm of the Nixpkgs project.
+  
+  - [x86_64 Linux](https://hydra.nixos.org/job/nixpkgs/trunk/lixStatic.x86_64-linux/latest/download-by-type/file/binary-dist)
+  - [ARM64 Linux](https://hydra.nixos.org/job/nixpkgs/trunk/lixStatic.aarch64-linux/latest/download-by-type/file/binary-dist)
+  
+  macOS has no known working static builds unfortunately.
 
 * **Do NOT run**:
 
@@ -50,6 +65,10 @@ NIX_REMOTE=local /path/to/static-nix/bin/nix-store --verify --repair
 ```
 
 Run this as `root`.
+
+**Note** : If you do not have a `nix-store` binary in your static build, you can always obtain one by symlinking the main binary `nix`, i.e. `ln -s nix nix-store`.
+**Note 2** : `--check-contents` is not required because this bug *deletes* paths and does not *corrupt* them. The verification can be very fast even on moderately sized stores.
+**Note 3** : the previous command will not log explicit success, but will log any corruption or failures. If you do not see anything wrong, you are safe.
 
 This might take a while but should warn you about any missing or corrupted paths.
 
@@ -119,6 +138,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-24**: CVE embargo lifted, patches published.
 * **2025-06-27**: Issue [#883](https://git.lix.systems/lix-project/lix/issues/883) reported.
 * **2025-06-28**: Confirmed and acknowledged by Lix team. Investigation and patching underway.
+* **2025-06-28 15:30 CEST** : Added links to known trustable static builds from Nixpkgs. Added affected Lix versions. Added more details on recovery section.
 
 ---
 
