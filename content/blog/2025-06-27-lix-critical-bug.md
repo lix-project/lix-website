@@ -88,7 +88,9 @@ Run this as `root`.
 
 ### Rebuilding your system
 
-To attempt rebuilding your system from the static Nix:
+Once you chose a remediation option (see below), you will want to apply it definitively to your system to exit the precarious state of "every build" is dangerous.
+
+To attempt rebuilding your system from the static Nix **after you changed your configuration**:
 
 **No-flakes**:
 
@@ -170,6 +172,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-28**: Confirmed and acknowledged by Lix team. Investigation and patching underway.
 * **2025-06-28 15:30 CEST** : Added links to known trustable static builds from Nixpkgs. Added affected Lix versions. Added more details on recovery section.
 * **2025-06-28 17:45 CEST** : Added instructions on how to rebuild the system using the static Nix, co-written by boogiewoogie (thank you!).
+* **2025-06-28 21:40 CEST** : Clarified that rebuilding your system makes sense if you changed your configuration to move away from the dangerous version.
 
 ---
 
