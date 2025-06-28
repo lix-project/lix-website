@@ -59,6 +59,8 @@ To avoid further breakage:
 
 ## Recovery
 
+### Checking your system's store
+
 First and foremost, perform a full check-up:
 ```bash
 NIX_REMOTE=local /path/to/static-nix/bin/nix-store --verify --repair
@@ -67,10 +69,14 @@ NIX_REMOTE=local /path/to/static-nix/bin/nix-store --verify --repair
 Run this as `root`.
 
 **Note** : If you do not have a `nix-store` binary in your static build, you can always obtain one by symlinking the main binary `nix`, i.e. `ln -s nix nix-store`.
+
 **Note 2** : `--check-contents` is not required because this bug *deletes* paths and does not *corrupt* them. The verification can be very fast even on moderately sized stores.
+
 **Note 3** : the previous command will not log explicit success, but will log any corruption or failures. If you do not see anything wrong, you are safe.
 
 This might take a while but should warn you about any missing or corrupted paths.
+
+### Recovering a missing path
 
 To attempt recovery of a missing path:
 
@@ -79,6 +85,30 @@ NIX_REMOTE=local /path/to/static-nix/bin/nix-store --repair -r /nix/store/xxxx-p
 ```
 
 Run this as `root`.
+
+### Rebuilding your system
+
+To attempt rebuilding your system from the static Nix:
+
+**No-flakes**:
+
+```bash
+NIX_REMOTE=local /path/to/static-nix/nix-build -E 'import <nixpkgs/nixos> {}' -A system
+./result/bin/switch-to-configuration switch
+nixos-rebuild switch # At this point, you should be running a non-dangerous Nix interpreter, you can rebuild your system and register it in the bootloader.
+```
+
+**With flakes**:
+
+```bash
+NIX_REMOTE=local /path/to/static-nix/nix --experimental-features 'nix-command flakes' build /path/to/nixos/flake#nixosConfigurations.myhostname.config.system.build.toplevel
+./result/bin/switch-to-configuration switch
+nixos-rebuild switch # At this point, you should be running a non-dangerous Nix interpreter, you can rebuild your system and register it in the bootloader.
+```
+
+Run this as `root`.
+
+**Note** : If you use colmena or deployment-wide tools, you will need to look into the manual to see if you can build the toplevel directly while using another Nix interpreter.
 
 ## Remediation options
 
@@ -139,6 +169,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-27**: Issue [#883](https://git.lix.systems/lix-project/lix/issues/883) reported.
 * **2025-06-28**: Confirmed and acknowledged by Lix team. Investigation and patching underway.
 * **2025-06-28 15:30 CEST** : Added links to known trustable static builds from Nixpkgs. Added affected Lix versions. Added more details on recovery section.
+* **2025-06-28 17:45 CEST** : Added instructions on how to rebuild the system using the static Nix, co-written by boogiewoogie (thank you!).
 
 ---
 
