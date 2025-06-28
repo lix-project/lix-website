@@ -37,9 +37,8 @@ If you're learning about those topics because you want to understand the ideas t
 ## Understanding Flakes
 
 - [Flakes aren't real and can't hurt you](https://jade.fyi/blog/flakes-arent-real/), by our own **jade**.
-- Several of Lix community member [Xe Iaso](https://xeiaso.net)'s blog posts:
+- Several of [Xe Iaso](https://xeiaso.net)'s blog posts:
   - [Nix Flakes: An Introduction](https://xeiaso.net/blog/nix-flakes-1-2022-02-21/)
   - [Nix Flakes: Packages and How To Use Them](https://xeiaso.net/blog/nix-flakes-2-2022-02-27/)
   - [Nix Flakes: Exposing and using NixOS Modules](https://xeiaso.net/blog/nix-flakes-3-2022-04-07/)
   - [Building Go Packages with Nix Flakes](https://xeiaso.net/blog/nix-flakes-go-programs/)
-
