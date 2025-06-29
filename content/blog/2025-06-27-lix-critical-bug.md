@@ -173,6 +173,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-28 15:30 CEST** : Added links to known trustable static builds from Nixpkgs. Added affected Lix versions. Added more details on recovery section.
 * **2025-06-28 17:45 CEST** : Added instructions on how to rebuild the system using the static Nix, co-written by boogiewoogie (thank you!).
 * **2025-06-28 21:40 CEST** : Clarified that rebuilding your system makes sense if you changed your configuration to move away from the dangerous version.
+* **2025-06-29 21:40 CEST** : Release engineering started to put an end to the incident.
 
 ---
 
