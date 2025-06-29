@@ -168,6 +168,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-29 21:48 CEST** : Remove the old option A with manual patching.
 * **2025-06-29 21:47 CEST** : Commencing final QA of all release branches (2.91, 2.92, 2.93 and main) before merge.
 * **2025-06-29 23:50 CEST** : Final QA completed and all mitigations merged in branches. Commencing release process.
+* **2025-06-29 01:02 CEST** : Release process completed. All versions are now uploaded. Commencing Nixpkgs ports and updating `lix-project/nixos-module`.
 
 ---
 
