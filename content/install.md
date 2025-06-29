@@ -78,7 +78,7 @@ Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the 
 sudo --preserve-env=PATH nix run \
      --experimental-features "nix-command flakes" \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=" \
-     'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.93.1' -- \
+     'git+https://git.lix.systems/lix-project/lix?ref=refs/tags/2.93.2' -- \
      upgrade-nix \
      --extra-substituters https://cache.lix.systems --extra-trusted-public-keys "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
 ```
@@ -88,7 +88,7 @@ to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.93.1
+nix (Lix, like Nix) 2.93.2
 ```
 
 As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
