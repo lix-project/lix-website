@@ -4,7 +4,7 @@ author = "Lix Team"
 date = "2025-06-27"
 +++
 
-*This is an ongoing incident. This post will be updated regularly.*
+_This incident has been mitigated. This post will be updated with pointers on how to close it. The Lix team remains available over all support channels to help recovering any system affected by it. A postmortem will be published once the incident is completely closed._
 
 ## Summary
 
@@ -12,15 +12,21 @@ The fix for [CVE-2025-52992](https://nvd.nist.gov/vuln/detail/CVE-2025-52992), r
 
 Currently known causes of this issue include all actions that build outputs of a derivation that is missing at least one output in the building store; this can happen for example when some outputs were built by a remote builder or placed in the store by deployment tools run on another host (e.g. colmena).
 
-If you have already upgraded and built your system, **read below carefully**. If you have not, **stop now**.
+If you have already upgraded and built your system to the affected versions, **read below carefully**. If you have not, **skip over the non-affected versions** via one of the available remediation options.
 
-We are deeply sorry for the disruption. We are working on a fix, which will undergo approximately **72 hours of testing** before we declare it safe. This post will be updated with progress.
+We are deeply sorry for the disruption. We needed **72 hours of testing** to ascertain that the fix was adequate, this amount of time was actually a good choice as we discovered further issues as we went into mitigations. More details will be provided in the upcoming postmortem.
 
-Lix versions which are affected are the following ones:
+Lix versions which are **AFFECTED** are the following ones:
 
 - Lix 2.91.2
-- Lix 2.92.3
+- Lix 2.92.2
 - Lix 2.93.1
+
+Lix versions which are **NOT AFFECTED** are the following ones:
+
+- Lix 2.91.3
+- Lix 2.92.3
+- Lix 2.93.2
 
 This problem has been witnessed on Linux, the root cause is platform independent and we believe it can occur on Darwin as well.
 
@@ -182,6 +188,7 @@ Note that our Gerrit instance returns patches encoded in base64.
    25.05: https://github.com/NixOS/nixpkgs/pull/421136
    24.11: https://github.com/NixOS/nixpkgs/pull/421137
 * **2025-06-29 01:36 CEST** : `lix-project/nixos-module` updated on all branches.
+* **2025-06-29 01:42 CEST** : Updated banner in this blog post, marking the stabilization of the situation.
    
 ---
 
