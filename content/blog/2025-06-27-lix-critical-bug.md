@@ -128,13 +128,14 @@ Open Nixpkgs PRs reverts the patches:
 * 25.05: https://github.com/NixOS/nixpkgs/pull/421136
 * 25.11: https://github.com/NixOS/nixpkgs/pull/421138
 
-### Option B : Update to one of the newest minor of Lix
+### Option B : Update to one of the newest minor of Lix using `lix-project/nixos-module`
 
 Non-affected versions are:
 
-- Lix 2.91.3
-- Lix 2.92.3
-- Lix 2.93.2
+- Lix 2.91.3 (tag: `2.91.3-1`)
+- Lix 2.92.3 (tag: `2.92.3-1`)
+- Lix 2.93.2 (tag: `2.93.2-1`)
+- Lix 2.94.0-dev starting `ea74d925e650948d296fb85e4671fb0ce944f550` on `lix-project/nixos-module`.
 
 ### Option C: Roll back to the previous (vulnerable) version
 
@@ -180,6 +181,7 @@ Note that our Gerrit instance returns patches encoded in base64.
    Unstable: https://github.com/NixOS/nixpkgs/pull/421138
    25.05: https://github.com/NixOS/nixpkgs/pull/421136
    24.11: https://github.com/NixOS/nixpkgs/pull/421137
+* **2025-06-29 01:36 CEST** : `lix-project/nixos-module` updated on all branches.
    
 ---
 
