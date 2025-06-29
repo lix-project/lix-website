@@ -118,16 +118,7 @@ If you need assistance on how to apply remediation, feel free to inquire in our 
 
 We will not publish a fixed release on June 28th (today, at the time of writing) due to incomplete testing. We have three recommendations:
 
-### Option A: Patch your current version
-
-We have published patches per release line. You can apply them manually:
-
-* 2.91: https://gerrit.lix.systems/c/lix/+/3515
-* 2.92: https://gerrit.lix.systems/c/lix/+/3513
-* 2.93: https://gerrit.lix.systems/c/lix/+/3510
-* HEAD: https://gerrit.lix.systems/c/lix/+/3501 (already merged, just update the HEAD pin)
-
-### Option B: Revert only the CVE fix
+### Option A: Revert only the CVE fix
 
 The vulnerability in CVE-2025-52992 has **no known exploit path**. 
 
@@ -138,7 +129,7 @@ Revert the CVE-2025-52992 patch using reverse diffs:
 * 2.93: https://gerrit.lix.systems/c/lix/+/3444 / `f85c84db371d91c4e651d96df6a06fc4ff95b231`
 * HEAD: https://gerrit.lix.systems/c/lix/+/3454 / `42e2bd045c9e51a59fdab038dc4e6f9e86c4922c`
 
-### Option C: Roll back to the previous (vulnerable) version
+### Option B: Roll back to the previous (vulnerable) version
 
 If you prefer stability, you can revert to your last working version.
 
@@ -174,6 +165,7 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-28 17:45 CEST** : Added instructions on how to rebuild the system using the static Nix, co-written by boogiewoogie (thank you!).
 * **2025-06-28 21:40 CEST** : Clarified that rebuilding your system makes sense if you changed your configuration to move away from the dangerous version.
 * **2025-06-29 21:40 CEST** : Release engineering started to put an end to the incident.
+* **2025-06-29 21:48 CEST** : Remove the old option A with manual patching.
 
 ---
 
