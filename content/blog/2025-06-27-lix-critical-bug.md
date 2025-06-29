@@ -118,18 +118,25 @@ If you need assistance on how to apply remediation, feel free to inquire in our 
 
 We will not publish a fixed release on June 28th (today, at the time of writing) due to incomplete testing. We have three recommendations:
 
-### Option A: Revert only the CVE fix
+### Option A: Patch your Nixpkgs for one of the existing remediation
 
 The vulnerability in CVE-2025-52992 has **no known exploit path**. 
 
-Revert the CVE-2025-52992 patch using reverse diffs:
+Open Nixpkgs PRs reverts the patches:
 
-* 2.91: https://gerrit.lix.systems/c/lix/+/3454 / `42e2bd045c9e51a59fdab038dc4e6f9e86c4922c`
-* 2.92: https://gerrit.lix.systems/c/lix/+/3432 / `2f323681361162f5710ea9b88a3496d6e93b07c5`
-* 2.93: https://gerrit.lix.systems/c/lix/+/3444 / `f85c84db371d91c4e651d96df6a06fc4ff95b231`
-* HEAD: https://gerrit.lix.systems/c/lix/+/3454 / `42e2bd045c9e51a59fdab038dc4e6f9e86c4922c`
+* 24.11: https://github.com/NixOS/nixpkgs/pull/421137
+* 25.05: https://github.com/NixOS/nixpkgs/pull/421136
+* 25.11: https://github.com/NixOS/nixpkgs/pull/421138
 
-### Option B: Roll back to the previous (vulnerable) version
+### Option B : Update to one of the newest minor of Lix
+
+Non-affected versions are:
+
+- Lix 2.91.3
+- Lix 2.92.3
+- Lix 2.93.2
+
+### Option C: Roll back to the previous (vulnerable) version
 
 If you prefer stability, you can revert to your last working version.
 
@@ -169,7 +176,11 @@ Note that our Gerrit instance returns patches encoded in base64.
 * **2025-06-29 21:47 CEST** : Commencing final QA of all release branches (2.91, 2.92, 2.93 and main) before merge.
 * **2025-06-29 23:50 CEST** : Final QA completed and all mitigations merged in branches. Commencing release process.
 * **2025-06-29 01:02 CEST** : Release process completed. All versions are now uploaded. Commencing Nixpkgs ports and updating `lix-project/nixos-module`.
-
+* **2025-06-29 01:28 CEST** : Nixpkgs PRs ready. Removing all instructions for temporary patching and replacing by Nixpkgs.
+   Unstable: https://github.com/NixOS/nixpkgs/pull/421138
+   25.05: https://github.com/NixOS/nixpkgs/pull/421136
+   24.11: https://github.com/NixOS/nixpkgs/pull/421137
+   
 ---
 
 Thank you for your patience. We will provide updates here as we validate fixes and issue guidance.
