@@ -35,10 +35,10 @@ by evolving a compatible but more flexible flake-like abstraction in the periphe
 #### Q: What relation does Lix have to the Nix Foundation, and to related projects?
 
 Besides being a fork of CppNix and an implementation of the Nix language, Lix is the
-effort of a number of long-time Nix, Nixpkgs, NixOS, and Tvix contributors and maintainers -- and has
+effort of a number of long-time Nix, Nixpkgs, NixOS, and Snix contributors and maintainers -- and has
 been developed in partnership with a number of prolific Nix-documenters, bloggers, and users.
 
-We welcome anyone who wants to develop for both Lix and another implementation -- including CppNix and Tvix,
+We welcome anyone who wants to develop for both Lix and another implementation -- including CppNix and Snix,
 and our open-source implementation absolutely allows any developer to integrate our code into any
 license-compatible project.
 
@@ -85,9 +85,9 @@ for login, as it will let you get started immediately. We also have local accoun
 wish not to use GitHub; if you would like one, please speak to a member of the Lix team on Matrix and we 
 will gladly make you one manually.
 
-#### Q: If Lix plans to adopt Rust, what makes it different from Tvix?
+#### Q: If Lix plans to adopt Rust, what makes it different from Snix?
 
-Unlike Lix, [Tvix](https://tvix.dev/) is a ground-up re-implementation of the Nix language in Rust,
+Unlike Lix, [Snix](https://snix.dev/) is a ground-up re-implementation of the Nix language in Rust,
 which shares many of the same modernization goals as Lix -- but also has a long way to go before it can
 reach feature parity (and parity in correctness) with the CppNix and Lix implementations.
 
