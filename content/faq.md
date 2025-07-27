@@ -28,7 +28,7 @@ extension system for the tooling -- which will allow technologies like flakes, a
 extensions -- to seamlessly act with the Lix core without needing to reside long-term in the Lix tree.
 
 _Flakes are not the only way to write Nix language code in Lix, and we intend to provide a good experience
-to those using flakes -- while also improving the experience for those not using them -- 
+to those using flakes -- while also improving the experience for those not using them --
 by evolving a compatible but more flexible flake-like abstraction in the periphery of the Lix system._
 
 
@@ -57,9 +57,9 @@ to get started on, we have triaged some tasks
 about which tasks we recommend taking on, see
 [Freezes and recommended contributions](https://wiki.lix.systems/link/9).
 
-Feel free to ask for help in the Lix development channel. Especially feel free to ask for us to write down 
-more work that we would like help with, or to write contribution information that is missing; 
-it is a goal of the project for it to be easy to get up to speed. Also, if you need additional access to 
+Feel free to ask for help in the Lix development channel. Especially feel free to ask for us to write down
+more work that we would like help with, or to write contribution information that is missing;
+it is a goal of the project for it to be easy to get up to speed. Also, if you need additional access to
 do some task, such as fixing a typo in the wiki, let us know and we will figure it out.
 
 #### Q: How do I submit changes to the Lix project?
@@ -80,9 +80,9 @@ it commit-by-commit.
 Lix has a central accounts system for all its services. These accounts allow access to Forgejo (the Lix bug tracker
 and repositories), Gerrit Code Review, the wiki and other collaboration software we use.
 
-To get started contributing to Lix, you need a Lix account. The easiest way to obtain one is to use GitHub 
+To get started contributing to Lix, you need a Lix account. The easiest way to obtain one is to use GitHub
 for login, as it will let you get started immediately. We also have local accounts available for those who
-wish not to use GitHub; if you would like one, please speak to a member of the Lix team on Matrix and we 
+wish not to use GitHub; if you would like one, please speak to a member of the Lix team on Matrix and we
 will gladly make you one manually.
 
 #### Q: If Lix plans to adopt Rust, what makes it different from Snix?

@@ -9,7 +9,7 @@ summaryLength: 20
 params:
   title: "Lix"
   description: "Lix is an independent variant of the Nix package manager, developed by a team of open-source volunteers, and maintained by and for a passionate community of users."
-  images: 
+  images:
     - "images/logo.png"
 
   logo: "lix_logo.png"
