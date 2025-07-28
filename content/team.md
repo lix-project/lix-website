@@ -13,7 +13,7 @@ and users to carry the burdens of maintenance and governance.
 
 The **core team** are the developers most directly responsible for the Lix project. While the project
 is in its "soft-release" period, these folks are responsible for project governance. One of their main
-tasks is to establish a lasting governance model -- and other teams to handle things!
+tasks is to establish a lasting governance model --- and other teams to handle things!
 
 Members (in alphabetical order):
 
@@ -54,12 +54,12 @@ Members (in alphabetical order):
 <br/>
 
 We all hang around in [community spaces](/community), including on Matrix. Feel free to pop into
-the Lix channels and say hello -- we'd love to hear what you think of Lix!
+the Lix channels and say hello --- we'd love to hear what you think of Lix!
 
 ## Conflict of Interest Statements
 
 As a community project, it's important that project decisions are made **exclusively for the
-benefit of the community**, and don't serve any other interests -- including personal or corporate gain.
+benefit of the community**, and don't serve any other interests --- including personal or corporate gain.
 
 If a team member is unable to do so in any context, they are **required** to disclose the _conflict of interest_
 and to recuse themselves from any leadership decisions affected.
