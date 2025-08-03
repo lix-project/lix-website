@@ -40,9 +40,3 @@ The easiest way to connect with us is to join our [Matrix space](https://matrix.
 which will allow you to see previews of and join the most relevant community rooms.
 
 Note that all community venues --- including our Matrix rooms --- are subject to our [community standards](/community-standards).
-
-### Community Resources
-
-In order to help folks who are getting started or who want to learn more about Lix, we've created a curated
-list of [community resources](/resources) that you may find helpful. If you have suggestions, feel free to
-drop them in our Matrix chat!

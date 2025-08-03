@@ -156,8 +156,7 @@ $ nix --version
 nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
-As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
-great time to check out some of the [community's resources on Nix](/resources).
+As long as you see `Lix` in the output, you're good!
 
 
 ## Non-Flake Configurations
@@ -233,8 +232,7 @@ $ nix --version
 nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
-As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
-great time to check out some of the [community's resources on Nix](/resources).
+As long as you see `Lix` in the output, you're good!
 
 ## Having Trouble?
 
