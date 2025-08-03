@@ -20,9 +20,6 @@ such as [home-manager](https://github.com/nix-community/home-manager) and
 [nix-darwin](https://github.com/nix-darwin/nix-darwin) --- but, like any Nix-based system, some Nix
 background knowledge is recommended before installation.
 
-If you're new to the Nix ecosystem, you may want to check out some [community resources](/resources)
-first, to get familiar with how Nix works.
-
 
 ## On NixOS
 
@@ -62,8 +59,7 @@ curl -sSf -L https://install.lix.systems/lix | sh -s -- install
 ```
 
 The installer will guide you through installing Lix --- and once it's finished,
-you'll have a full, working installation. If you're not sure what to do, now is a
-great time to check out some of the [community's resources on Nix](/resources).
+you'll have a full, working installation.
 
 [^1]: a customized variant of the [Determinate Nix Installer](https://github.com/DeterminateSystems/nix-installer).
 
@@ -91,8 +87,7 @@ $ nix --version
 nix (Lix, like Nix) 2.93.3
 ```
 
-As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
-great time to check out some of the [community's resources on Nix](/resources).
+As long as you see `Lix` in the output, you're good!
 
 ## Having Trouble?
 
