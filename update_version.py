@@ -5,7 +5,9 @@ import json
 
 
 def get_archive_hash(url):
-    output = subprocess.check_output(['nix', 'store', 'prefetch-file', '--name', 'source', '--json', '--unpack', url])
+    output = subprocess.check_output([
+        'nix', '--extra-experimental-features', 'nix-command', 'store', 'prefetch-file', '--name', 'source', '--json', '--unpack', url
+    ])
 
     data = json.loads(output)
     return data['hash']
