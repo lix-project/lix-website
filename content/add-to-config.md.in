@@ -16,18 +16,26 @@ Please don't edit add-to-config.md directly!
 If you have an existing configuration on **NixOS** or **nix-darwin**, there are
 a couple of ways to switch to Lix, all of which are relatively easy.
 
-- Using Lix from nixpkgs:
-  - Potentially slightly older version of Lix
-  - Working binary caching
-  - Programs like nix-eval-jobs and colmena still use the default version of
-    Nix (may be unacceptable depending on your use case)
-- Using the Lix NixOS module:
+- Using Lix from nixpkgs (recommended for stable, released versions):
+  - Official, supported builds maintained by the `nixpkgs` contributors and the Lix team
+  - Is cached by `cache.nixos.org`, no local builds are required
+  - Consistent compatibility with advanced features of Nixpkgs: cross compilation or static builds.
+- Using the Lix NixOS module, [only recommended if you run main](https://wiki.lix.systems/books/lix-contributors/page/running-lix-main)
   - Fresh version of Lix right out of the freezer
   - You will be compiling Lix yourself, for now at least
-  - Programs like nix-eval-jobs and colmena have the version of Nix they use
-    overridden by an overlay such that most of the system uses Lix.
+  - Build stability may vary, as `nixpkgs` updates can occasionally introduce breaking changes
 
-# Using Lix from nixpkgs
+Running bleeding-edge (i.e. the `main` branch) Lix should not prevent you from using your system, we
+take this seriously and strive to ensure it works reliably. 
+
+That said, issues can happen. If you choose to run bleeding-edge, make sure you
+have a way to recover your system in case Lix breaks. 
+
+# Using Lix from nixpkgs (recommended)
+
+Using Lix from nixpkgs is the most recommended way if you are not using bleeding edge HEAD builds.
+
+## Simplest change
 
 This approach has some caveats: since it is not using an overlay, it does not
 set the version of Nix depended on by other tools like colmena or
@@ -41,7 +49,7 @@ Add the following code to your NixOS configuration:
 ```nix
 { pkgs, ... }:
 {
-  nix.package = pkgs.lix;
+  nix.package = pkgs.lixPackageSets.stable.lix;
 }
 ```
 
@@ -54,187 +62,68 @@ $ nix --version
 nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
-# Using the Lix NixOS module
+## Advanced change
 
-The Lix NixOS module is the way to get the most consistent experience using
-Lix, and to have a system that has Lix as the default Nix implementation
-wherever possible by using an overlay to replace `pkgs.nix`. It will result in
-building Lix from source, which takes a few minutes on every update, which is a
-perfect time to get up, get some water, and stretch for a bit.
+This approach is more robust, as it uses an overlay to rewire other tools that depend on Nix, ensuring consistency across your setup. Tools like `colmena` or `nix-eval-jobs`, which often hardcode a reference to Nix, will now use the version provided by Lix.
 
-## Flake-based Configurations
-
-Adding Lix to a flake-based configuration is relatively simple. First, add the Lix module to your _flake inputs_:
+Add the following code to your NixOS configuration:
 
 ```nix
+{ pkgs, ... }:
 {
-  inputs = {
+  nixpkgs.overlays = [ (final: prev: {
+    inherit (final.lixPackageSets.stable)
+      nixpkgs-review
+      nix-direnv
+      nix-eval-jobs
+      nix-fast-build
+      colmena;
+  }) ];
 
-    # Add this section to your flake inputs!
-    #
-    # Note that this assumes you have a flake-input called nixpkgs,
-    # which is often the case. If you've named it something else,
-    # you'll need to change the `nixpkgs` below.
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/@VERSION@.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-  }
-
-  # <rest of configuration omitted>
+  nix.package = pkgs.lixPackageSets.stable.lix;
 }
 ```
 
-Next, add the `lix-module` as one of the arguments to your output function:
+That's it, your environment is now consistently using Lix across supported tools.
 
-```nix
-{
-  # <configuration above omitted>
-
-  # Add the `lix-module` argument to your output function, as below:
-  outputs = {nixpkgs, lix-module, ...}: {
-      # <rest of configuration omitted>
-  }
-}
-```
-
-Add the Lix _NixOS Module_ to your configuration:
-
-```nix
-{
-  # <configuration above omitted>
-
-  # Add the `lix-module` argument to your output function, as below:
-  outputs = {nixpkgs, lix-module, ...}: {
-
-      # The configuration here is an example; it will look slightly different
-      # based on your platform (NixOS, nix-darwin) and architecture.
-      nixosConfigurations.your-box = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux"
-
-        modules = [
-
-          # This is the important part -- add this line to your module list!
-          lix-module.nixosModules.default
-        ];
-
-      };
-  }
-
-  # <configuration below omitted>
-}
-```
-
-<!--
-FIXME: the binary cache doesn't do much good given that everyone is running a
-different nixpkgs than Lix is actually cached with during the release process.
-We need a hydra to be able to fix that.
-
-Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
-Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
-
-```nix
-{
-  nix.settings.substituters = [
-    "https://cache.lix.systems"
-  ];
-
-  nix.settings.trusted-public-keys = [
-    "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
-  ];
-}
-```
-
--->
-
-Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
-You should now be using Lix! You can verify this by asking the `nix` command to report its version:
+You can verify that it works by running the following command:
 
 ```sh
 $ nix --version
 nix (Lix, like Nix) @VERSION_NOTRAIL@
 ```
 
-As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
-great time to check out some of the [community's resources on Nix](/resources).
+---
 
+To use a different version of Lix, replace `stable` with `latest`, `git`, or a specific version like `lix_2_93`.
 
-## Non-Flake Configurations
-
-If you're not using flakes, you can set up your configuration to automatically pull down a
-Lix release tarball, and then add it to your `configuration.nix`.
-
-Open your `/etc/nixos/configuration.nix` in the editor of your choice. Find the `imports`
-section, and add the line provided in the configuration
+You can also rewire other packages manually. For example, to override a package so that it uses the Lix version of Nix:
 
 ```nix
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  nixpkgs.overlays = [ (final: prev: {
+    my-new-package = prev.my-new-package.override {
+      nix = final.lixPackageSets.stable.lix;
+    }; # Adapt to your specific use case.
 
-      # This includes the Lix NixOS module in your configuration along with the
-      # matching version of Lix itself.
-      #
-      # The sha256 hashes were obtained with the following command in Lix (n.b.
-      # this relies on --unpack, which is only in Lix and CppNix > 2.18):
-      # nix store prefetch-file --name source --unpack https://git.lix.systems/lix-project/lix/archive/@VERSION_NOTRAIL@.tar.gz
-      #
-      # Note that the tag (e.g. @VERSION_NOTRAIL@) in the URL here is what determines
-      # which version of Lix you'll wind up with.
-      (let
-        module = fetchTarball {
-          name = "source";
-          url = "https://git.lix.systems/lix-project/nixos-module/archive/@VERSION@.tar.gz";
-          sha256 = "@NIXOS_MODULE_HASH@";
-        };
-        lixSrc = fetchTarball {
-          name = "source";
-          url = "https://git.lix.systems/lix-project/lix/archive/@VERSION_NOTRAIL@.tar.gz";
-          sha256 = "@LIX_ARCHIVE_HASH@";
-        };
-        # This is the core of the code you need; it is an exercise to the
-        # reader to write the sources in a nicer way, or by using npins or
-        # similar pinning tools.
-        in import "${module}/module.nix" { lix = lixSrc; }
-      )
-    ];
+    inherit (final.lixPackageSets.stable)
+      nixpkgs-review
+      nix-direnv
+      nix-eval-jobs
+      nix-fast-build
+      colmena;
+  }) ];
 
-  # <configuration below omitted>
+  nix.package = pkgs.lixPackageSets.stable.lix;
 }
 ```
 
-<!--
-FIXME: as above, doesn't work, we should not recommend it.
+# Using the Lix NixOS module (only recommended for bleeding edge builds)
 
-Finally, if you'd prefer not to build Lix yourself, you can add our binary cache.
-Add the following to any NixOS module in your configuration (e.g. `configuration.nix`):
+_Thank you for considering Lix bleeding edge, this helps us a lot to make Lix better._
 
-```nix
-{
-  nix.settings.substituters = [
-    "https://cache.lix.systems"
-  ];
-
-  nix.settings.trusted-public-keys = [
-    "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="
-  ];
-}
-```
--->
-
-Rebuild and switch into your new system (either using `nixos-rebuild` or `darwin-rebuild`).
-You should now be using Lix! You can verify this by asking the `nix` command to report its version:
-
-```sh
-$ nix --version
-nix (Lix, like Nix) @VERSION_NOTRAIL@
-```
-
-As long as you see `Lix` in the output, you're good! If you're not sure what to do now, it's a
-great time to check out some of the [community's resources on Nix](/resources).
+The instructions are maintained on <https://wiki.lix.systems/books/lix-contributors/page/running-lix-main>.
 
 ## Having Trouble?
 
