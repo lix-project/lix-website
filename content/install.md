@@ -17,8 +17,8 @@ Whether you're a new or returning user, **we're thrilled you've decided to pick 
 
 Lix works out-of-the-box on most Linux and MacOS systems, including with system management tools
 such as [home-manager](https://github.com/nix-community/home-manager) and
-[nix-darwin](https://github.com/LnL7/nix-darwin) --- but, like any Nix-based system, some Nix background
-knowledge is recommended before installation.
+[nix-darwin](https://github.com/nix-darwin/nix-darwin) --- but, like any Nix-based system, some Nix
+background knowledge is recommended before installation.
 
 If you're new to the Nix ecosystem, you may want to check out some [community resources](/resources)
 first, to get familiar with how Nix works.
@@ -37,7 +37,7 @@ configurations are fully supported.
 
 ## On an Existing `nix-darwin` Install
 
-If you already have a [nix-darwin](https://github.com/LnL7/nix-darwin) installation, you
+If you already have a [nix-darwin](https://github.com/nix-darwin/nix-darwin) installation, you
 can use the same instructions as installing on a NixOS-based system. Follow the instructions
 for either:
 
