@@ -22,8 +22,8 @@
 - label: code review
   url: https://gerrit.lix.systems/
 
-- label: buildbot (ci)
-  url: https://buildbot.lix.systems/
+- label: buildkite login
+  url: https://buildkite.com/sso/lix-project
 
 - label: gitiles
   url: https://gerrit.lix.systems/plugins/gitiles/lix
