@@ -103,10 +103,6 @@ menus:
       url: "/community"
       weight: 2
 
-    - name: "Nix Resources"
-      url: "/resources"
-      weight: 2
-
     - name: "Source Repositories"
       url: "https://git.lix.systems/lix-project"
       weight: 4
