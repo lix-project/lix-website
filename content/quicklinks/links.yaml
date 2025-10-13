@@ -31,7 +31,10 @@
 - label: wiki
   url: https://wiki.lix.systems/books
 
-- label: matrix (chat)
+- label: zulip (new chat)
+  url: https://zulip.lix.systems
+
+- label: matrix (old chat)
   url: https://matrix.to/#/#space:lix.systems
 
 - label: |
