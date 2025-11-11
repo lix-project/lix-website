@@ -60,14 +60,20 @@ menus:
 
     - name: "Docs"
       url: "https://docs.lix.systems/manual/lix/stable"
+      params:
+        external: true
       weight: 6
 
     - name: "Code"
       url: "https://git.lix.systems/lix-project/lix"
+      params:
+        external: true
       weight: 7
 
     - name: "Wiki"
       url: "https://wiki.lix.systems/books"
+      params:
+        external: true
       weight: 8
 
   buttons:

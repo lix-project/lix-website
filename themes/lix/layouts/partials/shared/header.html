@@ -10,7 +10,11 @@
       <ul class="navbar-nav ms-auto mb-2 mb-xl-0">
         {{ range .Site.Menus.main }}
           <li class="nav-item text-center">
-            <a class="nav-link text-primary px-3" href="{{ .URL }}">{{ .Name }}</a>
+            <a
+              class="nav-link text-primary px-3"
+              href="{{ .URL }}"
+              {{ if eq .Params.External true }} target="_blank"{{ end }}
+            >{{ .Name }}</a>
           </li>
         {{ end }}
       </ul>
