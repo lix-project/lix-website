@@ -34,11 +34,6 @@ Members (in alphabetical order):
   jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of 
   the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
 
-- **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
-  A performance art piece written live by a collective of hardware hackers & low-level engineers.
-  Kate works on Lix as part of a commitment to helping you do cool things, and is seriously considering
-  rewriting every bit of documentation ever to cross paths with Nix.
- <br>
 - **Lily ([@lilyinstarlight](https://github.com/lilyinstarlight), she/they)**
 
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])** <br>
@@ -74,10 +69,20 @@ Members (in alphabetical order):
 - **hexchen** (@hexchen:colon.at)
 - **jade** (@jade_:matrix.org)
 - **k900** (@k900:0upti.me)
-- **ktemkin** (@ktemkin:katesiria.org)
 - **lunaphied** (@lunaphied:lunaphied.me)
 - **piegames** (@piegames:flausch.social)
 - **qyriad** (@qyriad:katesiria.org)
+
+## Governance advisors
+
+Governance advisors are trusted community members who have access to the private governance discussion channels.
+They are responsible for holding our governance processes accountable to the community.
+They have no formal voting power, but their opinion is highly valued.
+
+- **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
+  Former Core team and Community team
+- **Rutile ([@CommentatorForAll](https://github.com/CommentatorForAll/), they/them [plural])** <br>
+  Code owner of the *functional2* test suite
 
 ## Conflict of Interest Statements
 
@@ -101,12 +106,6 @@ conflicts of interest.
   software. **Should a governance decision involving these or any other
   financial ties arise, Jade will recuse herself from the relevant
   decision-making.**
-
-- **Kate Temkin** is the CEO and one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently
-  sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
-  no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
-  owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are
-  relevant, Kate will recuse herself from the relevant decision-making**.
 
 - **Lily** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
@@ -139,6 +138,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **Jan 7th, 2025**, and are believed to be up-to-date to the current date.
+These declarations were last updated on **Nov 18th, 2025**, and are believed to be up-to-date to the current date.
 If the bolded date is more than 56 days in the past, feel free to reach out via our
 [community channels](/community) to request these declarations be updated.
