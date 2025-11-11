@@ -1,19 +1,29 @@
 ---
-title:  "The Team"
-description: ""
-date: "2024-04-27"
+title:  "About Us"
+description: "Meet our team and know how we operate"
+date: "2025-11-11"
 author: "Lix Team"
 ---
 
 **Lix** is developed by a community of passionate users! We have no "benevolent dictator for life",
-nor a small foundation board that governs the community. Instead, we rely on teams of our developers
-and users to carry the burdens of maintenance and governance.
+nor a small foundation board that governs the community (or fails to do so).
+Instead, we rely on teams of our developers and users to carry the burdens of maintenance and governance.
+
+At our core, we are goverened by the **Core team** and the **Community team**.
+Both are supervised by our **advisors**, which are trusted friends or alumni.
+The code base is by our **committers**, who help review and merge changes.
+
+- **[Our Governance](/governance)**
+- **[Our Values](/values)**
+- **[Our Community Standards](/community-standards)**
+
+We all hang around in [community spaces](/community), including on Matrix. Feel free to pop into
+the Lix channels and say hello --- we'd love to hear what you think of Lix!
 
 ## Core Team
 
-The **core team** are the developers most directly responsible for the Lix project. While the project
-is in its "soft-release" period, these folks are responsible for project governance. One of their main
-tasks is to establish a lasting governance model --- and other teams to handle things!
+The **core team** are the developers most directly responsible for the Lix project.
+These folks steer the technical direction of the project, but are also responsible for the administration.
 
 Members (in alphabetical order):
 
@@ -54,10 +64,20 @@ Members (in alphabetical order):
 - **Rebecca Turner ([@9999years](https://github.com/9999years), she/her)** <br>
   Rebecca is working on the evaluator and error messages.
 
-<br/>
+## Community Team
 
-We all hang around in [community spaces](/community), including on Matrix. Feel free to pop into
-the Lix channels and say hello --- we'd love to hear what you think of Lix!
+The Community team is responsible for steering the community of this project, as well as moderation tasks.
+It also maintains the public-facing communication, does outreach and public relations on social media, and generally makes sure that we are a safe and pleasant project to be part of.
+
+Members (in alphabetical order):
+
+- **hexchen** (@hexchen:colon.at)
+- **jade** (@jade_:matrix.org)
+- **k900** (@k900:0upti.me)
+- **ktemkin** (@ktemkin:katesiria.org)
+- **lunaphied** (@lunaphied:lunaphied.me)
+- **piegames** (@piegames:flausch.social)
+- **qyriad** (@qyriad:katesiria.org)
 
 ## Conflict of Interest Statements
 
