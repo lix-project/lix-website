@@ -38,6 +38,9 @@ Members (in alphabetical order):
 - **pennae (aka "eldritch horrors", they/them)** <br>
   The shadow at the end of a dark hallway. An ancient, nameless evil. Likes cookies
 
+- **piegames ([@piegamesde](https://github.com/piegamesde), they/them)** <br>
+  Originally joined for improving the Nix language and working on the evaluator, stayed for being the glue that holds organizations together. Passionate community builder.
+
 - **puck ([@puckipedia](https://github.com/puckipedia), she/her [singular] or they/them [plural])**
 
 - **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])** <br>
@@ -90,6 +93,8 @@ conflicts of interest.
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **pennae** declare that they have **no conflicts of interest** regarding the governance of Lix.
+
+- **piegames** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **Puck** is working on a NLnet project involving Nix. **Should a governance decision involving relevant
   financial interests arise, she will recuse herself from the relevant decision-making.**
