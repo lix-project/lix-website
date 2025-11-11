@@ -93,9 +93,13 @@ menus:
       url: "/governance"
       weight: 4
 
+    - name: "Our Values"
+      url: "/values"
+      weight: 5
+
     - name: "FAQs"
       url: "/faq"
-      weight: 5
+      weight: 6
 
   resources:
 
