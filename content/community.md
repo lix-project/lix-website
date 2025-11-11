@@ -1,13 +1,23 @@
 ---
 title:  "Lix Community"
 description: "it's not an ice cream party, but it might as well be"
-date: "2024-04-27"
+date: "2025-11-11"
 author: "Lix Team"
 ---
 
 Lix exists **first and foremost for its community** --- and we very much hope that will include you!
-If you're looking for help, have any questions, want to pitch in --- or just want to talk --- join us
-using [one of the venues below](#engaging-with-the-community) .
+If you're looking for help, have any questions, want to pitch in --- or just want to talk --- feel free to join us.
+
+Our community is spread across two platforms (partially bridged), **Matrix** and **Zulip**.
+
+If you're mostly a curious Lix user, you'll likely want to join Matrix first, especially if you're more familiar with that platform.
+Joining is relatively straightforward --- you can find us on the **`lix.systems` Matrix server**.
+The easiest way to connect with us is to join our [Matrix space](https://matrix.to/#/#space:lix.systems),
+which will allow you to see previews of and join the most relevant community rooms.
+
+Most of our more technical discussions around development happen over on **Zulip, at <https://zulip.lix.systems>**.
+You need a Lix ID to participate in the conversation, but creating an Account with GitHub log in takes two clicks and you can always decouple things later.
+Beware: Your username will then be your GitHub username, if you want something else we recommend you create a Lix account manually, because renaming the account afterwards is a bit of a headache.
 
 ## Community Standards
 
@@ -19,24 +29,6 @@ are expected to follow.
 
 ## Governance
 
-Lix is developed by a community of passionate users! We have no "benevolent dictator for life",
-nor a small foundation board that governs the community. Instead, **we rely on teams of our developers
-and users to carry the burdens of maintenance and governance**.
-
-We're currently in the process of establishing a more full-fledged governance model, which we believe must
-be built on engagement with --- and feedback from --- our community. In the interim, decisions are made by
-simple voting, with one vote held by each member of the "[core team](/team)", who are acting as interim
-governance.
-
-## Engaging with the Community
-
-The best way to engage with the community currently is to **join our Matrix space** -- a decentralized
-chat platform commonly used among open-source projects.
-
-### Lix Matrix
-
-Joining is relatively straightforward --- you can find us on the `lix.systems` Matrix server.
-The easiest way to connect with us is to join our [Matrix space](https://matrix.to/#/#space:lix.systems),
-which will allow you to see previews of and join the most relevant community rooms.
-
-Note that all community venues --- including our Matrix rooms --- are subject to our [community standards](/community-standards).
+Lix is developed by a community of passionate users!
+Our governance and team structure is designed to be fairly minimal and lightweight.
+You can check it out over at [About Us](/team).
