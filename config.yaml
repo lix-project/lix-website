@@ -87,6 +87,10 @@ menus:
 
     - name: "The Lix Team"
       url: "/team"
+      weight: 3
+
+    - name: "Our Governance"
+      url: "/governance"
       weight: 4
 
     - name: "FAQs"
