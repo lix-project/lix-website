@@ -42,16 +42,16 @@ menus:
       url: "/about"
       weight: 2
 
-    - name: "FAQs"
-      url: "/faq"
-      weight: 2
-
-    - name: "Team"
+    - name: "About Us"
       url: "/team"
-      weight: 3
+      weight: 2
 
     - name: "Community"
       url: "/community"
+      weight: 3
+
+    - name: "FAQs"
+      url: "/faq"
       weight: 4
 
     - name: News
