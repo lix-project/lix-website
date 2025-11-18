@@ -59,7 +59,7 @@ You can verify that it works by running the following command:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.93.3
+nix (Lix, like Nix) 2.94.0
 ```
 
 ## Advanced change
@@ -89,7 +89,7 @@ You can verify that it works by running the following command:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.93.3
+nix (Lix, like Nix) 2.94.0
 ```
 
 ---
