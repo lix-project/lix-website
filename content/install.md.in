@@ -35,14 +35,9 @@ configurations are fully supported.
 ## On an Existing `nix-darwin` Install
 
 If you already have a [nix-darwin](https://github.com/nix-darwin/nix-darwin) installation, you
-can use the same instructions as installing on a NixOS-based system. Follow the instructions
-for either:
-
-- [flake-based configurations](/add-to-config#flake-based-configurations); or
-- [non-flake configurations](/add-to-config#non-flake-configurations)
-
-depending on how you prefer to configure your system.
-
+can use the same instructions as installing on a NixOS-based system. Follow the [instructions to
+add Lix to your configuration](/add-to-config). Both flake-based and non-flake-based configurations
+are fully supported.
 
 ## On Any Other Linux/MacOS System
 
