@@ -27,8 +27,10 @@ params:
     git: "https://git.lix.systems/lix-project"
 
   contact:
-    - "General Inquiries: info@lix.systems"
-    - "Security Reports: security@lix.systems"
+    - "General Inquiries: <a href=\"mailto:info@lix.systems\">info@lix.systems</a>"
+    - "Security Reports: <a href=\"mailto:security@lix.systems\">security@lix.systems</a>"
+    - "Matrix community: <a href=\"https://matrix.to/#/#space:lix.systems\">#space:lix.systems</a>"
+    - "Zulip community: <a href=\"https://zulip.lix.systems\">zulip.lix.systems</a>"
 
   copyright: "Content licensed under CC-BY-SA-4.0 or LGPL-2.0-or-later."
 
@@ -42,16 +44,16 @@ menus:
       url: "/about"
       weight: 2
 
-    - name: "FAQs"
-      url: "/faq"
-      weight: 2
-
-    - name: "Team"
+    - name: "About Us"
       url: "/team"
-      weight: 3
+      weight: 2
 
     - name: "Community"
       url: "/community"
+      weight: 3
+
+    - name: "FAQs"
+      url: "/faq"
       weight: 4
 
     - name: News
@@ -77,33 +79,33 @@ menus:
       pre: "btn btn-primary text-light"
 
   aboutus:
-    - name: "Why Lix?"
-      url: "/about#why-lix"
-      weight: 1
-
-    - name: "About Lix"
-      url: "/about"
-      weight: 2
-
     - name: "The Lix Team"
       url: "/team"
+      weight: 3
+
+    - name: "Our Governance"
+      url: "/governance"
       weight: 4
 
-    - name: "FAQs"
-      url: "/faq"
+    - name: "Community Standards"
+      url: "/community-standards"
       weight: 5
 
-  resources:
+    - name: "Project Values"
+      url: "/values"
+      weight: 6
 
+
+  resources:
     - name: "Wiki"
       url: "https://wiki.lix.systems"
       weight: 1
 
-    - name: "Community"
-      url: "/community"
+    - name: "Docs"
+      url: "https://docs.lix.systems/manual/lix/stable"
       weight: 2
 
-    - name: "Source Repositories"
+    - name: "Git"
       url: "https://git.lix.systems/lix-project"
       weight: 4
 

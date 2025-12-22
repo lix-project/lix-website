@@ -1,19 +1,21 @@
 ---
 title:  "Community Standards"
 description: "making Lix a safe and productive environment <3"
-date: "2024-05-14"
+date: "2025-11-11"
 author: "Lix Team"
 ---
 
-This is an interim set of Lix Community Standards, to be reviewed and revised further when the governance process is further along. *These standards are in force and will be enforced until that time*.
-
-The following are *principles* and do not in any way limit the authority of the interim community team to remove anyone for any kind of behaviour deleterious to the community. We generally will speak with people to deescalate and help them be excellent members of our community before applying consequences. Patterns of deleterious behaviour will tend to lead to exclusion from the community.
+These are the standards we want to maintain in our community.
+The [Community Team](/team#community-team) is reponsible for making sure those standards are upheld.
+It is your primary point of contact for any grievances you may have with other community members.
 
 ### Principles
 
+The following are *principles* and do not in any way limit the authority of the community team to remove anyone for any kind of behaviour deleterious to the community. We generally will speak with people to deescalate and help them be excellent members of our community before applying consequences. Patterns of deleterious behaviour will tend to lead to exclusion from the community.
+
 - We want to model our expected social norms at every level of leadership in the project.
     - We want to avoid creating unnecessary social hierarchy and avoid unaccountable positions in the project.
-    - These expectations apply to everyone in the project including the core team and the interim community team.
+    - These expectations apply to everyone in the project including the core team and the community team.
 - The Lix community is significantly comprised of people of various marginalised backgrounds. We are committed to protecting these people and providing a safe environment for them.
     - If you are of a less-marginalised background, keep in mind that you are a guest in our spaces but are nonetheless welcome. Think of it like staying at a friend's place where they might have different cultural customs; you may have to do things a little bit differently.
 - We want to build leadership in community members and help them grow.
@@ -37,18 +39,3 @@ We do not tolerate concern trolling, sealioning, and starting bad faith argument
 Spamming and crypto scams will not be tolerated.
 
 Causing legal problems for the project will not be tolerated.
-
-### Contacts
-
-We encourage working through conflicts privately with involved parties, but we are here to help if that is not possible.
-
-If you wish to contact a member of the interim community team about a concern, consider contacting one of the following people:
-
-<!-- throw a die and insert at random position -->
-- qyriad (@qyriad:katesiria.org)
-- piegames (@piegames:flausch.social)
-- ktemkin (@ktemkin:katesiria.org)
-- hexchen (@hexchen:colon.at)
-- lunaphied (@lunaphied:lunaphied.me)
-- k900 (@k900:0upti.me)
-- jade (@jade_:matrix.org)
