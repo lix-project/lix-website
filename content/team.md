@@ -94,10 +94,7 @@ and to recuse themselves from any leadership decisions affected.
 As transparency is important, we've included declarations from each core team member regarding any possible
 conflicts of interest.
 
-- **hexchen**'s employer and its sister companies use Nix/Lix internally and offer Nix-based consulting.
-  hexchen has no stake in the company, does not work in the consulting teams and there is no
-  expectation for her to contribute to Lix on company time. **Should a governance decision involving
-  these or any other financial ties arise, hexchen will recuse herself from decision-making.**
+- **hexchen** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **Jade** works for [Mercury](https://mercury.com/), a financial
   services startup that [uses
@@ -106,19 +103,28 @@ conflicts of interest.
   financial ties arise, Jade will recuse herself from the relevant
   decision-making.**
 
-- **Lily** declare that they have **no conflicts of interest** regarding the governance of Lix.
+- **Lily** works for [Shopify](https://www.shopify.com), a Canadian e-commerce company
+  that [uses Nix](https://shopify.engineering/what-is-nix) to build software.
+  **Should a governance decision involving these or any other
+  financial ties arise, Lily will recuse herself from the relevant
+  decision-making.**
 
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
-- **pennae** declare that they have **no conflicts of interest** regarding the governance of Lix.
+- **pennae** declare that they are beneficiary of a NLnet grant project on Lix.
+  **Should a governance decision involving these or any other
+  financial ties arise, pennae will recuse themselves from the relevant
+  decision-making.**
 
 - **piegames** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **Qyriad** is a one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
   no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
-  owned by individuals, and not VC investors. **Should any decision arise in which TMLLC's interests are
-  relevant,Qyriad will recuse herself from the relevant decision-making**.
+  owned by individuals, and not VC investors. 
+  In addition, they are beneficiary of a NLnet grant project on NixOS.
+  **Should any decision arise in which TMLLC's interests are
+  relevant, Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training.
   He currently possess stakes in the cooperative in minority and may be involved in IT strategic decisions.
@@ -134,6 +140,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **Dec 20th, 2025**, and are believed to be up-to-date to the current date.
+These declarations were last updated on **Dec 23th, 2025**, and are believed to be up-to-date to the current date.
 If the bolded date is more than 56 days in the past, feel free to reach out via our
 [community channels](/community) to request these declarations be updated.
