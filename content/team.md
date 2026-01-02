@@ -1,7 +1,7 @@
 ---
 title:  "About Us"
 description: "Meet our team and know how we operate"
-date: "2025-11-11"
+date: "2026-03-17"
 author: "Lix Team"
 ---
 
@@ -53,9 +53,6 @@ Members (in alphabetical order):
   Raito is working on infrastructure, review of core parts in Lix and lands smalls contributions when bored.
   He focus on the ongoing asyncification work and general scalability of Lix for large build farm usecases.
   Additionally, interested into bridging the Snix project with Lix.
-
-- **Rebecca Turner ([@9999years](https://github.com/9999years), she/her)** <br>
-  Rebecca is working on the evaluator and error messages.
 
 ## Community Team
 
@@ -130,13 +127,6 @@ conflicts of interest.
   He currently possess stakes in the cooperative in minority and may be involved in IT strategic decisions.
   **Should a governance decision involving these or any other financial ties
   arise, raitobezarius will recuse himself from decision-making.**
-
-- **Rebecca Turner** works for [Mercury](https://mercury.com/), a financial
-  services startup that [uses
-  Nix](https://serokell.io/blog/haskell-in-production-mercury) to build
-  software. **Should a governance decision involving these or any other
-  financial ties arise, Rebecca will recuse herself from the relevant
-  decision-making.**
 
 <br />
 
