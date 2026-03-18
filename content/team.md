@@ -127,3 +127,12 @@ conflicts of interest.
 These declarations were last updated on **Mar 16th, 2026**, and are believed to be up-to-date to the current date.
 If the bolded date is more than 56 days in the past, feel free to reach out via our
 [community channels](/community) to request these declarations be updated.
+
+## Many thanks
+
+We wish to express our gratitude towards all people who helped out with this project, all former team members and Lix founding members.
+
+- Rebecca Turner / wiggles / 9999years
+- puck
+- Irenes
+- Lily Foster
