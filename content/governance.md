@@ -42,12 +42,9 @@ Core team members are expected to stay active. “Active” means contributing i
 - Maintaining infra, releases, docs, or community spaces
 - Representing Lix publicly
 
-After **3 months of inactivity**, a member is marked **inactive**. They:
+To prevent stalling decision making processes, after **3 months of inactivity** a members stops being counted towards the quorum for core team votes (see next section).
 
-- Stay listed as historical members
-- Can return to active status by resuming regular contributions
-
-After **6 months of inactivity**, a member may be removed by vote.
+After **6 months of inactivity**, a member *may* be removed by vote.
 
 ### 2.3 Voting
 
