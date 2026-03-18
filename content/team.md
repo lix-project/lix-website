@@ -34,8 +34,6 @@ Members (in alphabetical order):
   jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of 
   the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
 
-- **Lily ([@lilyinstarlight](https://github.com/lilyinstarlight), she/they)**
-
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])** <br>
   Lunaphied spend a disproportionate amount of their time considering how to get FPGAs as far from Earth as possible.
   When they're not working on Space Stuff, they consider doing the same for Nix regressions.
@@ -67,6 +65,7 @@ Members (in alphabetical order):
 - **lunaphied** (@lunaphied:lunaphied.me)
 - **piegames** (@piegames:flausch.social)
 - **qyriad** (@qyriad:katesiria.org)
+- **raito** (@raitobezarius:matrix.org)
 
 ## Governance advisors
 
@@ -76,7 +75,6 @@ They have no formal voting power, but their opinion is highly valued.
 
 - **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
   Former Core team and Community team
-- **puck ([@puckipedia](https://github.com/puckipedia), she/her [singular] or they/them [plural])**
 - **Rutile ([@CommentatorForAll](https://github.com/CommentatorForAll/), they/them [plural])** <br>
   Code owner of the *functional2* test suite
 
@@ -100,12 +98,6 @@ conflicts of interest.
   financial ties arise, Jade will recuse herself from the relevant
   decision-making.**
 
-- **Lily** works for [Shopify](https://www.shopify.com), a Canadian e-commerce company
-  that [uses Nix](https://shopify.engineering/what-is-nix) to build software.
-  **Should a governance decision involving these or any other
-  financial ties arise, Lily will recuse herself from the relevant
-  decision-making.**
-
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **pennae** declare that they are beneficiary of a NLnet grant project on Lix.
@@ -113,7 +105,9 @@ conflicts of interest.
   financial ties arise, pennae will recuse themselves from the relevant
   decision-making.**
 
-- **piegames** declare that they have **no conflicts of interest** regarding the governance of Lix.
+- **piegames** declare that they are beneficiary of at least one NLnet grant project on Lix.
+  **All paid work on Lix is fully aligned with the project's technical vision and roadmap,
+  and piegames will reject any paid work which may conflict with the Lix project's bests interest.**
 
 - **Qyriad** is a one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently
   sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
@@ -130,6 +124,6 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **Dec 23th, 2025**, and are believed to be up-to-date to the current date.
+These declarations were last updated on **Mar 16th, 2026**, and are believed to be up-to-date to the current date.
 If the bolded date is more than 56 days in the past, feel free to reach out via our
 [community channels](/community) to request these declarations be updated.
