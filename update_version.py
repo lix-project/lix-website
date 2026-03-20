@@ -4,15 +4,6 @@ from pathlib import Path
 import json
 
 
-def get_archive_hash(url):
-    output = subprocess.check_output([
-        'nix', '--extra-experimental-features', 'nix-command', 'store', 'prefetch-file', '--name', 'source', '--json', '--unpack', url
-    ])
-
-    data = json.loads(output)
-    return data['hash']
-
-
 def substitute_all(content: str, substitutions: dict[str, str]) -> str:
     for sub, value in substitutions.items():
         content = content.replace(sub, value)
@@ -37,8 +28,6 @@ def go(version: str):
     substitutions = {
         '@VERSION_NOTRAIL@': version_notrail,
         '@VERSION@': version,
-        '@LIX_ARCHIVE_HASH@': get_archive_hash(BASE_URL + f'/lix-project/lix/archive/{version_notrail}.tar.gz'),
-        '@NIXOS_MODULE_HASH@': get_archive_hash(BASE_URL + f'/lix-project/nixos-module/archive/{version}.tar.gz'),
     }
 
     for file in files:
