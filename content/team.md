@@ -31,7 +31,7 @@ Members (in alphabetical order):
   hexchen is working primarily on maintaining and extending the Lix project infrastructure.
 
 - **jade ([@lf-](https://github.com/lf-), they/them)** <br>
-  jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of 
+  jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of
   the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
 
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])** <br>
@@ -109,12 +109,12 @@ conflicts of interest.
   **All paid work on Lix is fully aligned with the project's technical vision and roadmap,
   and piegames will reject any paid work which may conflict with the Lix project's bests interest.**
 
-- **Qyriad** is a one-third owner of **Tactile Metrology LLC (TMLLC)**, a company that currently
-  sponsors Lix development. TMLLC declares that it has no financial stake in the future of Lix or Nix,
-  no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMLLC is
-  owned by individuals, and not VC investors. 
+- **Qyriad** is a one-third owner of **Tactile Metrology B.V. (TMBV)**, a company that currently
+  sponsors Lix development. TMBV declares that it has no financial stake in the future of Lix or Nix,
+  no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMBV is
+  owned by individuals, and not VC investors.
   In addition, they are beneficiary of a NLnet grant project on NixOS.
-  **Should any decision arise in which TMLLC's interests are
+  **Should any decision arise in which TMBV's interests are
   relevant, Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training.
