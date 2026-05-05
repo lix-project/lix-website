@@ -223,17 +223,17 @@ In the second subcase, you are relying on the Lix daemon as a security boundary,
 
 ## Credits
 
-Credits to the Nixpkgs security team — hexa and tgerbet (@LeSuisse) — for coordinating and dealing with the MITRE paperwork.
+Credits to the Nixpkgs security team — [@hexa](https://github.com/mweinelt) and [tgerbet (@LeSuisse)](https://github.com/LeSuisse) — for coordinating and dealing with the MITRE paperwork.
 
-Credits to the xokdvium for handling the coordination on the CppNix side.
+Credits to the [@xokdvium](https://github.com/xokdvium) for handling the coordination on the CppNix side.
 
-Credits to @edef and @sandydoo for reporting this issue and discussing the scope of this vulnerability.
+Credits to [@edef](http://github.com/edef1c) and [@sandydoo](https://github.com/sandydoo) for reporting this issue and discussing the scope of this vulnerability.
 
-Credits to eldritch horrors for the thorough analysis and security response.
+Credits to [eldritch horrors](https://git.lix.systems/pennae) for the thorough analysis and security response.
 
-Credits to Kate Temkins and Qyriad for the installer and upgrade scripts support.
+Credits to [Kate Temkins](https://github.com/ktemkin) and [Qyriad](https://github.com/Qyriad) for the installer and upgrade scripts support.
 
-Credits to Raito Bezarius for handling the coordination on the Lix side.
+Credits to [Raito Bezarius](https://github.com/RaitoBezarius) for handling the coordination on the Lix side.
 
 ## References
 
