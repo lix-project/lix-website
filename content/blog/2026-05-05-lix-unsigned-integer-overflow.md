@@ -209,7 +209,7 @@ The third one is the thorny one, there's two subcases:
 
 In the first subcase, the user can already get to root and you are now vulnerable to attackers accessing your user account to become root, this scenario is less impacted by this vulnerability.
 
-In the second subcase, you are relying on the Lix daemon as a security boundary, the same way you are relying on any privileged piece of code the user can interact with to avoid giving out root. For this case, it is recommended to carefully jmonitor the endpoint w.r.t. crash logs and Lix daemon logs to catch exploitation attempts as the method is not silent.
+In the second subcase, you are relying on the Lix daemon as a security boundary, the same way you are relying on any privileged piece of code the user can interact with to avoid giving out root. For this case, it is recommended to carefully monitor the endpoint w.r.t. crash logs and Lix daemon logs to catch exploitation attempts as the method is not silent.
 
 ## Timeline
 
