@@ -16,7 +16,7 @@ A big thanks to [edef](http://github.com/edef1c) and [Sander](https://github.com
 
 ## Context
 
-While the Lix daemon is tries to be careful while manipulating untrusted user inputs on its daemon protocol and serialization formats such as the NAR format, they are not immune to classical attack vectors such as integer overflow.
+While the Lix daemon tries to be careful while manipulating untrusted user inputs on its daemon protocol and serialization formats such as the NAR format, they are not immune to classical attack vectors such as integer overflow.
 
 As far as we can tell, in the asyncification work of Lix, commit [5778998cfa2] rendered Lix vulnerable to an integer overflow by crafting specialized NAR with absurd archive members (a length of `2^64 - 8` announced in the format).
 
