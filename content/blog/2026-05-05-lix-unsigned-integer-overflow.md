@@ -241,6 +241,8 @@ Credits to [Kate Temkins](https://github.com/ktemkin) and [Qyriad](https://githu
 
 Credits to [Raito Bezarius](https://github.com/RaitoBezarius) for handling the coordination on the Lix side.
 
+Credits to [Yureka](https://github.com/yu-re-ka) and [delroth](https://github.com/delroth) on the [AFNix](https://afnix.fr) infrastructure team for improving our release engineering infrastructure.
+
 ## References
 
 - [Shared coordination Discourse post](https://discourse.nixos.org/t/security-advisory-local-privilege-escalation-in-lix-and-nix/77407/3)
