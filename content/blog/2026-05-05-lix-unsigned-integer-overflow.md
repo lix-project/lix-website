@@ -33,15 +33,8 @@ As a reminder, the Lix daemon is *NOT* a security boundary [as per our security 
 
 ### Am I affected?
 
-This vulnerability has an easy reproducer, you can run the following on your system:
-
-```
-$ echo "DQAAAAAAAABuaXgtYXJjaGl2ZS0xAAAAAQAAAAAAAAAoAAAAAAAAAAQAAAAAAAAAdHlwZQAAAAD1/////////3JlZ3VsYXIACgAAAAAAAABleGVjdXRhYmxlAAAAAAAAIAAAAAAAAAAAAAAAAAAAQAgAAAAAAAAAY29udGVudHMA//////////8AAAAAAAAAAQAAAAAAAAAAACkAAAAAAA==" \
-  | base64 -d \
-  | nix-store --restore /tmp/out
-```
-
-If you observe a Lix daemon crash, you are vulnerable. Otherwise, you are not.
+Affected versions: ≥ 2.93.0.
+Fixed versions: ≥ 2.93.4, ≥ 2.94.2, ≥ 2.95.2.
 
 ### Technical details
 
