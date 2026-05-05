@@ -214,11 +214,17 @@ In the second subcase, you are relying on the Lix daemon as a security boundary,
 ## Timeline
 
 2026-04-18: Bug informally pre-disclosed to Lix team during LixCon.
+
 2026-04-19: We found a security-relevant bug which matches the description.
+
 2026-04-20: Official security report received, which confirmed that this was indeed the same bug.
+
 2026-04-20: Coordination with CppNix team started to ensure that no other implementation are missed in the process.
+
 2026-05-04: Disclosure deadline.
+
 2026-05-04: Release day for Lix.
+
 2026-05-05: Blog post published.
 
 ## Credits
