@@ -33,6 +33,15 @@ As a reminder, the Lix daemon is *NOT* a security boundary [as per our security 
 
 ### Am I affected?
 
+To exploit this issue, a local attacker needs access to talk to the Nix daemon.
+All systems that allow connections to their daemons are affected. Only users
+that are allowed to connect to the daemon (via `allowed-users` and `trusted-users`)
+can reliably trigger the issue. Substituters can in theory trigger the issue
+but cannot make enough attempts to mount attacks in practice.
+
+Additionally, this vulnerability requires ASLR weakening techniques to lead to
+a compromise.
+
 This vulnerability has an easy reproducer, you can run the following on your system:
 
 ```
