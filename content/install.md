@@ -66,7 +66,7 @@ of the `upgrade-nix` command.
 Thanks to Nix, we can actually ask Lix to upgrade your system directly. Run the following command:
 
 ```sh
-curl -sSf -L "https://git.lix.systems/lix-project/lix/raw/tag/2.95.1/misc/upgrade-lix.sh" | sudo --preserve-env=PATH bash -s -- 2.95.1
+curl -sSf -L "https://git.lix.systems/lix-project/lix/raw/tag/2.95.3/misc/upgrade-lix.sh" | sudo --preserve-env=PATH bash -s -- 2.95.3
 ```
 
 You should now have upgraded to Lix! You can verify this by asking the `nix` command
@@ -74,7 +74,7 @@ to report its version:
 
 ```sh
 $ nix --version
-nix (Lix, like Nix) 2.95.1
+nix (Lix, like Nix) 2.95.3
 ```
 
 As long as you see `Lix` in the output, you're good!
