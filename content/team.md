@@ -1,7 +1,7 @@
 ---
 title:  "About Us"
 description: "Meet our team and know how we operate"
-date: "2026-03-17"
+date: "2026-06-24"
 author: "Lix Team"
 ---
 
@@ -27,22 +27,16 @@ These folks steer the technical direction of the project, but are also responsib
 
 Members (in alphabetical order):
 
-- **hexchen ([@hexchen](https://github.com/hexchen), she/her)** <br>
-  hexchen is working primarily on maintaining and extending the Lix project infrastructure.
-
 - **jade ([@lf-](https://github.com/lf-), they/them)** <br>
   jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of
   the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
 
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])** <br>
-  Lunaphied spend a disproportionate amount of their time considering how to get FPGAs as far from Earth as possible.
-  When they're not working on Space Stuff, they consider doing the same for Nix regressions.
+  Lunaphied spend a disproportionate amount of their time making FPGAs listen to the screaming of electromagnetic waves.
+  When they're not staring at signals, they work on fighting Darwin on the Lix campaign.
 
 - **pennae (aka "eldritch horrors", they/them)** <br>
   The shadow at the end of a dark hallway. An ancient, nameless evil. Likes cookies
-
-- **piegames ([@piegamesde](https://github.com/piegamesde), they/them)** <br>
-  Originally joined for improving the Nix language and working on the evaluator, stayed for being the glue that holds organizations together. Passionate community builder.
 
 - **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])** <br>
   Build system experts who delve way, way too deep into tooling -- so you don't have to.
@@ -51,6 +45,9 @@ Members (in alphabetical order):
   Raito is working on infrastructure, review of core parts in Lix and lands smalls contributions when bored.
   He focus on the ongoing asyncification work and general scalability of Lix for large build farm usecases.
   Additionally, interested into bridging the Snix project with Lix.
+
+- **Rutile ([@CommentatorForAll](https://github.com/CommentatorForAll/), they/them [plural])** <br>
+  Code owner of the *functional2* test suite
 
 ## Community Team
 
@@ -75,8 +72,6 @@ They have no formal voting power, but their opinion is highly valued.
 
 - **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
   Former Core team and Community team
-- **Rutile ([@CommentatorForAll](https://github.com/CommentatorForAll/), they/them [plural])** <br>
-  Code owner of the *functional2* test suite
 
 ## Conflict of Interest Statements
 
@@ -88,8 +83,6 @@ and to recuse themselves from any leadership decisions affected.
 
 As transparency is important, we've included declarations from each core team member regarding any possible
 conflicts of interest.
-
-- **hexchen** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **Jade** works for [Mercury](https://mercury.com/), a financial
   services startup that [uses
@@ -104,10 +97,6 @@ conflicts of interest.
   **Should a governance decision involving these or any other
   financial ties arise, pennae will recuse themselves from the relevant
   decision-making.**
-
-- **piegames** declare that they are beneficiary of at least one NLnet grant project on Lix.
-  **All paid work on Lix is fully aligned with the project's technical vision and roadmap,
-  and piegames will reject any paid work which may conflict with the Lix project's bests interest.**
 
 - **Qyriad** is a one-third owner of **Tactile Metrology B.V. (TMBV)**, a company that currently
   sponsors Lix development. TMBV declares that it has no financial stake in the future of Lix or Nix,
@@ -124,7 +113,7 @@ conflicts of interest.
 
 <br />
 
-These declarations were last updated on **Mar 16th, 2026**, and are believed to be up-to-date to the current date.
+These declarations were last updated on **Jun 24th, 2026**, and are believed to be up-to-date to the current date.
 If the bolded date is more than 56 days in the past, feel free to reach out via our
 [community channels](/community) to request these declarations be updated.
 
@@ -134,5 +123,7 @@ We wish to express our gratitude towards all people who helped out with this pro
 
 - Rebecca Turner / wiggles / 9999years
 - puck
+- hexchen
 - Irenes
 - Lily Foster
+- piegames
