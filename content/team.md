@@ -72,6 +72,8 @@ They have no formal voting power, but their opinion is highly valued.
 
 - **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
   Former Core team and Community team
+- **piegames ([@piegamesde](https://github.com/piegamesde), they/them)** <br>
+  Former Core team
 
 ## Conflict of Interest Statements
 
@@ -126,4 +128,3 @@ We wish to express our gratitude towards all people who helped out with this pro
 - hexchen
 - Irenes
 - Lily Foster
-- piegames
