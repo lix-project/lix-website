@@ -39,12 +39,12 @@ New members can be added via a core team vote. To be considered:
 
 Core team members are expected to stay active. “Active” means contributing in *some* meaningful way at least once every **3 months**:
 
-Members may declare themselves to be inactive and are encouraged to do so voluntarily when expecting to be temporarily unable to contribute.
-
 - Reviewing or driving technical work
 - Participating in governance discussions (such as the governance weekly) or votes
 - Maintaining infra, releases, docs, or community spaces
 - Representing Lix publicly
+
+Members may declare themselves to be inactive and are encouraged to do so voluntarily when expecting to be temporarily unable to contribute.
 
 To prevent stalling decision making processes, after **one month of non-declared inactivity** a members stops being counted towards the quorum for core team votes (see next section). For explicitly declared inactivity a member will stop being counted towards the quorum immediately until they return or are removed.
 
