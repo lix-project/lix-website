@@ -25,6 +25,8 @@ The core team:
 - Maintains project-wide policies, including this governance document
 - Represents Lix in cross-project/community spaces
 
+Core team members are individually empowered to make most decisions in the interest of project efficiency, however in the event of a disagreement consensus finding and a vote may be required. It is the goal of the project that as few decisions require this process as possible (i.e. to avoid bikeshedding).
+
 ### 2.1 Joining the Core team
 
 New members can be added via a core team vote. To be considered:
@@ -37,20 +39,26 @@ New members can be added via a core team vote. To be considered:
 
 Core team members are expected to stay active. “Active” means contributing in *some* meaningful way at least once every **3 months**:
 
+Members my declare themselves to be inactive and are encouraged to do so voluntarily when expecting to be temporarily unable to contribute.
+
 - Reviewing or driving technical work
-- Participating in governance discussions or votes
+- Participating in governance discussions (such as the governance weekly) or votes
 - Maintaining infra, releases, docs, or community spaces
 - Representing Lix publicly
 
-To prevent stalling decision making processes, after **3 months of inactivity** a members stops being counted towards the quorum for core team votes (see next section).
+To prevent stalling decision making processes, after **one month of non-declared inactivity** a members stops being counted towards the quorum for core team votes (see next section). For explicitly declared inactivity a member will stop being counted towards the quorum immediately until they return or are removed.
 
-After **6 months of inactivity**, a member *may* be removed by vote.
+When declaring inactivity explicitly, a member may ask for specific topics or issues to be held until they return, this should be respected as much as possible but it is expected that urgency may override this in exceptional circumstances.
+
+The core team **may** declare a member to be inactive for quorum purposes directly as well. This is intended to speed up the process form than being formally removed. This vote cannot be fast-tracked.
+
+After **3 months of inactivity**, a member *may* be removed by vote.
 
 ### 2.3 Voting
 
 - Each core team member gets one vote
 - Proposals pass with a **2/3-th majority** of active members (unless otherwise specified)
-- Votes happen via Matrix or another agreed-on platform
+- Votes happen via Zulip or another agreed-on platform
 
 Governance-level decisions that require a vote include:
 
