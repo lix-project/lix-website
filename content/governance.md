@@ -50,7 +50,7 @@ To prevent stalling decision making processes, after **one month of non-declared
 
 When declaring inactivity explicitly, a member may ask for specific topics or issues to be held until they return, this should be respected as much as possible but it is expected that urgency may override this in exceptional circumstances.
 
-The core team **may** declare a member to be inactive for quorum purposes directly as well. This is intended to speed up the process form than being formally removed. This vote cannot be fast-tracked.
+The core team **may** declare a member to be inactive for quorum purposes directly as well. This is intended to prevent having to formally remove a member or wait the entire inactivity period when it is clear that a member cannot participate. Like removal this vote cannot be fast-tracked.
 
 After **3 months of inactivity**, a member *may* be removed by vote.
 
