@@ -39,7 +39,7 @@ New members can be added via a core team vote. To be considered:
 
 Core team members are expected to stay active. “Active” means contributing in *some* meaningful way at least once every **3 months**:
 
-Members my declare themselves to be inactive and are encouraged to do so voluntarily when expecting to be temporarily unable to contribute.
+Members may declare themselves to be inactive and are encouraged to do so voluntarily when expecting to be temporarily unable to contribute.
 
 - Reviewing or driving technical work
 - Participating in governance discussions (such as the governance weekly) or votes
