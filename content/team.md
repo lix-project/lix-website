@@ -46,8 +46,9 @@ Members (in alphabetical order):
   He focus on the ongoing asyncification work and general scalability of Lix for large build farm usecases.
   Additionally, interested into bridging the Snix project with Lix.
 
-- **Rutile ([@CommentatorForAll](https://github.com/CommentatorForAll/), they/them [plural])** <br>
-  Code owner of the *functional2* test suite
+- **rootile (aka "Rutile", they/them [plural])** <br>
+  Advocate of tests, to the point of wanting things to be over-tested. Owner of the *functional2* testsuite, ensuring developers have the tools to write good and extensive tests.
+  "May your path always lead to knowledge, prisoner"
 
 ## Community Team
 
@@ -112,6 +113,9 @@ conflicts of interest.
   He currently possess stakes in the cooperative in minority and may be involved in IT strategic decisions.
   **Should a governance decision involving these or any other financial ties
   arise, raitobezarius will recuse himself from decision-making.**
+
+- **rootile** works at an IT-Consulting company, who extensively use Nix for internal tooling.
+  **Should a governance decision involving these or any other financial ties aries, rootile will recuse themselves from the relevant decision-making.**
 
 <br />
 
