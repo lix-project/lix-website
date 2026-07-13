@@ -55,25 +55,29 @@ menus:
       url: "/community"
       weight: 3
 
+    - name: "AI-Policy"
+      url: "/ai-policy"
+      weight: 4
+
     - name: "FAQs"
       url: "/faq"
-      weight: 4
+      weight: 5
 
     - name: News
       url: "/blog"
-      weight: 5
+      weight: 6
 
     - name: "Docs"
       url: "https://docs.lix.systems/manual/lix/stable"
-      weight: 6
+      weight: 7
 
     - name: "Code"
       url: "https://git.lix.systems/lix-project/lix"
-      weight: 7
+      weight: 8
 
     - name: "Wiki"
       url: "https://wiki.lix.systems/books"
-      weight: 8
+      weight: 9
 
   buttons:
     - name: "Install Lix"
