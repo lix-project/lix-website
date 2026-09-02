@@ -1,7 +1,7 @@
 ---
 title:  "About Us"
 description: "Meet our team and know how we operate"
-date: "2026-06-24"
+date: "2026-09-02"
 author: "Lix Team"
 ---
 
@@ -27,19 +27,12 @@ These folks steer the technical direction of the project, but are also responsib
 
 Members (in alphabetical order):
 
-- **jade ([@lf-](https://github.com/lf-), they/them)** <br>
-  jade is working on packaging, testing, infrastructure, tooling, review, stability, and a large amount of
-  the writing in Lix. They recently graduated from a Computer Engineering program at UBC in Canada.
-
 - **Lunaphied ([@Lunaphied](https://github.com/lunaphied), she/her [singular] or they/them [plural])** <br>
   Lunaphied spend a disproportionate amount of their time making FPGAs listen to the screaming of electromagnetic waves.
   When they're not staring at signals, they work on fighting Darwin on the Lix campaign.
 
 - **pennae (aka "eldritch horrors", they/them)** <br>
   The shadow at the end of a dark hallway. An ancient, nameless evil. Likes cookies
-
-- **Qyriad ([@Qyriad](https://github.com/Qyriad), she/her [singular] or they/them [plural])** <br>
-  Build system experts who delve way, way too deep into tooling -- so you don't have to.
 
 - **raito ([@RaitoBezarius](https://github.com/RaitoBezarius), he/him)** <br>
   Raito is working on infrastructure, review of core parts in Lix and lands smalls contributions when bored.
@@ -58,11 +51,9 @@ It also maintains the public-facing communication, does outreach and public rela
 Members (in alphabetical order):
 
 - **hexchen** (@hexchen:colon.at)
-- **jade** (@jade_:matrix.org)
 - **k900** (@k900:0upti.me)
 - **lunaphied** (@lunaphied:lunaphied.me)
 - **piegames** (@piegames:flausch.social)
-- **qyriad** (@qyriad:katesiria.org)
 - **raito** (@raitobezarius:matrix.org)
 
 ## Governance advisors
@@ -71,8 +62,6 @@ Governance advisors are trusted community members who have access to the private
 They are responsible for holding our governance processes accountable to the community.
 They have no formal voting power, but their opinion is highly valued.
 
-- **Kate Temkin ([@ktemkin](https://github.com/ktemkin), she/her [singular] or they/them [plural])** <br>
-  Former Core team and Community team
 - **piegames ([@piegamesde](https://github.com/piegamesde), they/them)** <br>
   Former Core team
 
@@ -87,27 +76,12 @@ and to recuse themselves from any leadership decisions affected.
 As transparency is important, we've included declarations from each core team member regarding any possible
 conflicts of interest.
 
-- **Jade** works for [Mercury](https://mercury.com/), a financial
-  services startup that [uses
-  Nix](https://serokell.io/blog/haskell-in-production-mercury) to build
-  software. **Should a governance decision involving these or any other
-  financial ties arise, Jade will recuse herself from the relevant
-  decision-making.**
-
 - **Lunaphied** declare that they have **no conflicts of interest** regarding the governance of Lix.
 
 - **pennae** declare that they are beneficiary of a NLnet grant project on Lix.
   **Should a governance decision involving these or any other
   financial ties arise, pennae will recuse themselves from the relevant
   decision-making.**
-
-- **Qyriad** is a one-third owner of **Tactile Metrology B.V. (TMBV)**, a company that currently
-  sponsors Lix development. TMBV declares that it has no financial stake in the future of Lix or Nix,
-  no ties to the military-industrial-complex, and a strong commitment to avoiding such ties. TMBV is
-  owned by individuals, and not VC investors.
-  In addition, they are beneficiary of a NLnet grant project on NixOS.
-  **Should any decision arise in which TMBV's interests are
-  relevant, Qyriad will recuse herself from the relevant decision-making**.
 
 - **raitobezarius** declares that he's self-employed in a cooperative, offers Nix-based consulting and training.
   He currently possess stakes in the cooperative in minority and may be involved in IT strategic decisions.
@@ -127,6 +101,9 @@ If the bolded date is more than 56 days in the past, feel free to reach out via 
 
 We wish to express our gratitude towards all people who helped out with this project, all former team members and Lix founding members.
 
+- Kate Temkin
+- Qyriad
+- Jade
 - Rebecca Turner / wiggles / 9999years
 - puck
 - hexchen
